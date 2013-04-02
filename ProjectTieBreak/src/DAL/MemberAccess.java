@@ -1,7 +1,13 @@
 package DAL;
 
+import BE.Member;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -42,5 +48,38 @@ public class MemberAccess
             instance = new MemberAccess();
         }
         return instance;
-    }   
+    }
+    
+    // Methods \\
+    
+    public Member get(int id) throws SQLServerException, SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "SELECT * FROM Team WHERE Id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next())
+            {
+                return getOneMember(rs);
+            }
+            return null;
+        }
+    }
+    private Member getOneMember(ResultSet rs) throws SQLException
+    {
+        int memberNo = rs.getInt(1);
+        String lastName = rs.getString(2);
+        String firstName = rs.getString(3);
+        String address = rs.getString(4);
+        int birthYear = rs.getInt(5);
+        int phoneNo = rs.getInt(6);
+        String email = rs.getString(7);
+        String memberType = rs.getString(8);
+        int DTULicence = rs.getInt(9);
+        
+        
+    }
 }
