@@ -8,7 +8,7 @@ package BLL;
  *
  * @author Reese
  */
-public class DataManager
+public class MemberManager
 {
     
 }

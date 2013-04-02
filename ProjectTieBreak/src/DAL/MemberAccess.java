@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAL;
 
 import java.io.FileNotFoundException;
@@ -20,7 +16,7 @@ public class MemberAccess
 
     // Constructor \\
     /**
-     * Constructs an instance of the TeamAccess class
+     * Constructs an instance of the MemberAccess class
      *
      * @throws FileNotFoundException if the config file is not found
      * @throws IOException if there's an error reading the config file
@@ -32,10 +28,10 @@ public class MemberAccess
 
     // Singleton \\
     /**
-     * Returns an instance of the TeamAccess class, and creates one first, if
+     * Returns an instance of the MemberAccess class, and creates one first, if
      * there's none available
      *
-     * @return an instance of the TeamAccess class
+     * @return an instance of the MemberAccess class
      * @throws FileNotFoundException if the config file can't be found
      * @throws IOException if there's an error reading the config file
      */
@@ -46,7 +42,5 @@ public class MemberAccess
             instance = new MemberAccess();
         }
         return instance;
-    }
-    
-    
+    }   
 }
