@@ -22,7 +22,7 @@ public class Member
     private MemberType memberType;
     private int DTULicenceNo;
     
-    private Member(int memberNo, String lastName, String firstname, String address, int birthYear, int phoneNo, String email, String memberType, int DTULicenceNo)
+    private Member(int memberNo, String lastName, String firstname, String address, int birthYear, int phoneNo, String email, String memberType, int DTULicenceNo) throws IllegalArgumentException
     {
         this.memberNo=memberNo;
         this.lastName=lastName;
@@ -37,11 +37,12 @@ public class Member
             case "senior": this.memberType = this.memberType.senior; break;
             case "recreational": this.memberType = this.memberType.recreational; break;
             case "retiree": this.memberType = this.memberType.retiree; break;
+            default: throw new IllegalArgumentException("ERROR - invalid member type");
         }        
         this.DTULicenceNo=DTULicenceNo;
     }
     
-    public static Member fromDataBase(int memberNo, String lastName, String firstname, String address, int birthYear, int phoneNo, String email, String memberType, int DTULicenceNo)
+    public static Member fromDataBase(int memberNo, String lastName, String firstname, String address, int birthYear, int phoneNo, String email, String memberType, int DTULicenceNo) throws IllegalArgumentException
     {
         return new Member(memberNo, lastName, firstname, address, birthYear, phoneNo, email,  memberType, DTULicenceNo);
     }

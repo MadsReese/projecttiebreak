@@ -12,10 +12,11 @@ import java.util.Date;
  */
 public class Match {
     
+    //instance fields
     private Date date;    
     private int[] DTULicenceNo;
     
-    private Match(Date date,int... DTULicenceNo)
+    private Match(Date date,int... DTULicenceNo)throws IllegalArgumentException
     {
         this.date=date;
         this.DTULicenceNo = DTULicenceNo;
@@ -25,7 +26,13 @@ public class Match {
         }
     }
         
-    public static Match someName(Date date,int... DTULicenceNo)
+    /**
+     * factory method for some undetermined purpose
+     * @param date the date and time the match will be played
+     * @param DTULicenceNo 2 or 4 DTU Licence Numbers.
+     * @return 
+     */
+    public static Match someName(Date date,int... DTULicenceNo) throws IllegalArgumentException
     {
         return new Match(date,DTULicenceNo);
     }
