@@ -18,9 +18,33 @@ public class Member
     private int birthYear;
     private int phoneNo;
     private String email;
-    private enum memberType {junior, senior, recreational, retiree};
+    private enum MemberType {junior, senior, recreational, retiree};
+    private MemberType memberType;
     private int DTULicenceNo;
-
+    
+    private Member(int memberNo, String lastName, String firstname, String address, int birthYear, int phoneNo, String email, String memberType, int DTULicenceNo)
+    {
+        this.memberNo=memberNo;
+        this.lastName=lastName;
+        this.firstName=firstName;
+        this.address=address;
+        this.birthYear=birthYear;
+        this.phoneNo=phoneNo;
+        this.email=email;
+        switch(memberType)
+        {
+            case "junior": this.memberType = this.memberType.junior; break;
+            case "senior": this.memberType = this.memberType.senior; break;
+            case "recreational": this.memberType = this.memberType.recreational; break;
+            case "retiree": this.memberType = this.memberType.retiree; break;
+        }        
+        this.DTULicenceNo=DTULicenceNo;
+    }
+    
+    public static Member fromDataBase(int memberNo, String lastName, String firstname, String address, int birthYear, int phoneNo, String email, String memberType, int DTULicenceNo)
+    {
+        return new Member(memberNo, lastName, firstname, address, birthYear, phoneNo, email,  memberType, DTULicenceNo);
+    }
     
     /**
      * @return the memberNo
