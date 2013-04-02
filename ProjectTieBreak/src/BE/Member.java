@@ -69,6 +69,16 @@ public class Member
     {
         return firstName;
     }
+    
+    public void SetLastName(String lastName)
+    {
+        this.lastName = lastName;
+    }
+    
+    public void setFirstName(String firstName)
+    {
+        this.firstName=firstName;
+    }
 
     /**
      * @return the address
