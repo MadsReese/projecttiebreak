@@ -10,6 +10,7 @@ package BE;
  */
 public class Member
 {
+    //Instance fields
     private int memberNo;
     private String lastName;
     private String firstName;
@@ -20,6 +21,7 @@ public class Member
     private enum memberType {junior, senior, recreational, retiree};
     private int DTULicenceNo;
 
+    
     /**
      * @return the memberNo
      */
