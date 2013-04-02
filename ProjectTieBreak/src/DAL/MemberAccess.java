@@ -51,7 +51,13 @@ public class MemberAccess
     }
     
     // Methods \\
-    
+    /**
+     * Get a member based on his/hers member id
+     * @param id the id of the member
+     * @return the member corresponding to the id
+     * @throws SQLServerException if there's an error connecting to the database
+     * @throws SQLException if there's an error in the SQL query execution
+     */
     public Member get(int id) throws SQLServerException, SQLException
     {
         try (Connection con = connector.getConnection())
@@ -69,6 +75,13 @@ public class MemberAccess
         }
     }
     
+    /**
+     * Gets a member based on the DTU Licence number
+     * @param DTUNo the DTU Licence number
+     * @return the member with the corresponding licence number
+     * @throws SQLServerException if there's an error connecting to the database
+     * @throws SQLException if there's an error in the SQL query execution
+     */
     public Member getByDTU(int DTUNo) throws SQLServerException, SQLException
     {
         try (Connection con = connector.getConnection())
@@ -86,6 +99,12 @@ public class MemberAccess
         }
     }
     
+    /**
+     * Updates a member in the database
+     * @param m the member to update
+     * @throws SQLServerException if there's an error connecting to the database
+     * @throws SQLException if there's an error in the SQL query execution
+     */
     public void update(Member m) throws SQLServerException, SQLException
     {
         try (Connection con = connector.getConnection())
@@ -107,6 +126,12 @@ public class MemberAccess
         }
     }
     
+    /**
+     * Deletes a member from the database
+     * @param id the id of the member to delete
+     * @throws SQLServerException if there's an error connecting to the database
+     * @throws SQLException if there's an error in the SQL query execution
+     */
     public void delete(int id) throws SQLServerException, SQLException
     {
         try (Connection con = connector.getConnection())
@@ -122,6 +147,8 @@ public class MemberAccess
             }
         }
     }
+    
+    
     private Member getOneMember(ResultSet rs) throws SQLException
     {
         int memberNo = rs.getInt(1);
