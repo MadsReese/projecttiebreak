@@ -1,7 +1,13 @@
 package DAL;
 
+import BE.Member;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -42,5 +48,127 @@ public class MemberAccess
             instance = new MemberAccess();
         }
         return instance;
-    }   
+    }
+    
+    // Methods \\
+    /**
+     * Get a member based on his/hers member id
+     * @param id the id of the member
+     * @return the member corresponding to the id
+     * @throws SQLServerException if there's an error connecting to the database
+     * @throws SQLException if there's an error in the SQL query execution
+     */
+    public Member get(int id) throws SQLServerException, SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "SELECT * FROM Member WHERE Id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next())
+            {
+                return getOneMember(rs);
+            }
+            return null;
+        }
+    }
+    
+    /**
+     * Gets a member based on the DTU Licence number
+     * @param DTUNo the DTU Licence number
+     * @return the member with the corresponding licence number
+     * @throws SQLServerException if there's an error connecting to the database
+     * @throws SQLException if there's an error in the SQL query execution
+     */
+    public Member getByDTU(int DTUNo) throws SQLServerException, SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "SELECT * FROM Member WHERE DTUNo = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, DTUNo);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next())
+            {
+                return getOneMember(rs);
+            }
+            return null;
+        }
+    }
+    
+    /**
+     * Updates a member in the database
+     * @param m the member to update
+     * @throws SQLServerException if there's an error connecting to the database
+     * @throws SQLException if there's an error in the SQL query execution
+     */
+    public void update(Member m) throws SQLServerException, SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "UPDATE Member SET firstName = ?, lastName = ?, address = ?, phoneNo = ?, email = ? WHERE Id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, m.getFirstName());
+            ps.setString(2, m.getLastName());
+            ps.setString(3, m.getAddress());
+            ps.setInt(4, m.getPhoneNo());
+            ps.setString(5, m.getEmail());
+            ps.setInt(6, m.getMemberNo());
+            
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows < 1)
+            {
+                throw new SQLException("Unable to update member");
+            }
+        }
+    }
+    
+    /**
+     * Deletes a member from the database
+     * @param id the id of the member to delete
+     * @throws SQLServerException if there's an error connecting to the database
+     * @throws SQLException if there's an error in the SQL query execution
+     */
+    public void delete(int id) throws SQLServerException, SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "DELETE FROM Member WHERE Id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows < 1)
+            {
+                throw new SQLException("Unable to delete member");
+            }
+        }
+    }
+    
+    
+    private Member getOneMember(ResultSet rs) throws SQLException
+    {
+        int memberNo = rs.getInt(1);
+        String lastName = rs.getString(2);
+        String firstName = rs.getString(3);
+        String address = rs.getString(4);
+        int birthYear = rs.getInt(5);
+        int phoneNo = rs.getInt(6);
+        String email = rs.getString(7);
+        String memberType = rs.getString(8);
+        int DTULicence = rs.getInt(9);
+        
+        return Member.fromDataBase(memberNo, 
+                lastName, 
+                firstName, 
+                address, 
+                birthYear, 
+                phoneNo, 
+                email, 
+                memberType, 
+                DTULicence);
+    }
 }
