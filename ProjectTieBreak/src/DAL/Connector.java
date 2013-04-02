@@ -35,7 +35,7 @@ public class Connector
     private Connector() throws FileNotFoundException, IOException
     {
         config = new Properties();
-        config.load(new FileReader(System.getProperty("user.dir") + "/config.cfg"));
+        config.load(new FileReader("config.cfg"));
         dataSource = new SQLServerDataSource();
         dataSource.setServerName(config.getProperty("SERVER"));
         dataSource.setPortNumber(Integer.valueOf(config.getProperty("PORT")));
