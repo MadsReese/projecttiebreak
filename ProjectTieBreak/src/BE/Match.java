@@ -32,8 +32,23 @@ public class Match {
      * @param DTULicenceNo 2 or 4 DTU Licence Numbers.
      * @return 
      */
-    public static Match someName(Date date,int... DTULicenceNo) throws IllegalArgumentException
+    public static Match createNew(int... DTULicenceNo) throws IllegalArgumentException
+    {
+        return new Match(null,DTULicenceNo);
+    }
+    
+    public static Match fromDateBase(Date date, int... DTULicenceNo)
     {
         return new Match(date,DTULicenceNo);
+    }
+    
+    public Date getDate()
+    {
+        return date;
+    }
+    
+    public int[] getLicenceNos()
+    {
+        return DTULicenceNo;
     }
 }
