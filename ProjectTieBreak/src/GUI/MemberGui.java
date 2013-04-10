@@ -1,7 +1,6 @@
 package GUI;
 
 import javax.swing.DefaultListModel;
-import javax.swing.UIManager;
 
 public class MemberGui extends javax.swing.JFrame
 {
