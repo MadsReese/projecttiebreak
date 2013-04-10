@@ -3,6 +3,7 @@ package DAL;
 import BE.Match;
 import BE.Member;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -23,6 +24,7 @@ public class XmlReader
     public XmlReader(String filename)
     {
         this.fileName = filename;
+        members = new ArrayList<>();
     }
     
     /**
@@ -38,21 +40,20 @@ public class XmlReader
         XPathFactory xpfactory = XPathFactory.newInstance();
         XPath xpath = xpfactory.newXPath();
         
-        int num = Integer.parseInt(xpath.evaluate("count(list/member)", doc));
-        
-        for (int i = 0; i < num; i++)
+        int num = Integer.parseInt(xpath.evaluate("count(memberList/member)", doc));
+        for (int i = 1; i <= num; i++)
         {
-            int memberNo = Integer.parseInt(xpath.evaluate("list/member[" + i + "]/memberNo", doc));
-            String firstName = xpath.evaluate("list/member[" + i + "]/firstName", doc);
-            String lastName = xpath.evaluate("list/member[" + i + "]/lastName", doc);
-            String address = xpath.evaluate("list/member[" + i + "]/address", doc);
-            int birthYear = Integer.parseInt(xpath.evaluate("list/member[" + i + "]/birthYear", doc));
-            int phoneNo = Integer.parseInt(xpath.evaluate("list/member[" + i + "]/phoneNo", doc));
-            String email = xpath.evaluate("list/member[" + i + "]/email", doc);
-            String memberType = xpath.evaluate("list/member[" + i + "]/memberType", doc);
-            int DTULicenceNo = Integer.parseInt(xpath.evaluate("list/member[" + i + "]/DTULicenceNo", doc));
+            int memberNo = Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/memberNo", doc));
+            String firstName = xpath.evaluate("memberList/member[" + i + "]/firstName", doc);
+            String lastName = xpath.evaluate("memberList/member[" + i + "]/lastName", doc);
+            String address = xpath.evaluate("memberList/member[" + i + "]/address", doc);
+            int birthYear = i; //Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/birthYear", doc));
+            int phoneNo = i; //Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/phoneNo", doc));
+            String email = xpath.evaluate("memberList/member[" + i + "]/email", doc);
+            String memberType = "junior"; //xpath.evaluate("memberList/member[" + i + "]/memberType", doc);
+            int DTULicenceNo = i; //Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/DTULicenceNo", doc));
+
             Member m = Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, memberType, DTULicenceNo);
-            
             members.add(m);
         }
         return members;

@@ -32,17 +32,17 @@ public class XmlWriter
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
         
         Document doc = docBuilder.newDocument();
-        Element rootElementMember = doc.createElement("Member");
+        Element rootElementMember = doc.createElement("memberList");
         doc.appendChild(rootElementMember);
 
         for(Member m : members)
         {
-            Element member = doc.createElement("Member");
+            Element member = doc.createElement("member");
             rootElementMember.appendChild(member);
             
-            Attr attr = doc.createAttribute("memberNo");
-            attr.setValue("" + m.getMemberNo());
-            member.setAttributeNode(attr);
+            Element id = doc.createElement("memberNo");
+            id.appendChild(doc.createTextNode("" + m.getMemberNo()));
+            member.appendChild(id);
             
             Element firstname = doc.createElement("firstName");
             firstname.appendChild(doc.createTextNode(m.getFirstName()));
