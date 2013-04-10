@@ -26,7 +26,7 @@ public class Member
     {
         this.memberNo=memberNo;
         this.lastName=lastName;
-        this.firstName=firstName;
+        this.firstName=firstname;
         this.address=address;
         this.birthYear=birthYear;
         this.phoneNo=phoneNo;
