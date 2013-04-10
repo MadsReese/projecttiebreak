@@ -47,11 +47,11 @@ public class XmlReader
             String firstName = xpath.evaluate("memberList/member[" + i + "]/firstName", doc);
             String lastName = xpath.evaluate("memberList/member[" + i + "]/lastName", doc);
             String address = xpath.evaluate("memberList/member[" + i + "]/address", doc);
-            int birthYear = i; //Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/birthYear", doc));
-            int phoneNo = i; //Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/phoneNo", doc));
+            int birthYear = Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/birthYear", doc));
+            int phoneNo = Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/phoneNo", doc));
             String email = xpath.evaluate("memberList/member[" + i + "]/email", doc);
-            String memberType = "junior"; //xpath.evaluate("memberList/member[" + i + "]/memberType", doc);
-            int DTULicenceNo = i; //Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/DTULicenceNo", doc));
+            String memberType = xpath.evaluate("memberList/member[" + i + "]/memberType", doc);
+            int DTULicenceNo = Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/DTULicenceNo", doc));
 
             Member m = Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, memberType, DTULicenceNo);
             members.add(m);
