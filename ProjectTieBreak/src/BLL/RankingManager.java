@@ -7,6 +7,7 @@ package BLL;
  *
  * @author boinq
  */
-public class RankingManager {
+public class RankingManager 
+{
     
 }
