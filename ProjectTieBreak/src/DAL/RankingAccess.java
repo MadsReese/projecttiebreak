@@ -7,6 +7,6 @@ package DAL;
  *
  * @author boinq
  */
-public class Ranking {
+public class RankingAccess {
     //a comment.
 }
