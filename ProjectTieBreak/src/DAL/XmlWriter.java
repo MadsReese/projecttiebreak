@@ -1,8 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAL;
+
+import BE.Member;
+import java.util.List;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  *
@@ -10,5 +14,62 @@ package DAL;
  */
 public class XmlWriter
 {
+    private final String filename;
     
+    public XmlWriter(String filename)
+    {
+        this.filename = filename;
+    }
+    
+    public void writeToXML(List<Member> members) throws Exception
+    {
+        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+        
+        Document doc = docBuilder.newDocument();
+        Element rootElementMember = doc.createElement("Member");
+        doc.appendChild(rootElementMember);
+
+        for(Member m : members)
+        {
+            Element member = doc.createElement("Member");
+            rootElementMember.appendChild(member);
+            
+            Attr attr = doc.createAttribute("member no");
+            attr.setValue("" + m.getMemberNo());
+            member.setAttributeNode(attr);
+            
+            Element firstname = doc.createElement("firstName");
+            firstname.appendChild(doc.createTextNode(m.getFirstName()));
+            member.appendChild(firstname);
+            
+            Element lastName = doc.createElement("lastName");
+            lastName.appendChild(doc.createTextNode(m.getLastName()));
+            member.appendChild(lastName);
+            
+            Element address = doc.createElement("address");
+            address.appendChild(doc.createTextNode(m.getAddress()));
+            member.appendChild(address);
+            
+            Element birthYear = doc.createElement("birthYear");
+            birthYear.appendChild(doc.createTextNode("" + m.getBirthYear()));
+            member.appendChild(birthYear);
+            
+            Element phoneNo = doc.createElement("phoneNo");
+            phoneNo.appendChild(doc.createTextNode("" + m.getPhoneNo()));
+            member.appendChild(phoneNo);
+            
+            Element email = doc.createElement("email");
+            email.appendChild(doc.createTextNode(m.getEmail()));
+            member.appendChild(email);
+            
+            Element memberType = doc.createElement("memberType");
+            memberType.appendChild(doc.createTextNode(m.getMemberType()));
+            member.appendChild(memberType);
+            
+            Element DTUNo = doc.createElement("DTULicenceNo");
+            DTUNo.appendChild(doc.createTextNode("" + m.getDTULicenceNo()));
+            member.appendChild(DTUNo);
+        }
+    }
 }

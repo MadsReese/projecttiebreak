@@ -1,9 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAL;
 
+import BE.Match;
 import BE.Member;
 import java.io.File;
 import java.util.List;
@@ -14,20 +11,26 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 
 /**
- *
+ * Reads an XML file to get the info out of it
  * @author Reese
  */
 public class XmlReader
 {
     private final String fileName;
     private List<Member> members;
+    private List<Match> matches;
     
     public XmlReader(String filename)
     {
         this.fileName = filename;
     }
     
-    public List<Member> getAll() throws Exception
+    /**
+     * Reads all the members in the xml-file
+     * @return List of all the members in the xml
+     * @throws Exception parsing errors etc.
+     */
+    public List<Member> getMembers() throws Exception
     {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -49,8 +52,14 @@ public class XmlReader
             String memberType = xpath.evaluate("list/member[" + i + "]/memberType", doc);
             int DTULicenceNo = Integer.parseInt(xpath.evaluate("list/member[" + i + "]/DTULicenceNo", doc));
             Member m = Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, memberType, DTULicenceNo);
+            
             members.add(m);
         }
         return members;
     }
+    
+//    public List<Match> getMatches() throws Exception
+//    {
+//        
+//    }
 }

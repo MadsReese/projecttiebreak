@@ -120,7 +120,15 @@ public class Member
     {
         return DTULicenceNo;
     }
-
+    
+    /**
+     * @
+     */
+    public String getMemberType()
+    {
+        return this.memberType.toString();
+    }
+    
     /**
      * @param address the address to set
      */
