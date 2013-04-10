@@ -1,9 +1,14 @@
 package DAL;
 
 import BE.Member;
+import java.io.File;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -35,7 +40,7 @@ public class XmlWriter
             Element member = doc.createElement("Member");
             rootElementMember.appendChild(member);
             
-            Attr attr = doc.createAttribute("member no");
+            Attr attr = doc.createAttribute("memberNo");
             attr.setValue("" + m.getMemberNo());
             member.setAttributeNode(attr);
             
@@ -70,6 +75,14 @@ public class XmlWriter
             Element DTUNo = doc.createElement("DTULicenceNo");
             DTUNo.appendChild(doc.createTextNode("" + m.getDTULicenceNo()));
             member.appendChild(DTUNo);
+            
+            // write the content into xml file
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(filename));
+            
+            transformer.transform(source, result);
         }
     }
 }
