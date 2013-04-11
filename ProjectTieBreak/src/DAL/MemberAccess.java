@@ -83,7 +83,7 @@ public class MemberAccess
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM Member WHERE Id = ?";
+            String sql = "SELECT * FROM Member";
             PreparedStatement ps = con.prepareStatement(sql);
             
 

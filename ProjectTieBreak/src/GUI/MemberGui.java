@@ -52,7 +52,15 @@ public class MemberGui extends javax.swing.JFrame
     public static void main(String[] args)
     {
         new MemberGui().setVisible(true);
-        int dialogResult = JOptionPane.showConfirmDialog(null, "WARNING: This is an unfinished and unreleased build!\n", null, WIDTH, 2);
+        Object[] options = {"Ok","Cancel"};
+        int dialogResult = JOptionPane.showOptionDialog(null,
+    "WARNING: This is an unfinished and unreleased build!\n",
+    "",
+    JOptionPane.YES_NO_OPTION,
+    JOptionPane.QUESTION_MESSAGE,
+    null,     //do not use a custom Icon
+    options,  //the titles of buttons
+    options[0]); //default button title
         if (dialogResult == JOptionPane.CANCEL_OPTION || dialogResult == JOptionPane.NO_OPTION)
         {
             System.exit(0);
