@@ -73,7 +73,7 @@ public class MemberManager
         return null;
     }
     
-    public void addMember(String firstName, String lastName,String address, int birthYear, String email, int phoneNo)
+    public void addMember(String firstName, String lastName,String address, int birthYear, String email, int phoneNo) throws SQLServerException, SQLException
     {
         int memberNo=0000;
         Calendar c = Calendar.getInstance();
@@ -95,5 +95,8 @@ public class MemberManager
         }
         
         Member m = Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, membertype, 0, 0);
+        
+        accessor.add(m);
+        members.add(m);
     }
 }
