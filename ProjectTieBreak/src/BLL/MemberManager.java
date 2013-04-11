@@ -11,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -69,5 +71,29 @@ public class MemberManager
                 return m;
         }
         return null;
+    }
+    
+    public void addMember(String firstName, String lastName,String address, int birthYear, String email, int phoneNo)
+    {
+        int memberNo=0000;
+        Calendar c = Calendar.getInstance();
+        int age = c.get(Calendar.YEAR)-birthYear;
+        String membertype = "senior";
+        //Determinants
+        for(Member m : members)
+        {
+            if(m.getMemberNo()>memberNo)
+                memberNo = m.getMemberNo()+1;
+        }
+        if(age < 18)
+        {
+            membertype = "junior";
+        }
+        else if(age > 60)
+        {
+            membertype = "retiree";
+        }
+        
+        Member m = Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, membertype, 0, 0);
     }
 }
