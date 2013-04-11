@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,6 +21,7 @@ public class MemberAccess
     // Instance variables \\
     private Connector connector;
     private static MemberAccess instance = null;
+    private List<Member> members = null;
 
     // Constructor \\
     /**
@@ -30,6 +33,7 @@ public class MemberAccess
     private MemberAccess() throws FileNotFoundException, IOException
     {
         connector = Connector.getInstance();
+        members = new ArrayList<>();
     }
 
     // Singleton \\
@@ -72,6 +76,23 @@ public class MemberAccess
                 return getOneMember(rs);
             }
             return null;
+        }
+    }
+    
+    public List<Member> getAll() throws SQLServerException, SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "SELECT * FROM Member WHERE Id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next())
+            {
+                members.add(getOneMember(rs));
+            }
+            return members;
         }
     }
     
@@ -146,6 +167,26 @@ public class MemberAccess
             {
                 throw new SQLException("Unable to delete member");
             }
+        }
+    }
+    
+    public void add(Member m) throws SQLServerException, SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "INSERT INTO Member (Id, lastName, firstName, address, birthYear, phoneNo, email, memberType, DTULicenceNo, DTUPoints, "
+                    + "VALUES ?,?,?,?,?,?,?,?,?,?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, m.getMemberNo());
+            ps.setString(2, m.getLastName());
+            ps.setString(3, m.getFirstName());
+            ps.setString(4, m.getAddress());
+            ps.setInt(5, m.getBirthYear());
+            ps.setInt(6, m.getPhoneNo());
+            ps.setString(7, m.getEmail());
+            ps.setString(8, m.getMemberType());
+            ps.setInt(9, m.getDTULicenceNo());
+            ps.setInt(10, m.getDTUPoints());
         }
     }
     
