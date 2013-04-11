@@ -48,6 +48,7 @@ public class MemberGui extends javax.swing.JFrame
         {
         }
         debugFetch();
+        lstResults.setModel(model);
     }
 
     public static void main(String[] args) throws SQLServerException, SQLException
@@ -423,16 +424,21 @@ public class MemberGui extends javax.swing.JFrame
     {
         List<Member> resultSet = mM.getAll();
         if(resultSet == null)
+        {
             System.out.println("Derp");
+        }
         resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
         if (!resultSet.isEmpty())
         {
+            System.out.println("DEBUG: resultSet is empty: " + resultSet.isEmpty());
+            System.out.println("DEBUG: resultSet contains " + resultSet.size() + "results.");
             for (Member m : resultSet)
             {
                 String memb = m.getMemberNo() + " - " + m.getFirstName() + " " + m.getLastName();
                 model.addElement(memb);
             }
             lblCount.setText(resultSet.size() + " results!");
+            System.out.println("DEBUG: model size: " + model.size());
         }
         else
         {
