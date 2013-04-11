@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -184,7 +185,24 @@ public class NewMemberGui extends javax.swing.JFrame
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSaveActionPerformed
     {//GEN-HEADEREND:event_btnSaveActionPerformed
-        
+        int year = Integer.parseInt(txtYear.toString());
+        int phone = Integer.parseInt(txtYear.toString());
+        try
+        {
+            mM.addMember(txtFirstName.toString(), txtLastName.toString(), txtAddress.toString(), year, txtEmail.toString(),phone);
+        } 
+        catch (SQLServerException ex)
+        {
+            System.out.println("SQLServerException: " + ex);
+            Logger.getLogger(NewMemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        catch (SQLException ex)
+        {
+            System.out.println("SQLException: " + ex);
+            Logger.getLogger(NewMemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Changes saved successfully!\n", null, WIDTH, 1);
+        NewMemberGui.this.setVisible(false);
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_btnCancelMouseClicked
