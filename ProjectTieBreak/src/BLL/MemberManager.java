@@ -109,8 +109,8 @@ public class MemberManager
         Member m = Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, membertype, 0, 0);
         
         accessor.debugAdd(m);
-        System.out.println("DEBUG: debugAdded member!");
-        accessor.add(m);
+        System.out.println("DEBUG: debugAdded attempted!");
+        //accessor.add(m);
         members.add(m);
     }
 }

@@ -211,14 +211,17 @@ public class MemberAccess
             {
                 throw new SQLException("DEBUG: unable to update server - do we have connection?");
             }
+            System.out.println("DEBUG: debugAdd completed... hopefully!");
         }
         catch (SQLServerException sqlsrv)
         {
             System.out.println("DEBUG: SQL-connection failed:\n" + sqlsrv);
+            System.out.println("DEBUG: debugAdd failed.");
         }     
         catch (SQLException sqlex)
         {
             System.out.println("DEBUG: SQL-exception:\n" + sqlex);
+            System.out.println("DEBUG: debugAdd failed.");
         }
     }
     
