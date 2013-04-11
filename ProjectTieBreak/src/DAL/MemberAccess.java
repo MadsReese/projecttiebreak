@@ -21,7 +21,6 @@ public class MemberAccess
     // Instance variables \\
     private Connector connector;
     private static MemberAccess instance = null;
-    private List<Member> members = null;
 
     // Constructor \\
     /**
@@ -33,7 +32,6 @@ public class MemberAccess
     private MemberAccess() throws FileNotFoundException, IOException
     {
         connector = Connector.getInstance();
-        members = new ArrayList<>();
     }
 
     // Singleton \\
@@ -83,6 +81,7 @@ public class MemberAccess
     {
         try (Connection con = connector.getConnection())
         {
+            List<Member> members = new ArrayList<>();
             String sql = "SELECT * FROM Member";
             PreparedStatement ps = con.prepareStatement(sql);
             

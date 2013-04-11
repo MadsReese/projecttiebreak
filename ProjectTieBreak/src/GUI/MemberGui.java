@@ -6,6 +6,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,41 +16,41 @@ import javax.swing.JOptionPane;
 public class MemberGui extends javax.swing.JFrame
 {
     private DefaultListModel model = new DefaultListModel();
-    private MemberManager mM = null;
+    private MemberManager mM;
     private int switchLimitation = Integer.MAX_VALUE;
     private int switchType = 0;
 
     /**
      * Initializes the main member GUI.
      */
-    public MemberGui()
+    public MemberGui() throws SQLServerException, SQLException
     {
+        
+        initComponents();
+        lstResults.setModel(model);
         try
         {
             mM = MemberManager.getInstance();
         } 
         catch (FileNotFoundException ex)
         {
-            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } 
         catch (IOException ex)
         {
-            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } 
         catch (SQLServerException ex)
         {
-            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } 
         catch (SQLException ex)
         {
-            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
         }
-        initComponents();
-        lstResults.setModel(model);
         debugFetch();
     }
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws SQLServerException, SQLException
     {
         new MemberGui().setVisible(true);
         Object[] options = {"Ok","Cancel"};
@@ -418,9 +419,11 @@ public class MemberGui extends javax.swing.JFrame
 //        }
     }
     
-    private void debugFetch()
+    private void debugFetch() throws SQLServerException, SQLException
     {
         List<Member> resultSet = mM.getAll();
+        if(resultSet == null)
+            System.out.println("Derp");
         resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
         if (!resultSet.isEmpty())
         {

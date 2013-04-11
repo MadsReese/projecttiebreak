@@ -22,7 +22,7 @@ public class MemberManager
 {
     private static MemberManager instance = null;
     private MemberAccess accessor;
-    private List<Member> members = null;
+    private List<Member> members;
     
     private MemberManager() throws FileNotFoundException, IOException, SQLServerException, SQLException
     {
@@ -74,7 +74,7 @@ public class MemberManager
     
     public List<Member> getAll() throws SQLServerException, SQLException
     {
-        return accessor.getAll();
+        return members;
     }
     
     public void addMember(String firstName, String lastName,String address, int birthYear, String email, int phoneNo) throws SQLServerException, SQLException
