@@ -2,13 +2,14 @@ package GUI;
 
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 public class MemberGui extends javax.swing.JFrame
 {
-    private DefaultListModel model = new DefaultListModel(); 
+    private DefaultListModel model = new DefaultListModel();
     private int switchLimitation = Integer.MAX_VALUE;
     private int switchType = 0;
-    
+
     /**
      * Initializes the main member GUI.
      */
@@ -17,12 +18,15 @@ public class MemberGui extends javax.swing.JFrame
         initComponents();
         lstResults.setModel(model);
     }
-    
-    public static void main(String[] args) 
+
+    public static void main(String[] args)
     {
         new MemberGui().setVisible(true);
-    }
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        JOptionPane.showConfirmDialog(null, "WARNING: This is an unfinished and unreleased build!", null, WIDTH, 3);
      
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -160,7 +164,7 @@ public class MemberGui extends javax.swing.JFrame
 
         lblSearchFor.setText("Search for...");
 
-        cmbBoxSearchFor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CPR-Number", "Name" }));
+        cmbBoxSearchFor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Member Number", "Name" }));
         cmbBoxSearchFor.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -280,23 +284,18 @@ public class MemberGui extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
- 
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void cmbBoxSearchForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBoxSearchForActionPerformed
-
     }//GEN-LAST:event_cmbBoxSearchForActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
@@ -305,27 +304,26 @@ public class MemberGui extends javax.swing.JFrame
 
     private void cmbBoxLimitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmbBoxLimitActionPerformed
     {//GEN-HEADEREND:event_cmbBoxLimitActionPerformed
-        switch(cmbBoxLimit.getSelectedIndex())
+        switch (cmbBoxLimit.getSelectedIndex())
         {
-            case 0: 
+            case 0:
                 switchLimitation = Integer.MAX_VALUE;
                 break;
-            case 1: 
+            case 1:
                 switchLimitation = 10;
                 break;
-            case 2: 
+            case 2:
                 switchLimitation = 20;
                 break;
-            case 3: 
+            case 3:
                 switchLimitation = 50;
                 break;
-            case 4: 
+            case 4:
                 switchLimitation = 100;
                 break;
         }
         btnSearch.doClick();
     }//GEN-LAST:event_cmbBoxLimitActionPerformed
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnClose;
@@ -348,42 +346,41 @@ public class MemberGui extends javax.swing.JFrame
     private javax.swing.JTextField txtBoxQuery;
     // End of variables declaration//GEN-END:variables
 
-private void searchByName()
-{
-    model.clear();
-    String query = txtBoxQuery.getText();
-    List<String> resultSet = mM.getByName(query);
-    resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
-    if (!resultSet.isEmpty())
+    private void searchByName()
     {
-      for (String s: resultSet)
-      {
-          model.addElement(s);
-      }
-      lblCount.setText("Count: " + resultSet.size() + ".");
+        model.clear();
+        String query = txtBoxQuery.getText();
+        List<String> resultSet; = mM.getByName(query);
+        resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
+        if (!resultSet.isEmpty())
+        {
+            for (String s : resultSet)
+            {
+                model.addElement(s);
+            }
+            lblCount.setText("Count: " + resultSet.size() + ".");
+        } else
+        {
+            lblCount.setText("No results.");
+        }
     }
-    else
-    {
-      lblCount.setText("No results.");
-    }
-}
 
-private void searchByCPR()
-{
-    model.clear();
-    String query = txtBoxQuery.getText();
-    List<String> resultSet = mM.getByCPR(query);
-    resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
-    if (!resultSet.isEmpty())
+    private void searchByCPR()
     {
-      for (String s: resultSet)
-      {
-          model.addElement(s);
-      }
-      lblCount.setText("Count: " + resultSet.size() + ".");
-    }
-    else
-    {
-      lblCount.setText("No results.");
+        model.clear();
+        String query = txtBoxQuery.getText();
+        List<String> resultSet; = mM.getByCPR(query);
+        resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
+        if (!resultSet.isEmpty())
+        {
+            for (String s : resultSet)
+            {
+                model.addElement(s);
+            }
+            lblCount.setText("Count: " + resultSet.size() + ".");
+        } else
+        {
+            lblCount.setText("No results.");
+        }
     }
 }
