@@ -1,12 +1,21 @@
 package GUI;
 
+import BE.Member;
+import BLL.MemberManager;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class MemberGui extends javax.swing.JFrame
 {
     private DefaultListModel model = new DefaultListModel();
+    private MemberManager mM = null;
     private int switchLimitation = Integer.MAX_VALUE;
     private int switchType = 0;
 
@@ -15,16 +24,35 @@ public class MemberGui extends javax.swing.JFrame
      */
     public MemberGui()
     {
+        try
+        {
+            mM = MemberManager.getInstance();
+        } catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLServerException ex)
+        {
+            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
         lstResults.setModel(model);
+        debugFetch();
     }
 
     public static void main(String[] args)
     {
         new MemberGui().setVisible(true);
-        int dialogButton = JOptionPane.YES_NO_OPTION;
-        JOptionPane.showConfirmDialog(null, "WARNING: This is an unfinished and unreleased build!", null, WIDTH, 3);
-     
+        int dialogResult = JOptionPane.showConfirmDialog(null, "WARNING: This is an unfinished and unreleased build!\n", null, WIDTH, 2);
+        if (dialogResult == JOptionPane.CANCEL_OPTION || dialogResult == JOptionPane.NO_OPTION)
+        {
+            System.exit(0);
+        }
     }
 
     /**
@@ -39,47 +67,27 @@ public class MemberGui extends javax.swing.JFrame
 
         txtBoxQuery = new javax.swing.JTextField();
         lblQuery = new javax.swing.JLabel();
-        btnSearch = new javax.swing.JButton();
-        btnClear = new javax.swing.JButton();
         pnlResultsAndDetails = new javax.swing.JPanel();
         scrPnlResults = new javax.swing.JScrollPane();
         lstResults = new javax.swing.JList();
         scrPnlDetails = new javax.swing.JScrollPane();
         lstDetails = new javax.swing.JList();
-        btnNew = new javax.swing.JButton();
-        btnRemove = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
         lblCount = new javax.swing.JLabel();
+        btnAddMember = new javax.swing.JButton();
+        btnRemoveMember = new javax.swing.JButton();
         pnlSearch = new javax.swing.JPanel();
         lblSearchFor = new javax.swing.JLabel();
-        cmbBoxSearchFor = new javax.swing.JComboBox();
+        cmbBoxSearchType = new javax.swing.JComboBox();
         pnlLimit = new javax.swing.JPanel();
         lblLimit = new javax.swing.JLabel();
         cmbBoxLimit = new javax.swing.JComboBox();
+        btnSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         lblQuery.setText("Query");
-
-        btnSearch.setText("Search");
-        btnSearch.setActionCommand("");
-        btnSearch.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnSearchActionPerformed(evt);
-            }
-        });
-
-        btnClear.setText("Clear");
-        btnClear.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnClearActionPerformed(evt);
-            }
-        });
 
         pnlResultsAndDetails.setBorder(javax.swing.BorderFactory.createTitledBorder("Results and Details"));
         pnlResultsAndDetails.setName("test"); // NOI18N
@@ -87,24 +95,6 @@ public class MemberGui extends javax.swing.JFrame
         scrPnlResults.setViewportView(lstResults);
 
         scrPnlDetails.setViewportView(lstDetails);
-
-        btnNew.setText("New...");
-        btnNew.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnNewActionPerformed(evt);
-            }
-        });
-
-        btnRemove.setText("Remove");
-        btnRemove.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnRemoveActionPerformed(evt);
-            }
-        });
 
         btnClose.setText("Close");
         btnClose.addActionListener(new java.awt.event.ActionListener()
@@ -117,6 +107,10 @@ public class MemberGui extends javax.swing.JFrame
 
         lblCount.setText("Count: ");
 
+        btnAddMember.setText("Add...");
+
+        btnRemoveMember.setText("Remove");
+
         javax.swing.GroupLayout pnlResultsAndDetailsLayout = new javax.swing.GroupLayout(pnlResultsAndDetails);
         pnlResultsAndDetails.setLayout(pnlResultsAndDetailsLayout);
         pnlResultsAndDetailsLayout.setHorizontalGroup(
@@ -126,15 +120,15 @@ public class MemberGui extends javax.swing.JFrame
                 .addGroup(pnlResultsAndDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlResultsAndDetailsLayout.createSequentialGroup()
                         .addGroup(pnlResultsAndDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(scrPnlResults, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlResultsAndDetailsLayout.createSequentialGroup()
-                                .addComponent(btnNew)
+                                .addComponent(btnAddMember)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnRemove))
-                            .addComponent(scrPnlResults, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnRemoveMember)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlResultsAndDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlResultsAndDetailsLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(0, 143, Short.MAX_VALUE)
                                 .addComponent(btnClose))
                             .addComponent(scrPnlDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(pnlResultsAndDetailsLayout.createSequentialGroup()
@@ -153,9 +147,9 @@ public class MemberGui extends javax.swing.JFrame
                     .addComponent(scrPnlResults, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlResultsAndDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNew)
-                    .addComponent(btnRemove)
-                    .addComponent(btnClose))
+                    .addComponent(btnClose)
+                    .addComponent(btnAddMember)
+                    .addComponent(btnRemoveMember))
                 .addContainerGap())
         );
 
@@ -164,12 +158,12 @@ public class MemberGui extends javax.swing.JFrame
 
         lblSearchFor.setText("Search for...");
 
-        cmbBoxSearchFor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Member Number", "Name" }));
-        cmbBoxSearchFor.addActionListener(new java.awt.event.ActionListener()
+        cmbBoxSearchType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Member No.", "Full Name" }));
+        cmbBoxSearchType.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                cmbBoxSearchForActionPerformed(evt);
+                cmbBoxSearchTypeActionPerformed(evt);
             }
         });
 
@@ -182,8 +176,8 @@ public class MemberGui extends javax.swing.JFrame
                 .addGroup(pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlSearchLayout.createSequentialGroup()
                         .addComponent(lblSearchFor)
-                        .addGap(0, 106, Short.MAX_VALUE))
-                    .addComponent(cmbBoxSearchFor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(cmbBoxSearchType, 0, 168, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlSearchLayout.setVerticalGroup(
@@ -191,8 +185,8 @@ public class MemberGui extends javax.swing.JFrame
             .addGroup(pnlSearchLayout.createSequentialGroup()
                 .addComponent(lblSearchFor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbBoxSearchFor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addComponent(cmbBoxSearchType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlLimit.setBorder(javax.swing.BorderFactory.createTitledBorder("Search Limit"));
@@ -228,8 +222,17 @@ public class MemberGui extends javax.swing.JFrame
                 .addComponent(lblLimit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbBoxLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
+
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -241,7 +244,7 @@ public class MemberGui extends javax.swing.JFrame
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(pnlSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(236, Short.MAX_VALUE))
+                        .addContainerGap(238, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pnlResultsAndDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -249,10 +252,9 @@ public class MemberGui extends javax.swing.JFrame
                                 .addComponent(lblQuery)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtBoxQuery)
-                                .addGap(12, 12, 12)
+                                .addGap(8, 8, 8)
                                 .addComponent(btnSearch)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnClear))
+                                .addGap(63, 63, 63))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(pnlLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -266,8 +268,7 @@ public class MemberGui extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtBoxQuery)
-                        .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnSearch))
                     .addComponent(lblQuery, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -282,22 +283,7 @@ public class MemberGui extends javax.swing.JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-    }//GEN-LAST:event_btnNewActionPerformed
-
-    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-    }//GEN-LAST:event_btnRemoveActionPerformed
-
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-    }//GEN-LAST:event_btnSearchActionPerformed
-
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-    }//GEN-LAST:event_btnClearActionPerformed
-
-    private void cmbBoxSearchForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBoxSearchForActionPerformed
-    }//GEN-LAST:event_cmbBoxSearchForActionPerformed
-
+    
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnCloseActionPerformed
@@ -324,14 +310,40 @@ public class MemberGui extends javax.swing.JFrame
         }
         btnSearch.doClick();
     }//GEN-LAST:event_cmbBoxLimitActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSearchActionPerformed
+    {//GEN-HEADEREND:event_btnSearchActionPerformed
+//        if (switchType == 1)
+//        {
+//            searchByName();
+//        }
+//        else
+//        {
+//            searchByMemberNo();
+//        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void cmbBoxSearchTypeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmbBoxSearchTypeActionPerformed
+    {//GEN-HEADEREND:event_cmbBoxSearchTypeActionPerformed
+        switch (cmbBoxSearchType.getSelectedIndex())
+        {
+            case 0:
+                switchType = 0;
+                break;
+            case 1:
+                switchType = 1;
+                break;
+        }
+        btnSearch.doClick();
+    }//GEN-LAST:event_cmbBoxSearchTypeActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnAddMember;
     private javax.swing.JButton btnClose;
-    private javax.swing.JButton btnNew;
-    private javax.swing.JButton btnRemove;
+    private javax.swing.JButton btnRemoveMember;
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox cmbBoxLimit;
-    private javax.swing.JComboBox cmbBoxSearchFor;
+    private javax.swing.JComboBox cmbBoxSearchType;
     private javax.swing.JLabel lblCount;
     private javax.swing.JLabel lblLimit;
     private javax.swing.JLabel lblQuery;
@@ -348,39 +360,56 @@ public class MemberGui extends javax.swing.JFrame
 
     private void searchByName()
     {
-        model.clear();
-        String query = txtBoxQuery.getText();
-        List<String> resultSet; = mM.getByName(query);
-        resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
-        if (!resultSet.isEmpty())
-        {
-            for (String s : resultSet)
-            {
-                model.addElement(s);
-            }
-            lblCount.setText("Count: " + resultSet.size() + ".");
-        } else
-        {
-            lblCount.setText("No results.");
-        }
+//        model.clear();
+//        String query = txtBoxQuery.getText();
+//        List<Member> resultSet = mM.getByName(query);
+//        resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
+//        if (!resultSet.isEmpty())
+//        {
+//            for (Member m : resultSet)
+//            {
+//                String memb = m.getMemberNo() + " - " + m.getFirstName() + " " + m.getLastName();
+//                model.addElement(memb);
+//            }
+//            lblCount.setText("Count: " + resultSet.size() + ".");
+//        } else
+//        {
+//            lblCount.setText("No results.");
+//        }
     }
 
-    private void searchByCPR()
+    private void searchByMemberNo()
     {
-        model.clear();
-        String query = txtBoxQuery.getText();
-        List<String> resultSet; = mM.getByCPR(query);
+//        model.clear();
+//        String query = txtBoxQuery.getText();
+//        Member result = mM.getByMemberNo(query);
+//        if (result != null)
+//        {
+//            model.addElement(result);
+//            lblCount.setText("Count: 1");
+//        } 
+//        else
+//        {
+//            lblCount.setText("No results.");
+//        }
+    }
+    
+    private void debugFetch()
+    {
+        List<Member> resultSet = mM.getAll();
         resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
         if (!resultSet.isEmpty())
         {
-            for (String s : resultSet)
+            for (Member m : resultSet)
             {
-                model.addElement(s);
+                String memb = m.getMemberNo() + " - " + m.getFirstName() + " " + m.getLastName();
+                model.addElement(memb);
             }
-            lblCount.setText("Count: " + resultSet.size() + ".");
-        } else
+            lblCount.setText(resultSet.size() + " results!");
+        }
+        else
         {
-            lblCount.setText("No results.");
+            lblCount.setText("No Results. :(");;
         }
     }
 }
