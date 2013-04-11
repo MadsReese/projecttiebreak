@@ -27,22 +27,26 @@ public class MemberGui extends javax.swing.JFrame
         try
         {
             mM = MemberManager.getInstance();
-        } catch (FileNotFoundException ex)
+        } 
+        catch (FileNotFoundException ex)
         {
             Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex)
+        } 
+        catch (IOException ex)
         {
             Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLServerException ex)
+        } 
+        catch (SQLServerException ex)
         {
             Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
+        } 
+        catch (SQLException ex)
         {
             Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
         }
         initComponents();
         lstResults.setModel(model);
-        debugFetch();
+        //debugFetch();
     }
 
     public static void main(String[] args)
@@ -108,6 +112,13 @@ public class MemberGui extends javax.swing.JFrame
         lblCount.setText("Count: ");
 
         btnAddMember.setText("Add...");
+        btnAddMember.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnAddMemberActionPerformed(evt);
+            }
+        });
 
         btnRemoveMember.setText("Remove");
 
@@ -337,6 +348,11 @@ public class MemberGui extends javax.swing.JFrame
         btnSearch.doClick();
     }//GEN-LAST:event_cmbBoxSearchTypeActionPerformed
 
+    private void btnAddMemberActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAddMemberActionPerformed
+    {//GEN-HEADEREND:event_btnAddMemberActionPerformed
+        new NewMemberGui().setVisible(true);
+    }//GEN-LAST:event_btnAddMemberActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddMember;
     private javax.swing.JButton btnClose;
@@ -411,5 +427,6 @@ public class MemberGui extends javax.swing.JFrame
         {
             lblCount.setText("No Results. :(");;
         }
+        resultSet.clear();
     }
 }
