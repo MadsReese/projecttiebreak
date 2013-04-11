@@ -109,14 +109,15 @@ public class MemberAccess
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "UPDATE Member SET firstName = ?, lastName = ?, address = ?, phoneNo = ?, email = ? WHERE Id = ?";
+            String sql = "UPDATE Member SET firstName = ?, lastName = ?, address = ?, phoneNo = ?, email = ?, DTUPoints = ?, WHERE Id = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, m.getFirstName());
             ps.setString(2, m.getLastName());
             ps.setString(3, m.getAddress());
             ps.setInt(4, m.getPhoneNo());
             ps.setString(5, m.getEmail());
-            ps.setInt(6, m.getMemberNo());
+            ps.setInt(6, m.getDTUPoints());
+            ps.setInt(7, m.getMemberNo());
             
             int affectedRows = ps.executeUpdate();
             if (affectedRows < 1)
@@ -160,6 +161,7 @@ public class MemberAccess
         String email = rs.getString(7);
         String memberType = rs.getString(8);
         int DTULicence = rs.getInt(9);
+        int DTUPoints = rs.getInt(10);
         
         return Member.fromDataBase(memberNo, 
                 lastName, 
@@ -169,6 +171,7 @@ public class MemberAccess
                 phoneNo, 
                 email, 
                 memberType, 
-                DTULicence);
+                DTULicence,
+                DTUPoints);
     }
 }

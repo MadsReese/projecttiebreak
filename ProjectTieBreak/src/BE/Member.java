@@ -18,11 +18,14 @@ public class Member
     private int birthYear;
     private int phoneNo;
     private String email;
+
+    
     private enum MemberType {junior, senior, recreational, retiree};
     private MemberType memberType;
     private int DTULicenceNo;
+    private int DTUPoints;
     
-    private Member(int memberNo, String lastName, String firstname, String address, int birthYear, int phoneNo, String email, String memberType, int DTULicenceNo) throws IllegalArgumentException
+    private Member(int memberNo, String lastName, String firstname, String address, int birthYear, int phoneNo, String email, String memberType, int DTULicenceNo, int DTUPoints) throws IllegalArgumentException
     {
         this.memberNo=memberNo;
         this.lastName=lastName;
@@ -40,11 +43,12 @@ public class Member
             default: throw new IllegalArgumentException("ERROR - invalid member type");
         }        
         this.DTULicenceNo=DTULicenceNo;
+        this.DTUPoints=DTUPoints;
     }
     
-    public static Member fromDataBase(int memberNo, String lastName, String firstname, String address, int birthYear, int phoneNo, String email, String memberType, int DTULicenceNo) throws IllegalArgumentException
+    public static Member fromDataBase(int memberNo, String lastName, String firstname, String address, int birthYear, int phoneNo, String email, String memberType, int DTULicenceNo, int DTUPoints) throws IllegalArgumentException
     {
-        return new Member(memberNo, lastName, firstname, address, birthYear, phoneNo, email,  memberType, DTULicenceNo);
+        return new Member(memberNo, lastName, firstname, address, birthYear, phoneNo, email,  memberType, DTULicenceNo, DTUPoints);
     }
     
     /**
@@ -152,4 +156,20 @@ public class Member
     {
         this.email = email;
     }   
+    
+    /**
+     * @return the DTUPoints
+     */
+    public int getDTUPoints()
+    {
+        return DTUPoints;
+    }
+
+    /**
+     * @param DTUPoints the DTUPoints to set
+     */
+    public void setDTUPoints(int DTUPoints)
+    {
+        this.DTUPoints = DTUPoints;
+    }
 }

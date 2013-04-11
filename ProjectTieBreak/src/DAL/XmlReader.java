@@ -52,8 +52,9 @@ public class XmlReader
             String email = xpath.evaluate("memberList/member[" + i + "]/email", doc);
             String memberType = xpath.evaluate("memberList/member[" + i + "]/memberType", doc);
             int DTULicenceNo = Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/DTULicenceNo", doc));
+            int DTUPoints = Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/DTUPoints", doc));
 
-            Member m = Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, memberType, DTULicenceNo);
+            Member m = Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, memberType, DTULicenceNo, DTUPoints);
             members.add(m);
         }
         return members;

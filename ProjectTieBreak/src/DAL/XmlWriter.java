@@ -76,6 +76,10 @@ public class XmlWriter
             DTUNo.appendChild(doc.createTextNode("" + m.getDTULicenceNo()));
             member.appendChild(DTUNo);
             
+            Element DTUPoints = doc.createElement("DTUPoints");
+            DTUPoints.appendChild(doc.createTextNode("" + m.getDTUPoints()));
+            member.appendChild(DTUPoints);
+            
             // write the content into xml file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
