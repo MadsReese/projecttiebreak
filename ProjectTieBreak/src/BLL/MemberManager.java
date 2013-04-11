@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -71,6 +70,11 @@ public class MemberManager
                 return m;
         }
         return null;
+    }
+    
+    public List<Member> getAll()
+    {
+        return members;
     }
     
     public void addMember(String firstName, String lastName,String address, int birthYear, String email, int phoneNo) throws SQLServerException, SQLException
