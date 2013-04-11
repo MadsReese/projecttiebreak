@@ -221,7 +221,15 @@ public class NewMemberGui extends javax.swing.JFrame
             System.out.println("SQLException: " + ex);
             Logger.getLogger(NewMemberGui.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int dialogResult = JOptionPane.showConfirmDialog(null, "Changes saved successfully!\n", null, WIDTH, 1);
+        Object[] options = {"Ok"};
+        int dialogResult = JOptionPane.showOptionDialog(null,
+                           "Changes saved!\n",
+                           "Information",
+                           JOptionPane.OK_OPTION,
+                           JOptionPane.WARNING_MESSAGE,
+                           null,     //do not use a custom Icon
+                           options,  //the titles of buttons
+                           options[0]); //default button title
         NewMemberGui.this.setVisible(false);
     }//GEN-LAST:event_btnSaveMouseClicked
 

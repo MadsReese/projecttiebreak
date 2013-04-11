@@ -25,6 +25,7 @@ public class MemberGui extends javax.swing.JFrame
      */
     public MemberGui() throws SQLServerException, SQLException, FileNotFoundException, IOException
     {
+        this.setTitle("Tie-Break Tennis Club");
         System.out.println("DEBUG: initializing components...");
         initComponents();
         mM = MemberManager.getInstance();
@@ -93,10 +94,15 @@ public class MemberGui extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMaximumSize(new java.awt.Dimension(460, 499));
+        setMinimumSize(new java.awt.Dimension(460, 499));
+        setResizable(false);
 
         lblQuery.setText("Query");
 
         pnlResultsAndDetails.setBorder(javax.swing.BorderFactory.createTitledBorder("Results and Details"));
+        pnlResultsAndDetails.setMaximumSize(new java.awt.Dimension(440, 353));
+        pnlResultsAndDetails.setMinimumSize(new java.awt.Dimension(440, 353));
         pnlResultsAndDetails.setName("test"); // NOI18N
 
         lstResults.setModel(new javax.swing.AbstractListModel()
