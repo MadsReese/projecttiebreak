@@ -72,9 +72,9 @@ public class MemberManager
         return null;
     }
     
-    public List<Member> getAll()
+    public List<Member> getAll() throws SQLServerException, SQLException
     {
-        return members;
+        return accessor.getAll();
     }
     
     public void addMember(String firstName, String lastName,String address, int birthYear, String email, int phoneNo) throws SQLServerException, SQLException
