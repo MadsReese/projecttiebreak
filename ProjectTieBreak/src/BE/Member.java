@@ -64,6 +64,15 @@ public class Member
         return newMemberObj;
     }
     
+    public static Member simpleFromDB(int memberNo, String lastName, String firstname) throws IllegalArgumentException
+    {
+        Member newMemberObj = new Member();
+        newMemberObj.setMemberNo(memberNo);
+        newMemberObj.SetLastName(lastName);
+        newMemberObj.setFirstName(firstname);
+        return newMemberObj;
+    }
+    
     public static Member createNew(String lastName, String firstname, String address, int birthYear, int phoneNo, String email, String memberType, int DTULicenceNo, int DTUPoints)
     {
         Member newMemberObj = new Member();

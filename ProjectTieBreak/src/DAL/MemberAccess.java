@@ -77,17 +77,18 @@ public class MemberAccess
         }
     }
     
-    public List<Member> getAll() throws SQLServerException, SQLException
+    public ArrayList<Member> getAll() throws SQLServerException, SQLException
     {
+        System.out.println("DEBUG: running getAll!");
         try (Connection con = connector.getConnection())
         {
-            List<Member> members = new ArrayList<>();
+            ArrayList<Member> members = new ArrayList<>();
             String sql = "SELECT * FROM Member";
             PreparedStatement ps = con.prepareStatement(sql);
             
 
             ResultSet rs = ps.executeQuery();
-            if (rs.next())
+            while (rs.next())
             {
                 members.add(getOneMember(rs));
             }
@@ -192,26 +193,18 @@ public class MemberAccess
     
     private Member getOneMember(ResultSet rs) throws SQLException
     {
+        System.out.println("DEBUG: running getOneMember!");
         int memberNo = rs.getInt(1);
         String lastName = rs.getString(2);
         String firstName = rs.getString(3);
-        String address = rs.getString(4);
-        int birthYear = rs.getInt(5);
-        int phoneNo = rs.getInt(6);
-        String email = rs.getString(7);
-        String memberType = rs.getString(8);
-        int DTULicence = rs.getInt(9);
-        int DTUPoints = rs.getInt(10);
+//        String address = rs.getString(4);
+//        int birthYear = rs.getInt(5);
+//        int phoneNo = rs.getInt(6);
+//        String email = rs.getString(7);
+//        String memberType = rs.getString(8);
+//        int DTULicence = rs.getInt(9);
+//        int DTUPoints = rs.getInt(10);
         
-        return Member.fromDataBase(memberNo, 
-                lastName, 
-                firstName, 
-                address, 
-                birthYear, 
-                phoneNo, 
-                email, 
-                memberType, 
-                DTULicence,
-                DTUPoints);
+        return Member.simpleFromDB(memberNo, lastName,firstName);
     }
 }

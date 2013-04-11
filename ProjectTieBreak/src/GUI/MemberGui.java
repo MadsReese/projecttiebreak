@@ -23,35 +23,28 @@ public class MemberGui extends javax.swing.JFrame
     /**
      * Initializes the main member GUI.
      */
-    public MemberGui() throws SQLServerException, SQLException
+    public MemberGui() throws SQLServerException, SQLException, FileNotFoundException, IOException
     {
-        
+        System.out.println("DEBUG: initializing components...");
         initComponents();
-        lstResults.setModel(model);
-        try
+        mM = MemberManager.getInstance();
+        System.out.println("DEBUG: mM-instance: " + mM.getInstance());
+        if (mM == null)
         {
-            mM = MemberManager.getInstance();
-        } 
-        catch (FileNotFoundException ex)
-        {
-            ex.printStackTrace();
-        } 
-        catch (IOException ex)
-        {
-            ex.printStackTrace();
-        } 
-        catch (SQLServerException ex)
-        {
-            ex.printStackTrace();
-        } 
-        catch (SQLException ex)
-        {
+            System.out.println("DEBUG: mM is null!");
         }
-        debugFetch();
-        lstResults.setModel(model);
+        else
+        {
+            System.out.println("DEBUG: attempting to load list!");        
+            debugFetch();
+            System.out.println("DEBUG: debugFetch has been run!");
+            lstResults.setModel(model);
+            System.out.println("DEBUG: listModel set!");
+        }
+        
     }
 
-    public static void main(String[] args) throws SQLServerException, SQLException
+    public static void main(String[] args) throws SQLServerException, SQLException, FileNotFoundException, IOException
     {
         new MemberGui().setVisible(true);
         Object[] options = {"Ok","Cancel"};
@@ -106,6 +99,12 @@ public class MemberGui extends javax.swing.JFrame
         pnlResultsAndDetails.setBorder(javax.swing.BorderFactory.createTitledBorder("Results and Details"));
         pnlResultsAndDetails.setName("test"); // NOI18N
 
+        lstResults.setModel(new javax.swing.AbstractListModel()
+        {
+            String[] strings = { "model" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
         scrPnlResults.setViewportView(lstResults);
 
         scrPnlDetails.setViewportView(lstDetails);
@@ -420,29 +419,34 @@ public class MemberGui extends javax.swing.JFrame
 //        }
     }
     
-    private void debugFetch() throws SQLServerException, SQLException
+    private void debugFetch() throws SQLServerException, SQLException, FileNotFoundException, IOException
     {
-        List<Member> resultSet = mM.getAll();
+        System.out.println("DEBUGFETCH: attempting to populate resultSet!");
+        System.out.println("DEBUGFETCH: mM-instance: " + mM.getInstance());
+        ArrayList<Member> resultSet = mM.getAll();
         if(resultSet == null)
         {
-            System.out.println("Derp");
+            System.out.println("DEBUGFETCH: resultSet is null!");
         }
-        resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
+        System.out.println("DEBUGFETCH: resultSet contains " + resultSet.size() + " elements!");
+        //resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
+                //subList(0, Math.min(resultSet.size(), switchLimitation));
+        System.out.println("DEBUGFETCH: resultSet is empty: " + resultSet.isEmpty());
         if (!resultSet.isEmpty())
         {
-            System.out.println("DEBUG: resultSet is empty: " + resultSet.isEmpty());
-            System.out.println("DEBUG: resultSet contains " + resultSet.size() + "results.");
+            System.out.println("DEBUGFETCH: resultSet contains " + resultSet.size() + "results.");
             for (Member m : resultSet)
             {
                 String memb = m.getMemberNo() + " - " + m.getFirstName() + " " + m.getLastName();
                 model.addElement(memb);
             }
             lblCount.setText(resultSet.size() + " results!");
-            System.out.println("DEBUG: model size: " + model.size());
+            System.out.println("DEBUGFETCH: model size: " + model.size());
         }
         else
         {
             lblCount.setText("No Results. :(");;
+            System.out.println("DEBUGFETCH: fetch failed - database empty?");
         }
         resultSet.clear();
     }

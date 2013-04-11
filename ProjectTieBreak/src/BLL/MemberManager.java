@@ -22,7 +22,7 @@ public class MemberManager
 {
     private static MemberManager instance = null;
     private MemberAccess accessor;
-    private List<Member> members;
+    private ArrayList<Member> members;
     
     private MemberManager() throws FileNotFoundException, IOException, SQLServerException, SQLException
     {
@@ -72,7 +72,7 @@ public class MemberManager
         return null;
     }
     
-    public List<Member> getAll() throws SQLServerException, SQLException
+    public ArrayList<Member> getAll() throws SQLServerException, SQLException
     {
         return members;
     }
