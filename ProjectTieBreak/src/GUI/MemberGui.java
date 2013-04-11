@@ -245,27 +245,23 @@ public class MemberGui extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        btnNew.doClick();
+ 
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        btnRemove.doClick();
+
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        if (cmbBoxSearchFor.getSelectedIndex() == 1)
-        {
-            
-        }
-        else
+
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        btnClear.doClick();
+
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void cmbBoxSearchForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBoxSearchForActionPerformed
-        btnSearch.doClick();
+
     }//GEN-LAST:event_cmbBoxSearchForActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
