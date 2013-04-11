@@ -46,7 +46,7 @@ public class MemberGui extends javax.swing.JFrame
         }
         initComponents();
         lstResults.setModel(model);
-        //debugFetch();
+        debugFetch();
     }
 
     public static void main(String[] args)
