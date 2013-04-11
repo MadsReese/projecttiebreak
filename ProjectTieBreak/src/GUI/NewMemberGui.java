@@ -86,6 +86,13 @@ public class NewMemberGui extends javax.swing.JFrame
         lblEmail.setText("Email");
 
         btnSave.setText("Save");
+        btnSave.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                btnSaveMouseClicked(evt);
+            }
+        });
         btnSave.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -185,8 +192,21 @@ public class NewMemberGui extends javax.swing.JFrame
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSaveActionPerformed
     {//GEN-HEADEREND:event_btnSaveActionPerformed
-        int year = Integer.parseInt(txtYear.toString());
-        int phone = Integer.parseInt(txtYear.toString());
+
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnCancelMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_btnCancelMouseClicked
+    {//GEN-HEADEREND:event_btnCancelMouseClicked
+        NewMemberGui.this.setVisible(false);
+    }//GEN-LAST:event_btnCancelMouseClicked
+
+    private void btnSaveMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_btnSaveMouseClicked
+    {//GEN-HEADEREND:event_btnSaveMouseClicked
+        System.out.println("DEBUG: save action performed!");
+        int year = Integer.parseInt(txtYear.getText());
+        System.out.println("DEBUG: year is set to; " + year);
+        int phone = Integer.parseInt(txtYear.getText());
+        System.out.println("DEBUG: phone is set to; " + phone);
         try
         {
             mM.addMember(txtFirstName.toString(), txtLastName.toString(), txtAddress.toString(), year, txtEmail.toString(),phone);
@@ -203,12 +223,7 @@ public class NewMemberGui extends javax.swing.JFrame
         }
         int dialogResult = JOptionPane.showConfirmDialog(null, "Changes saved successfully!\n", null, WIDTH, 1);
         NewMemberGui.this.setVisible(false);
-    }//GEN-LAST:event_btnSaveActionPerformed
-
-    private void btnCancelMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_btnCancelMouseClicked
-    {//GEN-HEADEREND:event_btnCancelMouseClicked
-        NewMemberGui.this.setVisible(false);
-    }//GEN-LAST:event_btnCancelMouseClicked
+    }//GEN-LAST:event_btnSaveMouseClicked
 
     /**
      * @param args the command line arguments

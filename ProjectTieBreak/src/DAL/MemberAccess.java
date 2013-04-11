@@ -88,10 +88,14 @@ public class MemberAccess
             
 
             ResultSet rs = ps.executeQuery();
+            int i = 0;
             while (rs.next())
             {
                 members.add(getOneMember(rs));
+                i++;
+                System.out.println(i + " member objects created.");
             }
+            System.out.println("DEBUG: returned list containing " + members.size());
             return members;
         }
     }
@@ -187,6 +191,34 @@ public class MemberAccess
             ps.setString(8, m.getMemberType());
             ps.setInt(9, m.getDTULicenceNo());
             ps.setInt(10, m.getDTUPoints());
+        }
+    }
+    
+    public void debugAdd(Member m)
+    {
+        System.out.println("DEBUG: running debugAdd!");
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "INSERT INTO Member (Id, Last_Name, First_Name, Email"
+                       + "VALUES ?,?,?,0,0,?,?,0,0";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, m.getMemberNo());
+            ps.setString(2, m.getLastName());
+            ps.setString(3, m.getFirstName());
+            ps.setString(4, m.getEmail());
+            int affectedRows = ps.executeUpdate();
+            if(affectedRows == 0)
+            {
+                throw new SQLException("DEBUG: unable to update server - do we have connection?");
+            }
+        }
+        catch (SQLServerException sqlsrv)
+        {
+            System.out.println("DEBUG: SQL-connection failed:\n" + sqlsrv);
+        }     
+        catch (SQLException sqlex)
+        {
+            System.out.println("DEBUG: SQL-exception:\n" + sqlex);
         }
     }
     

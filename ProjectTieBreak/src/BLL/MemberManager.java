@@ -77,7 +77,13 @@ public class MemberManager
         return members;
     }
     
-    public void addMember(String firstName, String lastName,String address, int birthYear, String email, int phoneNo) throws SQLServerException, SQLException
+    public void debugAdd(int id, String lastName, String firstName, String email)
+    {
+//        BE.Member.simpleFromDB(int id, String lastName, String firstName, String email);
+//        accessor.debugAdd(flerp);
+    }
+    
+    public void addMember(String firstName, String lastName, String address, int birthYear, String email, int phoneNo) throws SQLServerException, SQLException
     {
         int memberNo=0000;
         Calendar c = Calendar.getInstance();
@@ -87,7 +93,9 @@ public class MemberManager
         for(Member m : members)
         {
             if(m.getMemberNo()>memberNo)
+            {
                 memberNo = m.getMemberNo()+1;
+            }
         }
         if(age < 18)
         {
@@ -100,6 +108,8 @@ public class MemberManager
         
         Member m = Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, membertype, 0, 0);
         
+        accessor.debugAdd(m);
+        System.out.println("DEBUG: debugAdded member!");
         accessor.add(m);
         members.add(m);
     }
