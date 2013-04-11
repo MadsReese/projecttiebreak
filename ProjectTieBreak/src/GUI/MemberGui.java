@@ -55,9 +55,9 @@ public class MemberGui extends javax.swing.JFrame
         Object[] options = {"Ok","Cancel"};
         int dialogResult = JOptionPane.showOptionDialog(null,
     "WARNING: This is an unfinished and unreleased build!\n",
-    "",
+    "WARNING",
     JOptionPane.YES_NO_OPTION,
-    JOptionPane.QUESTION_MESSAGE,
+    JOptionPane.WARNING_MESSAGE,
     null,     //do not use a custom Icon
     options,  //the titles of buttons
     options[0]); //default button title
