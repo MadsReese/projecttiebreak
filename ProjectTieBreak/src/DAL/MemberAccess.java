@@ -194,35 +194,36 @@ public class MemberAccess
         }
     }
     
-    public void debugAdd(Member m)
+    public void debugAdd(Member m) throws SQLException, SQLServerException
     {
         System.out.println("DEBUG: running debugAdd!");
         try (Connection con = connector.getConnection())
         {
-            String sql = "INSERT INTO Member (Id, Last_Name, First_Name, Email"
-                       + "VALUES ?,?,?,0,0,?,?,0,0";
+            String sql = "INSERT INTO Member (Id, First_Name, Last_Name, Email"
+                       + "VALUES ?,?,?,0,0,?,0,0,0";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, m.getMemberNo());
-            ps.setString(2, m.getLastName());
-            ps.setString(3, m.getFirstName());
+            ps.setString(2, m.getFirstName());
+            ps.setString(3, m.getLastName());
             ps.setString(4, m.getEmail());
-            int affectedRows = ps.executeUpdate();
-            if(affectedRows == 0)
-            {
-                throw new SQLException("DEBUG: unable to update server - do we have connection?");
-            }
+            ps.executeUpdate();
+            //int affectedRows = ps.executeUpdate();
+//            if(affectedRows == 0)
+//            {
+//                throw new SQLException("DEBUG: unable to update server - do we have connection?");
+//            }
             System.out.println("DEBUG: debugAdd completed... hopefully!");
         }
-        catch (SQLServerException sqlsrv)
-        {
-            System.out.println("DEBUG: SQL-connection failed:\n" + sqlsrv);
-            System.out.println("DEBUG: debugAdd failed.");
-        }     
-        catch (SQLException sqlex)
-        {
-            System.out.println("DEBUG: SQL-exception:\n" + sqlex);
-            System.out.println("DEBUG: debugAdd failed.");
-        }
+//        catch (SQLServerException sqlsrv)
+//        {
+//            System.out.println("DEBUG: SQL-connection failed:\n" + sqlsrv);
+//            System.out.println("DEBUG: debugAdd failed.");
+//        }     
+//        catch (SQLException sqlex)
+//        {
+//            System.out.println("DEBUG: SQL-exception:\n" + sqlex);
+//            System.out.println("DEBUG: debugAdd failed.");
+//        }
     }
     
     
