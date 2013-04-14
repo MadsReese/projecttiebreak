@@ -1,6 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Project Tie-Break, EASV (2nd Semester, 2013)
+ *
+ * @author Kasper Pedersen, Jesper Agerbo Hansen,
+ * @author Mads Funch Patrzalek Reese and Jakob Hansen.
+ *
+ * Code stored at: https://github.com/MadsReese/projecttiebreak
  */
 package GUI;
 
@@ -14,13 +18,15 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
+ * This is the main class for the NewMemberGui interface.
  *
  * @author Jakob Hansen
  */
 public class NewMemberGui extends javax.swing.JFrame
 {
+//  instance fields.
     private MemberManager mM = null;
-    
+
     /**
      * Creates new form NewMemberGui
      */
@@ -30,21 +36,17 @@ public class NewMemberGui extends javax.swing.JFrame
         try
         {
             mM = MemberManager.getInstance();
-            System.out.println("DEBUG: mM-instance: " + mM.getInstance());
-        } 
-        catch (FileNotFoundException ex)
+            System.out.println("DEBUG: mM-instance: " + MemberManager.getInstance());
+        } catch (FileNotFoundException ex)
         {
             Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        catch (IOException ex)
+        } catch (IOException ex)
         {
             Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        catch (SQLServerException ex)
+        } catch (SQLServerException ex)
         {
             Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        catch (SQLException ex)
+        } catch (SQLException ex)
         {
             Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -194,14 +196,23 @@ public class NewMemberGui extends javax.swing.JFrame
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSaveActionPerformed
     {//GEN-HEADEREND:event_btnSaveActionPerformed
-
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    /**
+     * Action upon pressing the "cancel" button.
+     *
+     * @param evt
+     */
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_btnCancelMouseClicked
     {//GEN-HEADEREND:event_btnCancelMouseClicked
         NewMemberGui.this.setVisible(false);
     }//GEN-LAST:event_btnCancelMouseClicked
 
+    /**
+     * Action upon pressing "save".
+     *
+     * @param evt
+     */
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_btnSaveMouseClicked
     {//GEN-HEADEREND:event_btnSaveMouseClicked
         System.out.println("DEBUG: save action performed!");
@@ -211,31 +222,35 @@ public class NewMemberGui extends javax.swing.JFrame
         System.out.println("DEBUG: phone is set to; " + phone);
         try
         {
-            mM.addMember(txtFirstName.toString(), txtLastName.toString(), txtAddress.toString(), year, txtEmail.toString(),phone);
-        } 
-        catch (SQLServerException ex)
+            mM.addMember(txtFirstName.toString(), txtLastName.toString(), txtAddress.toString(), year, txtEmail.toString(), phone);
+        } catch (SQLServerException ex)
         {
             System.out.println("SQLServerException: " + ex);
             Logger.getLogger(NewMemberGui.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        catch (SQLException ex)
+        } catch (SQLException ex)
         {
             System.out.println("SQLException: " + ex);
             Logger.getLogger(NewMemberGui.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Object[] options = {"Ok"};
+        Object[] options =
+        {
+            "Ok"
+        };
         int dialogResult = JOptionPane.showOptionDialog(null,
-                           "Changes saved!\n",
-                           "Information",
-                           JOptionPane.OK_OPTION,
-                           JOptionPane.WARNING_MESSAGE,
-                           null,     //do not use a custom Icon
-                           options,  //the titles of buttons
-                           options[0]); //default button title
+                "Changes saved!\n",
+                "Information",
+                JOptionPane.OK_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null, //do not use a custom Icon
+                options, //the titles of buttons
+                options[0]); //default button title
         NewMemberGui.this.setVisible(false);
     }//GEN-LAST:event_btnSaveMouseClicked
 
     /**
+     * Main-class. Enables launching this interface seperately from the main
+     * MemberGui.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[])
