@@ -37,16 +37,20 @@ public class NewMemberGui extends javax.swing.JFrame
         {
             mM = MemberManager.getInstance();
             System.out.println("DEBUG: mM-instance: " + MemberManager.getInstance());
-        } catch (FileNotFoundException ex)
+        } 
+        catch (FileNotFoundException ex)
         {
             Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex)
+        } 
+        catch (IOException ex)
         {
             Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLServerException ex)
+        } 
+        catch (SQLServerException ex)
         {
             Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
+        } 
+        catch (SQLException ex)
         {
             Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
         }
