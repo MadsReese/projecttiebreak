@@ -48,28 +48,30 @@ public class MemberManager
         return instance;
     }
     
-    public ArrayList<Member> getByName(String name) 
+    public ArrayList<Member> getByName(String searchString) 
     {
-        String searchString;
+        String name;
         ArrayList<Member> result = new ArrayList<>();
         for(Member m : members)
         {
-            searchString = m.getFirstName() + " " + m.getLastName();
+            name = m.getFirstName().toLowerCase() + " " + m.getLastName().toLowerCase();
             if(name.contains(searchString))
                 result.add(m);
         }
         return result;
     }
     
-    public Member getByMemberNo(String id)
+    public ArrayList<Member> getByMemberNo(String id)
     {
+        String memNo;
+        ArrayList<Member> result = new ArrayList<>();
         for(Member m : members)
         {
-            String mNo = "" + m.getMemberNo();
-            if(mNo.equals(id))
-                return m;
+            memNo = m.getMemberNo() + "";
+            if(memNo.contains(id))
+                result.add(m);
         }
-        return null;
+        return result;
     }
     
     public List<Member> getAll() throws SQLServerException, SQLException

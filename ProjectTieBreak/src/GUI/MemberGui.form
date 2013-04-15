@@ -88,6 +88,9 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="txtBoxQuery">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBoxQueryActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblQuery">
       <Properties>
@@ -279,8 +282,8 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
-                <StringItem index="0" value="Member No."/>
-                <StringItem index="1" value="Full Name"/>
+                <StringItem index="0" value="Full Name"/>
+                <StringItem index="1" value="Member No."/>
               </StringArray>
             </Property>
           </Properties>

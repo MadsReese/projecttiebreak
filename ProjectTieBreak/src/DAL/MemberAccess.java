@@ -231,8 +231,8 @@ public class MemberAccess
     {
         System.out.println("DEBUG: running getOneMember!");
         int memberNo = rs.getInt(1);
-        String lastName = rs.getString(2);
-        String firstName = rs.getString(3);
+        String firstName = rs.getString(2);
+        String lastName = rs.getString(3);
 //        String address = rs.getString(4);
 //        int birthYear = rs.getInt(5);
 //        int phoneNo = rs.getInt(6);

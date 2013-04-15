@@ -14,7 +14,6 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -38,21 +37,9 @@ public class MemberGui extends javax.swing.JFrame
     public MemberGui() throws SQLServerException, SQLException, FileNotFoundException, IOException
     {
         this.setTitle("Tie-Break Tennis Club");
-        System.out.println("DEBUG: initializing components...");
         initComponents();
         mM = MemberManager.getInstance();
-        System.out.println("DEBUG: mM-instance: " + mM.getInstance());
-        if (mM == null)
-        {
-            System.out.println("DEBUG: mM is null!");
-        } else
-        {
-            System.out.println("DEBUG: attempting to load list!");
-            debugFetch();
-            System.out.println("DEBUG: debugFetch has been run!");
-            lstResults.setModel(model);
-            System.out.println("DEBUG: listModel set!");
-        }
+        lstResults.setModel(model);
 
     }
 
@@ -120,6 +107,14 @@ public class MemberGui extends javax.swing.JFrame
         setMaximumSize(new java.awt.Dimension(460, 499));
         setMinimumSize(new java.awt.Dimension(460, 499));
         setResizable(false);
+
+        txtBoxQuery.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtBoxQueryActionPerformed(evt);
+            }
+        });
 
         lblQuery.setText("Query");
 
@@ -207,7 +202,7 @@ public class MemberGui extends javax.swing.JFrame
 
         lblSearchFor.setText("Search for...");
 
-        cmbBoxSearchType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Member No.", "Full Name" }));
+        cmbBoxSearchType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Full Name", "Member No." }));
         cmbBoxSearchType.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -367,6 +362,7 @@ public class MemberGui extends javax.swing.JFrame
                 switchLimitation = 100;
                 break;
         }
+        
         btnSearch.doClick();
     }//GEN-LAST:event_cmbBoxLimitActionPerformed
 
@@ -377,14 +373,14 @@ public class MemberGui extends javax.swing.JFrame
      */
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSearchActionPerformed
     {//GEN-HEADEREND:event_btnSearchActionPerformed
-//        if (switchType == 1)
-//        {
-//            searchByName();
-//        }
-//        else
-//        {
-//            searchByMemberNo();
-//        }
+        if (switchType == 0)
+        {
+            searchByName();
+        }
+        else
+        {
+            searchByMemberNo();
+        }
     }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
@@ -403,7 +399,6 @@ public class MemberGui extends javax.swing.JFrame
                 switchType = 1;
                 break;
         }
-        btnSearch.doClick();
     }//GEN-LAST:event_cmbBoxSearchTypeActionPerformed
 
     /**
@@ -416,6 +411,12 @@ public class MemberGui extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btnAddMemberActionPerformed
         new NewMemberGui().setVisible(true);
     }//GEN-LAST:event_btnAddMemberActionPerformed
+
+    private void txtBoxQueryActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtBoxQueryActionPerformed
+    {//GEN-HEADEREND:event_txtBoxQueryActionPerformed
+        btnSearch.doClick();
+    }//GEN-LAST:event_txtBoxQueryActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddMember;
     private javax.swing.JButton btnClose;
@@ -442,42 +443,43 @@ public class MemberGui extends javax.swing.JFrame
      */
     private void searchByName()
     {
-//        model.clear();
-//        String query = txtBoxQuery.getText();
-//        List<Member> resultSet = mM.getByName(query);
-//        resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
-//        if (!resultSet.isEmpty())
-//        {
-//            for (Member m : resultSet)
-//            {
-//                String memb = m.getMemberNo() + " - " + m.getFirstName() + " " + m.getLastName();
-//                model.addElement(memb);
-//            }
-//            lblCount.setText("Count: " + resultSet.size() + ".");
-//        } else
-//        {
-//            lblCount.setText("No results.");
-//        }
+        model.clear();
+        String query = txtBoxQuery.getText();
+        List<Member> resultSet = mM.getByName(query.toLowerCase());
+        resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
+        if (!resultSet.isEmpty())
+        {
+            for (Member m : resultSet)
+            {
+                model.addElement(m);
+            }
+            lblCount.setText("Count: " + resultSet.size());
+        } else
+        {
+            lblCount.setText("No results.");
+        }
     }
 
     /**
-     * Method for searching for members by their member-numbers. Usually only
-     * returns a single result. (?)
+     * Method for searching for members by their member-numbers. 
      */
     private void searchByMemberNo()
     {
-//        model.clear();
-//        String query = txtBoxQuery.getText();
-//        Member result = mM.getByMemberNo(query);
-//        if (result != null)
-//        {
-//            model.addElement(result);
-//            lblCount.setText("Count: 1");
-//        } 
-//        else
-//        {
-//            lblCount.setText("No results.");
-//        }
+        model.clear();
+        String query = txtBoxQuery.getText();
+        List<Member> resultSet = mM.getByMemberNo(query);
+        if (!resultSet.isEmpty())
+        {
+            for(Member m : resultSet)
+            {
+                model.addElement(m);
+            }
+            lblCount.setText("Count: " + resultSet.size());
+        } 
+        else
+        {
+            lblCount.setText("No results.");
+        }
     }
 
     /**
@@ -490,36 +492,36 @@ public class MemberGui extends javax.swing.JFrame
      * @throws FileNotFoundException
      * @throws IOException
      */
-    private void debugFetch() throws SQLServerException, SQLException, FileNotFoundException, IOException
-    {
-        switchLimitation = 10;
-        System.out.println("DEBUGFETCH: attempting to populate resultSet!");
-        System.out.println("DEBUGFETCH: mM-instance: " + MemberManager.getInstance());
-        List<Member> resultSet = mM.getAll();
-        ArrayList<Member> limitedResults;
-        if (resultSet == null)
-        {
-            System.out.println("DEBUGFETCH: resultSet is null!");
-        }
-        System.out.println("DEBUGFETCH: resultSet contains " + resultSet.size() + " elements!");
-        resultSet = resultSet.subList(0, (Math.min(resultSet.size(), switchLimitation)));
-        System.out.println("DEBUGFETCH: attempted to limit to: " + switchLimitation);
-        System.out.println("DEBUGFETCH: resultSet is empty: " + resultSet.isEmpty());
-        if (!resultSet.isEmpty())
-        {
-            System.out.println("DEBUGFETCH: resultSet contains " + resultSet.size() + "results.");
-            for (Member m : resultSet)
-            {
-                String memb = m.getMemberNo() + " - " + m.getFirstName() + " " + m.getLastName();
-                model.addElement(memb);
-            }
-            lblCount.setText(resultSet.size() + " results!");
-            System.out.println("DEBUGFETCH: model size: " + model.size());
-        } else
-        {
-            lblCount.setText("No Results. :(");;
-            System.out.println("DEBUGFETCH: fetch failed - database empty?");
-        }
-        resultSet.clear();
-    }
+//    private void debugFetch() throws SQLServerException, SQLException, FileNotFoundException, IOException
+//    {
+//        switchLimitation = 10;
+//        System.out.println("DEBUGFETCH: attempting to populate resultSet!");
+//        System.out.println("DEBUGFETCH: mM-instance: " + MemberManager.getInstance());
+//        List<Member> resultSet = mM.getAll();
+//        ArrayList<Member> limitedResults;
+//        if (resultSet == null)
+//        {
+//            System.out.println("DEBUGFETCH: resultSet is null!");
+//        }
+//        System.out.println("DEBUGFETCH: resultSet contains " + resultSet.size() + " elements!");
+//        resultSet = resultSet.subList(0, (Math.min(resultSet.size(), switchLimitation)));
+//        System.out.println("DEBUGFETCH: attempted to limit to: " + switchLimitation);
+//        System.out.println("DEBUGFETCH: resultSet is empty: " + resultSet.isEmpty());
+//        if (!resultSet.isEmpty())
+//        {
+//            System.out.println("DEBUGFETCH: resultSet contains " + resultSet.size() + "results.");
+//            for (Member m : resultSet)
+//            {
+//                String memb = m.getMemberNo() + " - " + m.getFirstName() + " " + m.getLastName();
+//                model.addElement(memb);
+//            }
+//            lblCount.setText(resultSet.size() + " results!");
+//            System.out.println("DEBUGFETCH: model size: " + model.size());
+//        } else
+//        {
+//            lblCount.setText("No Results. :(");;
+//            System.out.println("DEBUGFETCH: fetch failed - database empty?");
+//        }
+//        resultSet.clear();
+//    }
 }

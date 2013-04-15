@@ -238,4 +238,10 @@ public class Member
     {
         this.DTULicenceNo=DTULicenceNo;
     }
+    
+    @Override
+    public String toString()
+    {
+        return this.memberNo + " - " + this.firstName + " " + this.lastName;
+    }
 }
