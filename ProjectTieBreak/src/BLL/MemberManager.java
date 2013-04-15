@@ -72,7 +72,7 @@ public class MemberManager
         return null;
     }
     
-    public ArrayList<Member> getAll() throws SQLServerException, SQLException
+    public List<Member> getAll() throws SQLServerException, SQLException
     {
         return members;
     }
