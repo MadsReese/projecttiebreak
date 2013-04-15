@@ -499,7 +499,8 @@ public class MemberGui extends javax.swing.JFrame
             System.out.println("DEBUGFETCH: resultSet is null!");
         }
         System.out.println("DEBUGFETCH: resultSet contains " + resultSet.size() + " elements!");
-        resultSet.subList(0, (Math.min(resultSet.size(), switchLimitation)));
+        ArrayList<Member> limitedResults = new ArrayList<>();
+        limitedResults = (ArrayList<Member>)resultSet.subList(0, (Math.min(resultSet.size(), switchLimitation)));
         System.out.println("DEBUGFETCH: resultSet is empty: " + resultSet.isEmpty());
         if (!resultSet.isEmpty())
         {
