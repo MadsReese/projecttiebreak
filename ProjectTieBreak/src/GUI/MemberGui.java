@@ -1,3 +1,11 @@
+/**
+ * Project Tie-Break, EASV (2nd Semester, 2013)
+ *
+ * @author Kasper Pedersen, Jesper Agerbo Hansen,
+ * @author Mads Funch Patrzalek Reese and Jakob Hansen.
+ *
+ * Code stored at: https://github.com/MadsReese/projecttiebreak
+ */
 package GUI;
 
 import BE.Member;
@@ -10,8 +18,14 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
+/**
+ * This is the main-class for the MemberGui-system.
+ *
+ * @author Jakob Hansen
+ */
 public class MemberGui extends javax.swing.JFrame
 {
+//  instance fields.
     private DefaultListModel model = new DefaultListModel();
     private MemberManager mM;
     private int switchLimitation = Integer.MAX_VALUE;
@@ -30,30 +44,41 @@ public class MemberGui extends javax.swing.JFrame
         if (mM == null)
         {
             System.out.println("DEBUG: mM is null!");
-        }
-        else
+        } else
         {
-            System.out.println("DEBUG: attempting to load list!");        
+            System.out.println("DEBUG: attempting to load list!");
             debugFetch();
             System.out.println("DEBUG: debugFetch has been run!");
             lstResults.setModel(model);
             System.out.println("DEBUG: listModel set!");
         }
-        
+
     }
 
+    /**
+     * Main-method for starting the program from this class.
+     *
+     * @param args command-line arguments.
+     * @throws SQLServerException
+     * @throws SQLException
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public static void main(String[] args) throws SQLServerException, SQLException, FileNotFoundException, IOException
     {
         new MemberGui().setVisible(true);
-        Object[] options = {"Ok","Cancel"};
+        Object[] options =
+        {
+            "Ok", "Cancel"
+        };
         int dialogResult = JOptionPane.showOptionDialog(null,
-    "WARNING: This is an unfinished and unreleased build!\n",
-    "WARNING",
-    JOptionPane.YES_NO_OPTION,
-    JOptionPane.WARNING_MESSAGE,
-    null,     //do not use a custom Icon
-    options,  //the titles of buttons
-    options[0]); //default button title
+                "WARNING: This is an unfinished and unreleased build!\n",
+                "WARNING",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null, //do not use a custom Icon
+                options, //the titles of buttons
+                options[0]); //default button title
         if (dialogResult == JOptionPane.CANCEL_OPTION || dialogResult == JOptionPane.NO_OPTION)
         {
             System.exit(0);
@@ -306,11 +331,21 @@ public class MemberGui extends javax.swing.JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
+    /**
+     * Action upon pressing "close".
+     *
+     * @param evt
+     */
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnCloseActionPerformed
 
+    /**
+     * Action upon switching the limitation.
+     *
+     * @param evt
+     */
     private void cmbBoxLimitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmbBoxLimitActionPerformed
     {//GEN-HEADEREND:event_cmbBoxLimitActionPerformed
         switch (cmbBoxLimit.getSelectedIndex())
@@ -334,6 +369,11 @@ public class MemberGui extends javax.swing.JFrame
         btnSearch.doClick();
     }//GEN-LAST:event_cmbBoxLimitActionPerformed
 
+    /**
+     * Action upon pressing "search".
+     *
+     * @param evt
+     */
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSearchActionPerformed
     {//GEN-HEADEREND:event_btnSearchActionPerformed
 //        if (switchType == 1)
@@ -346,6 +386,11 @@ public class MemberGui extends javax.swing.JFrame
 //        }
     }//GEN-LAST:event_btnSearchActionPerformed
 
+    /**
+     * Action upon changing search-types.
+     *
+     * @param evt
+     */
     private void cmbBoxSearchTypeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmbBoxSearchTypeActionPerformed
     {//GEN-HEADEREND:event_cmbBoxSearchTypeActionPerformed
         switch (cmbBoxSearchType.getSelectedIndex())
@@ -360,11 +405,16 @@ public class MemberGui extends javax.swing.JFrame
         btnSearch.doClick();
     }//GEN-LAST:event_cmbBoxSearchTypeActionPerformed
 
+    /**
+     * Action upon pressing the "Add..." button. (launches a new "NewMemberGui"
+     * frame!)
+     *
+     * @param evt
+     */
     private void btnAddMemberActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAddMemberActionPerformed
     {//GEN-HEADEREND:event_btnAddMemberActionPerformed
         new NewMemberGui().setVisible(true);
     }//GEN-LAST:event_btnAddMemberActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddMember;
     private javax.swing.JButton btnClose;
@@ -386,6 +436,9 @@ public class MemberGui extends javax.swing.JFrame
     private javax.swing.JTextField txtBoxQuery;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Method for searching for members by their names.
+     */
     private void searchByName()
     {
 //        model.clear();
@@ -406,6 +459,10 @@ public class MemberGui extends javax.swing.JFrame
 //        }
     }
 
+    /**
+     * Method for searching for members by their member-numbers. Usually only
+     * returns a single result. (?)
+     */
     private void searchByMemberNo()
     {
 //        model.clear();
@@ -421,19 +478,28 @@ public class MemberGui extends javax.swing.JFrame
 //            lblCount.setText("No results.");
 //        }
     }
-    
+
+    /**
+     * A debugging method that fetches data from the members-table and adds them
+     * to the display. This method outputs a metric shit ton of information in
+     * the console - use with caution.
+     *
+     * @throws SQLServerException
+     * @throws SQLException
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     private void debugFetch() throws SQLServerException, SQLException, FileNotFoundException, IOException
     {
         System.out.println("DEBUGFETCH: attempting to populate resultSet!");
         System.out.println("DEBUGFETCH: mM-instance: " + mM.getInstance());
         ArrayList<Member> resultSet = mM.getAll();
-        if(resultSet == null)
+        if (resultSet == null)
         {
             System.out.println("DEBUGFETCH: resultSet is null!");
         }
         System.out.println("DEBUGFETCH: resultSet contains " + resultSet.size() + " elements!");
-        //resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
-                //subList(0, Math.min(resultSet.size(), switchLimitation));
+        resultSet.subList(0, (Math.min(resultSet.size(), switchLimitation)));
         System.out.println("DEBUGFETCH: resultSet is empty: " + resultSet.isEmpty());
         if (!resultSet.isEmpty())
         {
@@ -445,8 +511,7 @@ public class MemberGui extends javax.swing.JFrame
             }
             lblCount.setText(resultSet.size() + " results!");
             System.out.println("DEBUGFETCH: model size: " + model.size());
-        }
-        else
+        } else
         {
             lblCount.setText("No Results. :(");;
             System.out.println("DEBUGFETCH: fetch failed - database empty?");

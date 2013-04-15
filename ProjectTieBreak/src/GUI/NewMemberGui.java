@@ -26,9 +26,11 @@ public class NewMemberGui extends javax.swing.JFrame
      */
     public NewMemberGui()
     {
+        System.out.println("DEBUG: starting NewMemberGui...");
         try
         {
             mM = MemberManager.getInstance();
+            System.out.println("DEBUG: mM-instance: " + mM.getInstance());
         } 
         catch (FileNotFoundException ex)
         {
