@@ -178,7 +178,7 @@ public class MemberAccess
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "INSERT INTO Member (Id, lastName, firstName, address, birthYear, phoneNo, email, memberType, DTULicenceNo, DTUPoints, "
+            String sql = "INSERT INTO Member (Id, Last_Name, First_Name, Address, BirthYear, Phone_Number, email, Type, DTULicenceNo, DTUPoints, "
                     + "VALUES ?,?,?,?,?,?,?,?,?,?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, m.getMemberNo());
@@ -191,6 +191,8 @@ public class MemberAccess
             ps.setString(8, m.getMemberType());
             ps.setInt(9, m.getDTULicenceNo());
             ps.setInt(10, m.getDTUPoints());
+            
+            ps.executeUpdate();
         }
     }
     
@@ -200,7 +202,7 @@ public class MemberAccess
         try (Connection con = connector.getConnection())
         {
             String sql = "INSERT INTO Member (Id, Last_Name, First_Name, Email"
-                       + "VALUES ?,?,?,0,0,?,?,0,0";
+                       + "VALUES ?,?,?,0,0,?,0,0,0";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, m.getMemberNo());
             ps.setString(2, m.getLastName());
