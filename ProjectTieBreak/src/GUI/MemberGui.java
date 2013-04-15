@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -491,16 +492,18 @@ public class MemberGui extends javax.swing.JFrame
      */
     private void debugFetch() throws SQLServerException, SQLException, FileNotFoundException, IOException
     {
+        switchLimitation = 10;
         System.out.println("DEBUGFETCH: attempting to populate resultSet!");
-        System.out.println("DEBUGFETCH: mM-instance: " + mM.getInstance());
-        ArrayList<Member> resultSet = mM.getAll();
+        System.out.println("DEBUGFETCH: mM-instance: " + MemberManager.getInstance());
+        List<Member> resultSet = mM.getAll();
+        ArrayList<Member> limitedResults;
         if (resultSet == null)
         {
             System.out.println("DEBUGFETCH: resultSet is null!");
         }
         System.out.println("DEBUGFETCH: resultSet contains " + resultSet.size() + " elements!");
-        ArrayList<Member> limitedResults = new ArrayList<>();
-        limitedResults = (ArrayList<Member>)resultSet.subList(0, (Math.min(resultSet.size(), switchLimitation)));
+        resultSet = resultSet.subList(0, (Math.min(resultSet.size(), switchLimitation)));
+        System.out.println("DEBUGFETCH: attempted to limit to: " + switchLimitation);
         System.out.println("DEBUGFETCH: resultSet is empty: " + resultSet.isEmpty());
         if (!resultSet.isEmpty())
         {

@@ -77,12 +77,12 @@ public class MemberAccess
         }
     }
     
-    public ArrayList<Member> getAll() throws SQLServerException, SQLException
+    public List<Member> getAll() throws SQLServerException, SQLException
     {
         System.out.println("DEBUG: running getAll!");
         try (Connection con = connector.getConnection())
         {
-            ArrayList<Member> members = new ArrayList<>();
+            List<Member> members = new ArrayList<>();
             String sql = "SELECT * FROM Member";
             PreparedStatement ps = con.prepareStatement(sql);
             
