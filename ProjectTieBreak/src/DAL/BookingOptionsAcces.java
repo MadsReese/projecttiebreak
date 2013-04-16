@@ -35,4 +35,14 @@ public class BookingOptionsAcces
         }
         return instance;
     }
+    
+    public void setOutdoorCourtDates(String from,String to)
+    {
+        
+    }
+    
+    public void setOutdoorCourtTimes(int from, int to)
+    {
+        
+    }
 }
