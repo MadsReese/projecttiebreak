@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import javax.swing.WindowConstants;
+
 /**
  *
  * @author Jesper
@@ -17,6 +19,7 @@ public class OptionsGui extends javax.swing.JFrame
     public OptionsGui()
     {
         initComponents();
+        this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
