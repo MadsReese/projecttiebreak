@@ -38,7 +38,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
                       <Component id="pnlSearch" min="-2" pref="200" max="-2" attributes="0"/>
-                      <EmptySpace pref="238" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -77,9 +77,9 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="pnlLimit" max="32767" attributes="0"/>
-                  <Component id="pnlSearch" pref="79" max="32767" attributes="0"/>
+                  <Component id="pnlSearch" pref="88" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="11" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="pnlResultsAndDetails" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -88,6 +88,9 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="txtBoxQuery">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBoxQueryActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblQuery">
       <Properties>
@@ -119,30 +122,28 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="btnAddMember" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnRemoveMember" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnClose" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="scrPnlResults" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="lblCount" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="btnAddMember" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnRemoveMember" min="-2" max="-2" attributes="0"/>
+                                  <Component id="scrPnlResults" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="scrPnlDetails" min="-2" pref="204" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="0" pref="143" max="32767" attributes="0"/>
-                                  <Component id="btnClose" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="scrPnlDetails" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblCount" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -154,13 +155,14 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="scrPnlDetails" max="32767" attributes="0"/>
-                      <Component id="scrPnlResults" pref="259" max="32767" attributes="0"/>
+                      <Component id="scrPnlResults" pref="278" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnAddMember" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnRemoveMember" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -182,6 +184,12 @@
                     <StringItem index="0" value="model"/>
                   </StringArray>
                 </Property>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[200, 278]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[200, 278]"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>
@@ -197,6 +205,12 @@
               <Properties>
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                   <StringArray count="0"/>
+                </Property>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[200, 278]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[200, 278]"/>
                 </Property>
               </Properties>
             </Component>
@@ -228,6 +242,11 @@
             <Property name="text" type="java.lang.String" value="Remove"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Edit..."/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="pnlSearch">
@@ -252,7 +271,7 @@
                           <Component id="lblSearchFor" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="cmbBoxSearchType" pref="168" max="32767" attributes="0"/>
+                      <Component id="cmbBoxSearchType" pref="166" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -279,8 +298,8 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
-                <StringItem index="0" value="Member No."/>
-                <StringItem index="1" value="Full Name"/>
+                <StringItem index="0" value="Full Name"/>
+                <StringItem index="1" value="Member No."/>
               </StringArray>
             </Property>
           </Properties>
@@ -322,7 +341,7 @@
                   <Component id="lblLimit" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="cmbBoxLimit" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

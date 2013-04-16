@@ -77,12 +77,12 @@ public class MemberAccess
         }
     }
     
-    public ArrayList<Member> getAll() throws SQLServerException, SQLException
+    public List<Member> getAll() throws SQLServerException, SQLException
     {
         System.out.println("DEBUG: running getAll!");
         try (Connection con = connector.getConnection())
         {
-            ArrayList<Member> members = new ArrayList<>();
+            List<Member> members = new ArrayList<>();
             String sql = "SELECT * FROM Member";
             PreparedStatement ps = con.prepareStatement(sql);
             
@@ -231,8 +231,8 @@ public class MemberAccess
     {
         System.out.println("DEBUG: running getOneMember!");
         int memberNo = rs.getInt(1);
-        String lastName = rs.getString(2);
-        String firstName = rs.getString(3);
+        String firstName = rs.getString(2);
+        String lastName = rs.getString(3);
 //        String address = rs.getString(4);
 //        int birthYear = rs.getInt(5);
 //        int phoneNo = rs.getInt(6);
