@@ -68,8 +68,7 @@ public class MemberGui extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         txtBoxQuery = new javax.swing.JTextField();
         lblQuery = new javax.swing.JLabel();
@@ -97,10 +96,8 @@ public class MemberGui extends javax.swing.JFrame
         setMinimumSize(new java.awt.Dimension(460, 499));
         setResizable(false);
 
-        txtBoxQuery.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txtBoxQuery.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBoxQueryActionPerformed(evt);
             }
         });
@@ -112,25 +109,21 @@ public class MemberGui extends javax.swing.JFrame
         pnlResultsAndDetails.setMinimumSize(new java.awt.Dimension(440, 353));
         pnlResultsAndDetails.setName("test"); // NOI18N
 
-        lstResults.setModel(new javax.swing.AbstractListModel()
-        {
+        lstResults.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "model" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
         lstResults.setMaximumSize(new java.awt.Dimension(200, 278));
         lstResults.setMinimumSize(new java.awt.Dimension(200, 278));
-        lstResults.addListSelectionListener(new javax.swing.event.ListSelectionListener()
-        {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt)
-            {
+        lstResults.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstResultsValueChanged(evt);
             }
         });
         scrPnlResults.setViewportView(lstResults);
 
-        lstDetails.setModel(new javax.swing.AbstractListModel()
-        {
+        lstDetails.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "model2" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -140,10 +133,8 @@ public class MemberGui extends javax.swing.JFrame
         scrPnlDetails.setViewportView(lstDetails);
 
         btnClose.setText("Close");
-        btnClose.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);
             }
         });
@@ -151,19 +142,15 @@ public class MemberGui extends javax.swing.JFrame
         lblCount.setText("Count: ");
 
         btnAddMember.setText("Add...");
-        btnAddMember.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAddMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddMemberActionPerformed(evt);
             }
         });
 
         btnRemoveMember.setText("Remove");
-        btnRemoveMember.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnRemoveMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoveMemberActionPerformed(evt);
             }
         });
@@ -219,10 +206,8 @@ public class MemberGui extends javax.swing.JFrame
         lblSearchFor.setText("Search for...");
 
         cmbBoxSearchType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Full Name", "Member No." }));
-        cmbBoxSearchType.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        cmbBoxSearchType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbBoxSearchTypeActionPerformed(evt);
             }
         });
@@ -255,10 +240,8 @@ public class MemberGui extends javax.swing.JFrame
         lblLimit.setText("Limit to...");
 
         cmbBoxLimit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "None", "10", "20", "50", "100" }));
-        cmbBoxLimit.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        cmbBoxLimit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbBoxLimitActionPerformed(evt);
             }
         });
@@ -286,10 +269,8 @@ public class MemberGui extends javax.swing.JFrame
         );
 
         btnSearch.setText("Search");
-        btnSearch.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
             }
         });

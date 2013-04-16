@@ -76,6 +76,20 @@ public class MemberManager
         return result;
     }
     
+    public ArrayList<Member> getByRank(String rank) 
+    {
+        String memRank;
+        ArrayList<Member> ranks = new ArrayList<>();
+        for(Member m : members)
+        {
+            
+            //memRank = m.getDTUPoints() + "";
+            //if(memRank.contains(rank))
+            //    result.add(m);
+        }
+        return ranks;
+    }
+    
     public List<Member> getAll() throws SQLServerException, SQLException
     {
         return members;

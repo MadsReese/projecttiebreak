@@ -3,19 +3,42 @@
  */
 package GUI;
 
+import BE.Member;
+import BLL.MemberManager;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.List;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author boinq
  */
 public class RankingGui extends javax.swing.JFrame {
-
+    private DefaultListModel model3 = new DefaultListModel();
+    private MemberManager mM;
+    private int switchLimitation = Integer.MAX_VALUE;
+    private int switchType = 0;
+    
     /**
      * Creates new form RankingGui
      */
-    public RankingGui() {
+    public RankingGui() throws SQLServerException, SQLException, FileNotFoundException, IOException
+    {
+        this.setTitle("Tie-Break Tennis Club Ranking List");
         initComponents();
+        mM = MemberManager.getInstance();
+        lstRank.setModel(model3);
     }
 
+    public static void main(String[] args) throws SQLServerException, SQLException, FileNotFoundException, IOException
+    {
+        new RankingGui().setVisible(true);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -25,11 +48,75 @@ public class RankingGui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnRefresh = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstRank = new javax.swing.JList();
+        pnlRankLimit = new javax.swing.JPanel();
+        lblLimit = new javax.swing.JLabel();
+        cmbBoxLimit = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField1.setText("jTextField1");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Tie-Break Ranking List:");
+
+        jLabel2.setText("Last Updated: ");
+
+        btnRefresh.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
+        lstRank.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "model3" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        lstRank.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstRankValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lstRank);
+
+        pnlRankLimit.setBorder(javax.swing.BorderFactory.createTitledBorder("Search Limit"));
+        pnlRankLimit.setAutoscrolls(true);
+
+        lblLimit.setText("Limit to...");
+
+        cmbBoxLimit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "None", "10", "20", "50", "100" }));
+        cmbBoxLimit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbBoxLimitActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlRankLimitLayout = new javax.swing.GroupLayout(pnlRankLimit);
+        pnlRankLimit.setLayout(pnlRankLimitLayout);
+        pnlRankLimitLayout.setHorizontalGroup(
+            pnlRankLimitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRankLimitLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlRankLimitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbBoxLimit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlRankLimitLayout.createSequentialGroup()
+                        .addComponent(lblLimit)
+                        .addGap(0, 115, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        pnlRankLimitLayout.setVerticalGroup(
+            pnlRankLimitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRankLimitLayout.createSequentialGroup()
+                .addComponent(lblLimit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbBoxLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -37,21 +124,104 @@ public class RankingGui extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(331, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pnlRankLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnRefresh))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlRankLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lstRankValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstRankValueChanged
+        model3.clear();
+        Member m = (Member)lstRank.getSelectedValue();
+        model3.addElement("Member No: " + m.getMemberNo());
+        model3.addElement("Name: " + m.getFirstName() + " " + m.getLastName());
+        Calendar c = Calendar.getInstance();
+        int age = c.get(Calendar.YEAR) - m.getBirthYear();
+        model3.addElement("Age: " + age + " - " + m.getMemberType());
+        model3.addElement("Address: " + m.getAddress());
+        model3.addElement("Email: " + m.getEmail());
+        model3.addElement("Telephone: " + m.getPhoneNo());
+    }//GEN-LAST:event_lstRankValueChanged
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        searchByRank();
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void cmbBoxLimitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBoxLimitActionPerformed
+        switch (cmbBoxLimit.getSelectedIndex())
+        {
+            case 0:
+            switchLimitation = Integer.MAX_VALUE;
+            break;
+            case 1:
+            switchLimitation = 10;
+            break;
+            case 2:
+            switchLimitation = 20;
+            break;
+            case 3:
+            switchLimitation = 50;
+            break;
+            case 4:
+            switchLimitation = 100;
+            break;
+        }
+
+        btnRefresh.doClick();
+    }//GEN-LAST:event_cmbBoxLimitActionPerformed
+
+    private void searchByRank()
+    {
+        model3.clear();
+        String query = "";
+        //String query = txtBoxQuery.getText();
+        List<Member> resultSet = mM.getByName(query.toLowerCase());
+        resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
+        if (!resultSet.isEmpty())
+        {
+            for (Member m : resultSet)
+            {
+                model3.addElement(m);
+            }
+            
+        } else
+        {
+            //lblCount.setText("No results.");
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton btnRefresh;
+    private javax.swing.JComboBox cmbBoxLimit;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblLimit;
+    private javax.swing.JList lstRank;
+    private javax.swing.JPanel pnlRankLimit;
     // End of variables declaration//GEN-END:variables
 }
