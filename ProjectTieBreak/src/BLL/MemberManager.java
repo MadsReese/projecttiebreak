@@ -56,7 +56,9 @@ public class MemberManager
         {
             name = m.getFirstName().toLowerCase() + " " + m.getLastName().toLowerCase();
             if(name.contains(searchString))
+            {
                 result.add(m);
+            }
         }
         return result;
     }

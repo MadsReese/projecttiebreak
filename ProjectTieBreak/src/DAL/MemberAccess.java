@@ -199,18 +199,17 @@ public class MemberAccess
     
     private Member getOneMember(ResultSet rs) throws SQLException
     {
-        System.out.println("DEBUG: running getOneMember!");
         int memberNo = rs.getInt(1);
         String firstName = rs.getString(2);
         String lastName = rs.getString(3);
-//        String address = rs.getString(4);
-//        int birthYear = rs.getInt(5);
-//        int phoneNo = rs.getInt(6);
-//        String email = rs.getString(7);
-//        String memberType = rs.getString(8);
-//        int DTULicence = rs.getInt(9);
+        String address = rs.getString(4);
+        int birthYear = rs.getInt(5);
+        int phoneNo = rs.getInt(6);
+        String email = rs.getString(7);
+        String memberType = rs.getString(9);
+//        int DTULicence = rs.getInt();
 //        int DTUPoints = rs.getInt(10);
         
-        return Member.simpleFromDB(memberNo, lastName,firstName);
+        return Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, memberType, 0, 0);
     }
 }

@@ -20,7 +20,7 @@ public class Member
     private String email;
 
     
-    private enum MemberType {junior, senior, recreational, retiree};
+    private enum MemberType {junior, senior, recreational, retiree, administrative};
     private MemberType memberType;
     private int DTULicenceNo;
     private int DTUPoints;

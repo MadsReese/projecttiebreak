@@ -14,6 +14,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -441,7 +442,16 @@ public class MemberGui extends javax.swing.JFrame
 
     private void lstResultsValueChanged(javax.swing.event.ListSelectionEvent evt)//GEN-FIRST:event_lstResultsValueChanged
     {//GEN-HEADEREND:event_lstResultsValueChanged
+        model2.clear();
         Member m = (Member)lstResults.getSelectedValue();
+        model2.addElement("Member No: " + m.getMemberNo());
+        model2.addElement("Name: " + m.getFirstName() + " " + m.getLastName());
+        Calendar c = Calendar.getInstance();
+        int age = c.get(Calendar.YEAR) - m.getBirthYear();
+        model2.addElement("Age: " + age + " - " + m.getMemberType());
+        model2.addElement("Address: " + m.getAddress());
+        model2.addElement("Email: " + m.getEmail());
+        model2.addElement("Telephone: " + m.getPhoneNo());
         
     }//GEN-LAST:event_lstResultsValueChanged
 
@@ -510,47 +520,4 @@ public class MemberGui extends javax.swing.JFrame
             lblCount.setText("No results.");
         }
     }
-
-    /**
-     * A debugging method that fetches data from the members-table and adds them
-     * to the display. This method outputs a metric shit ton of information in
-     * the console - use with caution.
-     *
-     * @throws SQLServerException
-     * @throws SQLException
-     * @throws FileNotFoundException
-     * @throws IOException
-     */
-//    private void debugFetch() throws SQLServerException, SQLException, FileNotFoundException, IOException
-//    {
-//        switchLimitation = 10;
-//        System.out.println("DEBUGFETCH: attempting to populate resultSet!");
-//        System.out.println("DEBUGFETCH: mM-instance: " + MemberManager.getInstance());
-//        List<Member> resultSet = mM.getAll();
-//        ArrayList<Member> limitedResults;
-//        if (resultSet == null)
-//        {
-//            System.out.println("DEBUGFETCH: resultSet is null!");
-//        }
-//        System.out.println("DEBUGFETCH: resultSet contains " + resultSet.size() + " elements!");
-//        resultSet = resultSet.subList(0, (Math.min(resultSet.size(), switchLimitation)));
-//        System.out.println("DEBUGFETCH: attempted to limit to: " + switchLimitation);
-//        System.out.println("DEBUGFETCH: resultSet is empty: " + resultSet.isEmpty());
-//        if (!resultSet.isEmpty())
-//        {
-//            System.out.println("DEBUGFETCH: resultSet contains " + resultSet.size() + "results.");
-//            for (Member m : resultSet)
-//            {
-//                String memb = m.getMemberNo() + " - " + m.getFirstName() + " " + m.getLastName();
-//                model.addElement(memb);
-//            }
-//            lblCount.setText(resultSet.size() + " results!");
-//            System.out.println("DEBUGFETCH: model size: " + model.size());
-//        } else
-//        {
-//            lblCount.setText("No Results. :(");;
-//            System.out.println("DEBUGFETCH: fetch failed - database empty?");
-//        }
-//        resultSet.clear();
-//    }
 }
