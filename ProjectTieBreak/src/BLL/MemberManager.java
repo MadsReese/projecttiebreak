@@ -81,13 +81,25 @@ public class MemberManager
         return members;
     }
     
+    @Deprecated
     public void debugAdd(Member m) throws Exception
     {
         accessor.add(m);
         members.add(m);
     }
     
-    public void addMember(Member memb) throws SQLServerException, SQLException
+    /**
+     * Deletes a member from the database and from the local memory
+     * @param m The Member to delete
+     * @throws Exception 
+     */
+    public void delete(Member m) throws Exception
+    {
+        accessor.delete(m.getMemberNo());
+        members.remove(m);
+    }
+    
+    public void add(Member memb) throws SQLServerException, SQLException
     {
         int memberNo=1000;
         Calendar c = Calendar.getInstance();

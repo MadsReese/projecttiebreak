@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -57,22 +59,6 @@ public class MemberGui extends javax.swing.JFrame
     public static void main(String[] args) throws SQLServerException, SQLException, FileNotFoundException, IOException
     {
         new MemberGui().setVisible(true);
-        Object[] options =
-        {
-            "Ok", "Cancel"
-        };
-        int dialogResult = JOptionPane.showOptionDialog(null,
-                "WARNING: This is an unfinished and unreleased build!\n",
-                "WARNING",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.WARNING_MESSAGE,
-                null, //do not use a custom Icon
-                options, //the titles of buttons
-                options[0]); //default button title
-        if (dialogResult == JOptionPane.CANCEL_OPTION || dialogResult == JOptionPane.NO_OPTION)
-        {
-            System.exit(0);
-        }
     }
 
     /**
@@ -174,6 +160,13 @@ public class MemberGui extends javax.swing.JFrame
         });
 
         btnRemoveMember.setText("Remove");
+        btnRemoveMember.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnRemoveMemberActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Edit...");
 
@@ -454,6 +447,29 @@ public class MemberGui extends javax.swing.JFrame
         model2.addElement("Telephone: " + m.getPhoneNo());
         
     }//GEN-LAST:event_lstResultsValueChanged
+
+    private void btnRemoveMemberActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRemoveMemberActionPerformed
+    {//GEN-HEADEREND:event_btnRemoveMemberActionPerformed
+        Member m = (Member)lstResults.getSelectedValue();
+        lstResults.clearSelection();
+        System.out.println("Derp");
+        model.removeElement(m);
+        try
+        {
+            mM.delete(m);
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        if (switchType == 0)
+        {
+            searchByName();
+        }
+        else
+        {
+            searchByMemberNo();
+        }
+    }//GEN-LAST:event_btnRemoveMemberActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddMember;
