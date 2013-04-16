@@ -8,6 +8,7 @@
  */
 package GUI;
 
+import BE.Member;
 import BLL.MemberManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileNotFoundException;
@@ -208,22 +209,25 @@ public class NewMemberGui extends javax.swing.JFrame
      */
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_btnSaveMouseClicked
     {//GEN-HEADEREND:event_btnSaveMouseClicked
-        System.out.println("DEBUG: save action performed!");
-        int year = Integer.parseInt(txtYear.getText());
-        System.out.println("DEBUG: year is set to; " + year);
-        int phone = Integer.parseInt(txtYear.getText());
-        System.out.println("DEBUG: phone is set to; " + phone);
+        Member memberobj = Member.createSimple(txtLastName.getText(), txtFirstName.getText(), txtAddress.getText(), Integer.parseInt(txtYear.getText()), Integer.parseInt(txtTelephone.getText()) , txtEmail.getText());
         try
         {
-            mM.addMember(txtFirstName.toString(), txtLastName.toString(), txtAddress.toString(), year, txtEmail.toString(), phone);
-        } catch (SQLServerException ex)
+            mM.debugAdd(memberobj);
+        } 
+        catch (SQLServerException ex)
         {
             System.out.println("SQLServerException: " + ex);
             Logger.getLogger(NewMemberGui.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
+        } 
+        catch (SQLException ex)
         {
             System.out.println("SQLException: " + ex);
             Logger.getLogger(NewMemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (Exception å)
+        {
+            System.out.println("Exception: " + å);
+            Logger.getLogger(NewMemberGui.class.getName()).log(Level.SEVERE, null, å);
         }
         Object[] options =
         {

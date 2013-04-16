@@ -174,56 +174,26 @@ public class MemberAccess
         }
     }
     
-    public void add(Member m) throws SQLServerException, SQLException
-    {
-        try (Connection con = connector.getConnection())
-        {
-            String sql = "INSERT INTO Member (Id, lastName, firstName, address, birthYear, phoneNo, email, memberType, DTULicenceNo, DTUPoints, "
-                    + "VALUES ?,?,?,?,?,?,?,?,?,?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, m.getMemberNo());
-            ps.setString(2, m.getLastName());
-            ps.setString(3, m.getFirstName());
-            ps.setString(4, m.getAddress());
-            ps.setInt(5, m.getBirthYear());
-            ps.setInt(6, m.getPhoneNo());
-            ps.setString(7, m.getEmail());
-            ps.setString(8, m.getMemberType());
-            ps.setInt(9, m.getDTULicenceNo());
-            ps.setInt(10, m.getDTUPoints());
-        }
-    }
-    
-    public void debugAdd(Member m) throws SQLException, SQLServerException
+    public void add(Member m) throws SQLException, SQLServerException
     {
         System.out.println("DEBUG: running debugAdd!");
         try (Connection con = connector.getConnection())
         {
-            String sql = "INSERT INTO Member (Id, First_Name, Last_Name, Email"
-                       + "VALUES ?,?,?,0,0,?,0,0,0";
+            String sql = "INSERT INTO Member (First_Name, Last_Name, Address, Birth_Year, Phone_No, Email) "
+                    + "VALUES (?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, m.getMemberNo());
-            ps.setString(2, m.getFirstName());
-            ps.setString(3, m.getLastName());
-            ps.setString(4, m.getEmail());
-            ps.executeUpdate();
-            //int affectedRows = ps.executeUpdate();
-//            if(affectedRows == 0)
-//            {
-//                throw new SQLException("DEBUG: unable to update server - do we have connection?");
-//            }
-            System.out.println("DEBUG: debugAdd completed... hopefully!");
+            ps.setString(1, m.getFirstName());
+            ps.setString(2, m.getLastName());
+            ps.setString(3, m.getAddress());
+            ps.setInt(4, m.getBirthYear());
+            ps.setInt(5, m.getPhoneNo());
+            ps.setString(6, m.getEmail());
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows < 1)
+            {
+                throw new SQLException("Unable to update member :( ");
+            }
         }
-//        catch (SQLServerException sqlsrv)
-//        {
-//            System.out.println("DEBUG: SQL-connection failed:\n" + sqlsrv);
-//            System.out.println("DEBUG: debugAdd failed.");
-//        }     
-//        catch (SQLException sqlex)
-//        {
-//            System.out.println("DEBUG: SQL-exception:\n" + sqlex);
-//            System.out.println("DEBUG: debugAdd failed.");
-//        }
     }
     
     

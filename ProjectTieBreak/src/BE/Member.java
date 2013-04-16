@@ -88,6 +88,17 @@ public class Member
         return newMemberObj;
     }
     
+    public static Member createSimple(String firstName, String lastName, String address, int birthYear, int phoneNo, String email)
+    {
+        Member newMemberObj = new Member();
+        newMemberObj.SetLastName(lastName);
+        newMemberObj.setFirstName(firstName);
+        newMemberObj.setAddress(address);
+        newMemberObj.setEmail(email);
+        newMemberObj.setBirthYear(birthYear);
+        newMemberObj.setPhoneNo(phoneNo);
+        return newMemberObj;
+    }
     
     /**
      * @return the memberNo

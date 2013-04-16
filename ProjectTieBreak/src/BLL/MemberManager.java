@@ -79,17 +79,17 @@ public class MemberManager
         return members;
     }
     
-    public void debugAdd(int id, String lastName, String firstName, String email)
+    public void debugAdd(Member m) throws Exception
     {
-//        BE.Member.simpleFromDB(int id, String lastName, String firstName, String email);
-//        accessor.debugAdd(flerp);
+        accessor.add(m);
+        members.add(m);
     }
     
-    public void addMember(String firstName, String lastName, String address, int birthYear, String email, int phoneNo) throws SQLServerException, SQLException
+    public void addMember(Member memb) throws SQLServerException, SQLException
     {
-        int memberNo=0000;
+        int memberNo=1000;
         Calendar c = Calendar.getInstance();
-        int age = c.get(Calendar.YEAR)-birthYear;
+        int age = c.get(Calendar.YEAR)-memb.getBirthYear();
         String membertype = "senior";
         //Determinants
         for(Member m : members)
@@ -107,12 +107,9 @@ public class MemberManager
         {
             membertype = "retiree";
         }
-        
-        Member m = Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, membertype, 0, 0);
-        
-        accessor.debugAdd(m);
-        System.out.println("DEBUG: debugAdded attempted!");
-        //accessor.add(m);
-        members.add(m);
+        memb.setMemberType(membertype);
+        //Member m = Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, membertype, 0, 0);
+        accessor.add(memb);
+        members.add(memb);
     }
 }
