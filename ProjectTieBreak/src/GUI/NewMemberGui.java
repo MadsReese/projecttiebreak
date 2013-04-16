@@ -212,7 +212,7 @@ public class NewMemberGui extends javax.swing.JFrame
         Member memberobj = Member.createSimple(txtLastName.getText(), txtFirstName.getText(), txtAddress.getText(), Integer.parseInt(txtYear.getText()), Integer.parseInt(txtTelephone.getText()) , txtEmail.getText());
         try
         {
-            mM.debugAdd(memberobj);
+            mM.add(memberobj);
         } 
         catch (SQLServerException ex)
         {
