@@ -89,6 +89,10 @@ public class MemberGui extends javax.swing.JFrame
         lblLimit = new javax.swing.JLabel();
         cmbBoxLimit = new javax.swing.JComboBox();
         btnSearch = new javax.swing.JButton();
+        jMenuBar = new javax.swing.JMenuBar();
+        File = new javax.swing.JMenu();
+        Settings = new javax.swing.JMenu();
+        Options = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -275,6 +279,26 @@ public class MemberGui extends javax.swing.JFrame
             }
         });
 
+        File.setText("File");
+        jMenuBar.add(File);
+
+        Settings.setText("Settings");
+
+        Options.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        Options.setText("Options");
+        Options.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                OptionsActionPerformed(evt);
+            }
+        });
+        Settings.add(Options);
+
+        jMenuBar.add(Settings);
+
+        setJMenuBar(jMenuBar);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -452,7 +476,15 @@ public class MemberGui extends javax.swing.JFrame
         }
     }//GEN-LAST:event_btnRemoveMemberActionPerformed
 
+    private void OptionsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_OptionsActionPerformed
+    {//GEN-HEADEREND:event_OptionsActionPerformed
+        new OptionsGui().setVisible(true);
+    }//GEN-LAST:event_OptionsActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu File;
+    private javax.swing.JMenuItem Options;
+    private javax.swing.JMenu Settings;
     private javax.swing.JButton btnAddMember;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnRemoveMember;
@@ -460,6 +492,7 @@ public class MemberGui extends javax.swing.JFrame
     private javax.swing.JComboBox cmbBoxLimit;
     private javax.swing.JComboBox cmbBoxSearchType;
     private javax.swing.JButton jButton1;
+    private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JLabel lblCount;
     private javax.swing.JLabel lblLimit;
     private javax.swing.JLabel lblQuery;
