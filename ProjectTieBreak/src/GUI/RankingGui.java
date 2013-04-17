@@ -4,13 +4,15 @@
 package GUI;
 
 import BE.Member;
-import BLL.MemberManager;
+import BLL.RankingManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 /**
@@ -19,7 +21,7 @@ import javax.swing.DefaultListModel;
  */
 public class RankingGui extends javax.swing.JFrame {
     private DefaultListModel model3 = new DefaultListModel();
-    private MemberManager mM;
+    private RankingManager rM;
     private int switchLimitation = Integer.MAX_VALUE;
     private int switchType = 0;
     
@@ -30,7 +32,7 @@ public class RankingGui extends javax.swing.JFrame {
     {
         this.setTitle("Tie-Break Tennis Club Ranking List");
         initComponents();
-        mM = MemberManager.getInstance();
+        rM = RankingManager.getInstance();
         lstRank.setModel(model3);
     }
 
@@ -199,7 +201,15 @@ public class RankingGui extends javax.swing.JFrame {
         model3.clear();
         String query = "";
         //String query = txtBoxQuery.getText();
-        List<Member> resultSet = mM.getByName(query.toLowerCase());
+        List<Member> resultSet;
+        try
+        {
+            resultSet = rM.getByRank();
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(RankingGui.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
         resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
         if (!resultSet.isEmpty())
         {
