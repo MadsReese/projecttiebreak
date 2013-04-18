@@ -23,7 +23,7 @@ public class RankingAccess {
     // Instance variables \\
     private Connector connector;
     private static RankingAccess instance = null;
-
+    
     // Constructor \\
     /**
      * Constructs an instance of the MemberAccess class
@@ -56,6 +56,7 @@ public class RankingAccess {
 
     public List<Member> getByRank() throws SQLServerException, SQLException
     {
+        
         try(Connection con = connector.getConnection())
         {
         String sql =
