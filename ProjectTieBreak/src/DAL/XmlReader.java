@@ -32,7 +32,7 @@ public class XmlReader
      * @return List of all the members in the xml
      * @throws Exception parsing errors etc.
      */
-    public List<Member> getMembers() throws Exception
+    public List<Member> getUpdatedPoints(List<Member> beforeMemb) throws Exception
     {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -43,25 +43,24 @@ public class XmlReader
         int num = Integer.parseInt(xpath.evaluate("count(memberList/member)", doc));
         for (int i = 1; i <= num; i++)
         {
-            int memberNo = Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/memberNo", doc));
-            String firstName = xpath.evaluate("memberList/member[" + i + "]/firstName", doc);
-            String lastName = xpath.evaluate("memberList/member[" + i + "]/lastName", doc);
-            String address = xpath.evaluate("memberList/member[" + i + "]/address", doc);
-            int birthYear = Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/birthYear", doc));
-            int phoneNo = Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/phoneNo", doc));
-            String email = xpath.evaluate("memberList/member[" + i + "]/email", doc);
-            String memberType = xpath.evaluate("memberList/member[" + i + "]/memberType", doc);
+//            int memberNo = Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/memberNo", doc));
+//            String firstName = xpath.evaluate("memberList/member[" + i + "]/firstName", doc);
+//            String lastName = xpath.evaluate("memberList/member[" + i + "]/lastName", doc);
+//            String address = xpath.evaluate("memberList/member[" + i + "]/address", doc);
+//            int birthYear = Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/birthYear", doc));
+//            int phoneNo = Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/phoneNo", doc));
+//            String email = xpath.evaluate("memberList/member[" + i + "]/email", doc);
+//            String memberType = xpath.evaluate("memberList/member[" + i + "]/memberType", doc);
             int DTULicenceNo = Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/DTULicenceNo", doc));
             int DTUPoints = Integer.parseInt(xpath.evaluate("memberList/member[" + i + "]/DTUPoints", doc));
-
-            Member m = Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, memberType, DTULicenceNo, DTUPoints);
-            members.add(m);
+            for(Member m : beforeMemb)
+                if(m.getDTULicenceNo() == DTULicenceNo)
+                    m.setDTUPoints(DTUPoints);
+//            Member m = Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, memberType, DTULicenceNo, DTUPoints);
+//            members.add(m);
+            
         }
+        members = beforeMemb;
         return members;
     }
-    
-//    public List<Match> getMatches() throws Exception
-//    {
-//        
-//    }
 }
