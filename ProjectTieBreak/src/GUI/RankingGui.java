@@ -4,6 +4,7 @@
 package GUI;
 
 import BE.Member;
+import BE.MemberContainer;
 import BLL.RankingManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileNotFoundException;
@@ -213,9 +214,10 @@ public class RankingGui extends javax.swing.JFrame {
         resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
         if (!resultSet.isEmpty())
         {
+            int i = 1;
             for (Member m : resultSet)
             {
-                model3.addElement(m);
+                model3.addElement(new MemberContainer(m,i++));
             }
             
         } else
