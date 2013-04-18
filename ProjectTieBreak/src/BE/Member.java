@@ -17,9 +17,7 @@ public class Member
     private String address;
     private int birthYear;
     private int phoneNo;
-    private String email;
-
-    
+    private String email;    
     private enum MemberType {junior, senior, recreational, retiree, administrative};
     private MemberType memberType;
     private int DTULicenceNo;
@@ -27,25 +25,7 @@ public class Member
     
     private Member() throws IllegalArgumentException
     {
-        /**
-        this.memberNo=memberNo;
-        this.lastName=lastName;
-        this.firstName=firstname;
-        this.address=address;
-        this.birthYear=birthYear;
-        this.phoneNo=phoneNo;
-        this.email=email;
-        switch(memberType)
-        {
-            case "junior": this.memberType = this.memberType.junior; break;
-            case "senior": this.memberType = this.memberType.senior; break;
-            case "recreational": this.memberType = this.memberType.recreational; break;
-            case "retiree": this.memberType = this.memberType.retiree; break;
-            default: throw new IllegalArgumentException("ERROR - invalid member type");
-        }        
-        this.DTULicenceNo=DTULicenceNo;
-        this.DTUPoints=DTUPoints;
-        */
+       
     }
     
     public static Member fromDataBase(int memberNo, String lastName, String firstname, String address, int birthYear, int phoneNo, String email, String memberType, int DTULicenceNo, int DTUPoints) throws IllegalArgumentException

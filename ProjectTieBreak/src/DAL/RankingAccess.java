@@ -91,8 +91,8 @@ public class RankingAccess {
         int phoneNo = rs.getInt(6);
         String email = rs.getString(7);
         String memberType = rs.getString(9);
-        int DTULicence = rs.getInt(10);
-        int DTUPoints = rs.getInt(11);
+        int DTUPoints = rs.getInt(10);
+        int DTULicence = rs.getInt(11);
         
         return Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, memberType, DTULicence, DTUPoints);
     }
