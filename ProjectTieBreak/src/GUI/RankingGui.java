@@ -57,14 +57,11 @@ public class RankingGui extends javax.swing.JFrame {
         btnRefresh = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstRank = new javax.swing.JList();
-        pnlRankLimit = new javax.swing.JPanel();
-        lblLimit = new javax.swing.JLabel();
-        cmbBoxLimit = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Tie-Break Ranking List:");
+        jLabel1.setText("Tie-Break Ranking List");
 
         dateLabel.setText("Last Updated: ");
         dateLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -89,40 +86,6 @@ public class RankingGui extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(lstRank);
 
-        pnlRankLimit.setBorder(javax.swing.BorderFactory.createTitledBorder("Search Limit"));
-        pnlRankLimit.setAutoscrolls(true);
-
-        lblLimit.setText("Limit to...");
-
-        cmbBoxLimit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "None", "10", "20", "50", "100" }));
-        cmbBoxLimit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbBoxLimitActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnlRankLimitLayout = new javax.swing.GroupLayout(pnlRankLimit);
-        pnlRankLimit.setLayout(pnlRankLimitLayout);
-        pnlRankLimitLayout.setHorizontalGroup(
-            pnlRankLimitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlRankLimitLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlRankLimitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbBoxLimit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlRankLimitLayout.createSequentialGroup()
-                        .addComponent(lblLimit)
-                        .addGap(0, 115, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        pnlRankLimitLayout.setVerticalGroup(
-            pnlRankLimitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlRankLimitLayout.createSequentialGroup()
-                .addComponent(lblLimit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbBoxLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,14 +93,12 @@ public class RankingGui extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlRankLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(dateLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dateLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -151,8 +112,6 @@ public class RankingGui extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dateLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlRankLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -160,44 +119,12 @@ public class RankingGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lstRankValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstRankValueChanged
-        model3.clear();
-        Member m = (Member)lstRank.getSelectedValue();
-        model3.addElement("Member No: " + m.getMemberNo());
-        model3.addElement("Name: " + m.getFirstName() + " " + m.getLastName());
-        Calendar c = Calendar.getInstance();
-        int age = c.get(Calendar.YEAR) - m.getBirthYear();
-        model3.addElement("Age: " + age + " - " + m.getMemberType());
-        model3.addElement("Address: " + m.getAddress());
-        model3.addElement("Email: " + m.getEmail());
-        model3.addElement("Telephone: " + m.getPhoneNo());
+
     }//GEN-LAST:event_lstRankValueChanged
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         searchByRank();
     }//GEN-LAST:event_btnRefreshActionPerformed
-
-    private void cmbBoxLimitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBoxLimitActionPerformed
-        switch (cmbBoxLimit.getSelectedIndex())
-        {
-            case 0:
-            switchLimitation = Integer.MAX_VALUE;
-            break;
-            case 1:
-            switchLimitation = 10;
-            break;
-            case 2:
-            switchLimitation = 20;
-            break;
-            case 3:
-            switchLimitation = 50;
-            break;
-            case 4:
-            switchLimitation = 100;
-            break;
-        }
-
-        btnRefresh.doClick();
-    }//GEN-LAST:event_cmbBoxLimitActionPerformed
 
     private void updateDateLabel(){
         Date date = new Date( );
@@ -237,12 +164,9 @@ public class RankingGui extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRefresh;
-    private javax.swing.JComboBox cmbBoxLimit;
     private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblLimit;
     private javax.swing.JList lstRank;
-    private javax.swing.JPanel pnlRankLimit;
     // End of variables declaration//GEN-END:variables
 }
