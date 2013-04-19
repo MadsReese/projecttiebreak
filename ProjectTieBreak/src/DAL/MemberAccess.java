@@ -179,7 +179,7 @@ public class MemberAccess
         System.out.println("DEBUG: running debugAdd!");
         try (Connection con = connector.getConnection())
         {
-            String sql = "INSERT INTO Member (First_Name, Last_Name, Address, Birth_Year, Phone_No, Email, Member_Type) "
+            String sql = "INSERT INTO Member (First_Name, Last_Name, Address, Birth_Year, Phone_No, Email, MemberType) "
                     + "VALUES (?,?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, m.getFirstName());

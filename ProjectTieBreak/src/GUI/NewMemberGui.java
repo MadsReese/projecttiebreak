@@ -209,7 +209,7 @@ public class NewMemberGui extends javax.swing.JFrame
      */
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_btnSaveMouseClicked
     {//GEN-HEADEREND:event_btnSaveMouseClicked
-        Member memberobj = Member.createSimple(txtLastName.getText(), txtFirstName.getText(), txtAddress.getText(), Integer.parseInt(txtYear.getText()), Integer.parseInt(txtTelephone.getText()) , txtEmail.getText());
+        Member memberobj = Member.createSimple(txtFirstName.getText(), txtLastName.getText(), txtAddress.getText(), Integer.parseInt(txtYear.getText()), Integer.parseInt(txtTelephone.getText()) , txtEmail.getText());
         try
         {
             mM.add(memberobj);

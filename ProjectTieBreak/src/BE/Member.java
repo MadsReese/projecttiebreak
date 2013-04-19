@@ -53,7 +53,7 @@ public class Member
         return newMemberObj;
     }
     
-    public static Member createNew(String lastName, String firstname, String address, int birthYear, int phoneNo, String email, String memberType, int DTULicenceNo, int DTUPoints)
+    public static Member createNew(String firstname, String lastName, String address, int birthYear, int phoneNo, String email, String memberType, int DTULicenceNo, int DTUPoints)
     {
         Member newMemberObj = new Member();
         newMemberObj.SetLastName(lastName);
