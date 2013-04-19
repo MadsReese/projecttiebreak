@@ -197,8 +197,9 @@ public class MemberAccess
             {
                 throw new SQLException("Unable to update member :( ");
             }
-            int key = ps.getGeneratedKeys().getInt(1);
-            return key;
+            //ResultSet rs = ps.getGeneratedKeys();
+            //rs.next();
+            return 0;
         }
     }
     

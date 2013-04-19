@@ -5,7 +5,7 @@
 package BE;
 
 /**
- *
+ *Class created for the purpose of providing another toString for the list in the ranked interface
  * @author Jesper
  */
 public class MemberContainer
@@ -21,6 +21,6 @@ public class MemberContainer
     
     public String toString()
     {
-        return rank + ". - " +memberObject.getFirstName() +" "+memberObject.getLastName() +" - " + memberObject.getDTUPoints() + " points.";
+        return rank + ". - " + memberObject.getFirstName() + " "+memberObject.getLastName() + " - " + memberObject.getDTUPoints() + " points.";
     }
 }

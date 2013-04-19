@@ -4,6 +4,9 @@
  */
 package BLL;
 
+import DAL.BookingOptionsAccess;
+import java.io.IOException;
+
 /**
  *
  * @author Jesper
@@ -11,18 +14,26 @@ package BLL;
 public class BookingOptionsManager
 {
     private static BookingOptionsManager instance;
+    private static BookingOptionsAccess accessor;
     
-    private BookingOptionsManager()
+    private BookingOptionsManager() throws IOException
     {
-        
+        accessor = BookingOptionsAccess.getInstance();
     }
     
-    public static BookingOptionsManager getInstance()
+    public static BookingOptionsManager getInstance() throws IOException
     {
         if(instance==null)
         {
             instance=new BookingOptionsManager();
         }
         return instance;        
+    }
+    
+  
+    
+    public void setOutdoorPrice(double price)
+    {
+        
     }
 }
