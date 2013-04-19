@@ -100,6 +100,11 @@ public class MemberManager
         members.remove(m);
     }
     
+    public void update(Member m) throws Exception
+    {
+        accessor.update(m);
+    }
+    
     public void add(Member memb) throws SQLServerException, SQLException
     {
         int memberNo=1000;
