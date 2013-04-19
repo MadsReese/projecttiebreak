@@ -220,7 +220,7 @@ public class Member
         this.memberNo=memberNo;
     }
     
-    private void setBirthYear(int birthYear)
+    public void setBirthYear(int birthYear)
     {
         this.birthYear=birthYear;
     }

@@ -481,7 +481,7 @@ public class MemberGui extends javax.swing.JFrame
     private void btnRemoveMemberActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRemoveMemberActionPerformed
     {//GEN-HEADEREND:event_btnRemoveMemberActionPerformed
         Member m = (Member)lstResults.getSelectedValue();
-        lstResults.clearSelection();
+        //lstResults.clearSelection();
         System.out.println("Derp");
         model.removeElement(m);
         try
@@ -510,6 +510,7 @@ public class MemberGui extends javax.swing.JFrame
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_btnEditMouseClicked
     {//GEN-HEADEREND:event_btnEditMouseClicked
         Member m = (Member)lstResults.getSelectedValue();
+        System.out.println("DEBUG: Sent member with #" + m.getMemberNo() + " to EditMemberGui.");;
         //lstResults.clearSelection();
         new EditMemberGui(m).setVisible(true);
     }//GEN-LAST:event_btnEditMouseClicked

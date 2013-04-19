@@ -61,8 +61,26 @@ public class EditMemberGui extends javax.swing.JFrame
     
     public EditMemberGui(Member memb)
     {
+        try
+        {
+            mM = MemberManager.getInstance();
+        } catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(EditMemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(EditMemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLServerException ex)
+        {
+            Logger.getLogger(EditMemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(EditMemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        initComponents();
         m = memb;
         populateDetails(m);
+        lblMembNo.setText("Member #" + m.getMemberNo());
     }
 
     /**
@@ -90,7 +108,7 @@ public class EditMemberGui extends javax.swing.JFrame
         txtAddress = new javax.swing.JTextField();
         lblTelephone = new javax.swing.JLabel();
         txtTelephone = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        lblMembNo = new javax.swing.JLabel();
 
         lblDescription.setText("Edit member details...");
 
@@ -131,7 +149,7 @@ public class EditMemberGui extends javax.swing.JFrame
 
         lblTelephone.setText("Telephone");
 
-        jLabel1.setText("PLACEHOLDER");
+        lblMembNo.setText("PLACEHOLDER");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,7 +161,7 @@ public class EditMemberGui extends javax.swing.JFrame
                         .addGap(10, 10, 10)
                         .addComponent(lblDescription)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
+                        .addComponent(lblMembNo))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,7 +193,7 @@ public class EditMemberGui extends javax.swing.JFrame
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDescription)
-                    .addComponent(jLabel1))
+                    .addComponent(lblMembNo))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -231,6 +249,14 @@ public class EditMemberGui extends javax.swing.JFrame
      */
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_btnSaveMouseClicked
     {//GEN-HEADEREND:event_btnSaveMouseClicked
+        m.setFirstName(txtFirstName.getText());
+        m.SetLastName(txtLastName.getText());
+        m.setAddress(txtAddress.getText());
+        m.setEmail(txtEmail.getText());
+        m.setPhoneNo(Integer.parseInt(txtTelephone.getText()));
+        m.setBirthYear(Integer.parseInt(txtYear.getText()));
+        System.out.println("Attempting to save:\n" + m.getFirstName() + " " + m.getLastName() 
+                + "\n" + m.getAddress() + "\n" + m.getEmail() + "\n" + m.getPhoneNo() + "");
         try
         {
             mM.update(m);
@@ -315,12 +341,12 @@ public class EditMemberGui extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblFirstName;
     private javax.swing.JLabel lblLastName;
+    private javax.swing.JLabel lblMembNo;
     private javax.swing.JLabel lblTelephone;
     private javax.swing.JLabel lblYear;
     private javax.swing.JTextField txtAddress;
