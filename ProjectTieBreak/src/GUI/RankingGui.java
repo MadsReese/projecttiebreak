@@ -128,7 +128,7 @@ public class RankingGui extends javax.swing.JFrame {
 
     private void updateDateLabel(){
         Date date = new Date( );
-        String str = String.format("Last Updated: %tc", date );
+        String str = String.format("Last Updated: %tc", date);
         dateLabel.setText(str);
     }
     
