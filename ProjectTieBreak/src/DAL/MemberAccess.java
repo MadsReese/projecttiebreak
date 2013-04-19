@@ -135,7 +135,8 @@ public class MemberAccess
         try (Connection con = connector.getConnection())
         {
             String sql = "UPDATE Member "
-                    + "SET First_Name = ?, Last_Name = ?, Address = ?, Birth_Year = ?, Phone_No = ?, Email = ?, MemberType = ?, WHERE Id = ?";
+                    + "SET First_Name = ?, Last_Name = ?, Address = ?, Birth_Year = ?, Phone_No = ?, Email = ?, MemberType = ? "
+                    + "WHERE Id = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, m.getFirstName());
             ps.setString(2, m.getLastName());
