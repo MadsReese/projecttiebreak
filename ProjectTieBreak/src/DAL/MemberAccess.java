@@ -184,7 +184,7 @@ public class MemberAccess
         {
             String sql = "INSERT INTO Member (First_Name, Last_Name, Address, Birth_Year, Phone_No, Email, MemberType) "
                     + "VALUES (?,?,?,?,?,?,?)";
-            PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, m.getFirstName());
             ps.setString(2, m.getLastName());
             ps.setString(3, m.getAddress());
@@ -197,9 +197,9 @@ public class MemberAccess
             {
                 throw new SQLException("Unable to update member :( ");
             }
-            //ResultSet rs = ps.getGeneratedKeys();
-            //rs.next();
-            return 0;
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            return rs.getInt(1);
         }
     }
     
