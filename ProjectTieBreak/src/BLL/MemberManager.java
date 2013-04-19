@@ -123,12 +123,7 @@ public class MemberManager
             membertype = "retiree";
         }
         memb.setMemberType(membertype);
-        //Member m = Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, membertype, 0, 0);
         accessor.add(memb);
         members.add(memb);
     }
-    
-    //private methods
-    
-    
 }

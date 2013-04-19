@@ -206,10 +206,10 @@ public class Member
     {
         switch(memberType)
         {
-            case "junior": this.memberType = this.memberType.junior; break;
-            case "senior": this.memberType = this.memberType.senior; break;
-            case "recreational": this.memberType = this.memberType.recreational; break;
-            case "retiree": this.memberType = this.memberType.retiree; break;
+            case "junior": this.memberType = MemberType.junior; break;
+            case "senior": this.memberType = MemberType.senior; break;
+            case "recreational": this.memberType = MemberType.recreational; break;
+            case "retiree": this.memberType = MemberType.retiree; break;
             default: throw new IllegalArgumentException("ERROR - invalid member type");
         } 
     }

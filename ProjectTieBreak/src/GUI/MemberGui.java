@@ -469,7 +469,6 @@ public class MemberGui extends javax.swing.JFrame
         model2.addElement("Address: " + m.getAddress());
         model2.addElement("Email: " + m.getEmail());
         model2.addElement("Telephone: " + m.getPhoneNo());
-        
     }//GEN-LAST:event_lstResultsValueChanged
 
     private void btnRemoveMemberActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRemoveMemberActionPerformed
