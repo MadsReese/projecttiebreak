@@ -193,6 +193,11 @@ public class Member
     {
         return DTUPoints;
     }
+    
+    public void setMemberNo(int memberNo)
+    {
+        this.memberNo=memberNo;
+    }
 
     /**
      * @param DTUPoints the DTUPoints to set
@@ -215,10 +220,7 @@ public class Member
     }
     
     //private setters for factory constructor methods
-    private void setMemberNo(int memberNo)
-    {
-        this.memberNo=memberNo;
-    }
+    
     
     private void setBirthYear(int birthYear)
     {

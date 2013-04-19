@@ -102,18 +102,12 @@ public class MemberManager
     
     public void add(Member memb) throws SQLServerException, SQLException
     {
-        int memberNo=1000;
+        
         Calendar c = Calendar.getInstance();
         int age = c.get(Calendar.YEAR)-memb.getBirthYear();
         String membertype = "senior";
         //Determinants
-        for(Member m : members)
-        {
-            if(m.getMemberNo()>memberNo)
-            {
-                memberNo = m.getMemberNo()+1;
-            }
-        }
+        
         if(age < 18)
         {
             membertype = "junior";
@@ -124,8 +118,10 @@ public class MemberManager
         }
         memb.setMemberType(membertype);
         //Member m = Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, membertype, 0, 0);
-        accessor.add(memb);
+        int memberNo=accessor.add(memb);
+        memb.setMemberNo(memberNo);
         members.add(memb);
+        
     }
     
     //private methods

@@ -174,7 +174,7 @@ public class MemberAccess
         }
     }
     
-    public void add(Member m) throws SQLException, SQLServerException
+    public int add(Member m) throws SQLException, SQLServerException
     {
         System.out.println("DEBUG: running debugAdd!");
         try (Connection con = connector.getConnection())
@@ -193,6 +193,8 @@ public class MemberAccess
             {
                 throw new SQLException("Unable to update member :( ");
             }
+            int key = ps.getGeneratedKeys().getInt(1);
+            return key;
         }
     }
     
