@@ -100,6 +100,11 @@ public class MemberManager
         members.remove(m);
     }
     
+    public void update(Member m) throws Exception
+    {
+        accessor.update(m);
+    }
+    
     public void add(Member memb) throws SQLServerException, SQLException
     {
         int memberNo=1000;
@@ -123,12 +128,7 @@ public class MemberManager
             membertype = "retiree";
         }
         memb.setMemberType(membertype);
-        //Member m = Member.fromDataBase(memberNo, lastName, firstName, address, birthYear, phoneNo, email, membertype, 0, 0);
         accessor.add(memb);
         members.add(memb);
     }
-    
-    //private methods
-    
-    
 }
