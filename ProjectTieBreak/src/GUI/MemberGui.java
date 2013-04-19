@@ -468,6 +468,9 @@ public class MemberGui extends javax.swing.JFrame
     {//GEN-HEADEREND:event_lstResultsValueChanged
         model2.clear();
         Member m = (Member)lstResults.getSelectedValue();
+        if(m == null){
+            
+        } else {
         model2.addElement("Member No: " + m.getMemberNo());
         model2.addElement("Name: " + m.getFirstName() + " " + m.getLastName());
         Calendar c = Calendar.getInstance();
@@ -476,6 +479,7 @@ public class MemberGui extends javax.swing.JFrame
         model2.addElement("Address: " + m.getAddress());
         model2.addElement("Email: " + m.getEmail());
         model2.addElement("Telephone: " + m.getPhoneNo());
+        }
     }//GEN-LAST:event_lstResultsValueChanged
 
     private void btnRemoveMemberActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRemoveMemberActionPerformed
@@ -572,7 +576,7 @@ public class MemberGui extends javax.swing.JFrame
      * Method for searching for members by their member-numbers. 
      */
     private void searchByMemberNo()
-    {
+    {        
         model.clear();
         String query = txtBoxQuery.getText();
         List<Member> resultSet = mM.getByMemberNo(query);
