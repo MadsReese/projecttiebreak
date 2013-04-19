@@ -23,17 +23,18 @@ import javax.swing.JOptionPane;
  *
  * @author Jakob Hansen
  */
-public class NewMemberGui extends javax.swing.JFrame
+public class EditMemberGui extends javax.swing.JFrame
 {
 //  instance fields.
     private MemberManager mM = null;
+    private Member m;
 
     /**
      * Creates new form NewMemberGui
      */
-    public NewMemberGui()
+    public EditMemberGui()
     {
-        System.out.println("DEBUG: starting NewMemberGui...");
+        System.out.println("DEBUG: starting EditMemberGui...");
         try
         {
             mM = MemberManager.getInstance();
@@ -57,6 +58,30 @@ public class NewMemberGui extends javax.swing.JFrame
         }
         initComponents();
     }
+    
+    public EditMemberGui(Member memb)
+    {
+        try
+        {
+            mM = MemberManager.getInstance();
+        } catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(EditMemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(EditMemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLServerException ex)
+        {
+            Logger.getLogger(EditMemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(EditMemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        initComponents();
+        m = memb;
+        populateDetails(m);
+        lblMembNo.setText("Member #" + m.getMemberNo());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,7 +90,8 @@ public class NewMemberGui extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         lblDescription = new javax.swing.JLabel();
         lblFirstName = new javax.swing.JLabel();
@@ -82,8 +108,9 @@ public class NewMemberGui extends javax.swing.JFrame
         txtAddress = new javax.swing.JTextField();
         lblTelephone = new javax.swing.JLabel();
         txtTelephone = new javax.swing.JTextField();
+        lblMembNo = new javax.swing.JLabel();
 
-        lblDescription.setText("Add a new member...");
+        lblDescription.setText("Edit member details...");
 
         lblFirstName.setText("First Name");
 
@@ -94,20 +121,26 @@ public class NewMemberGui extends javax.swing.JFrame
         lblEmail.setText("Email");
 
         btnSave.setText("Save");
-        btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        btnSave.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 btnSaveMouseClicked(evt);
             }
         });
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSave.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSaveActionPerformed(evt);
             }
         });
 
         btnCancel.setText("Cancel");
-        btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        btnCancel.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 btnCancelMouseClicked(evt);
             }
         });
@@ -115,6 +148,8 @@ public class NewMemberGui extends javax.swing.JFrame
         lblAddress.setText("Address");
 
         lblTelephone.setText("Telephone");
+
+        lblMembNo.setText("PLACEHOLDER");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,36 +159,41 @@ public class NewMemberGui extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(lblDescription))
+                        .addComponent(lblDescription)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                        .addComponent(lblMembNo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFirstName)
+                            .addComponent(lblLastName)
+                            .addComponent(lblAddress)
+                            .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTelephone)
+                            .addComponent(lblYear))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(txtAddress, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTelephone, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtYear, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtFirstName)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblLastName)
-                            .addComponent(lblAddress)
-                            .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblYear)
-                            .addComponent(lblTelephone)
-                            .addComponent(lblFirstName))
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtFirstName)
-                            .addComponent(txtLastName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-                            .addComponent(txtAddress, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtYear, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTelephone, javax.swing.GroupLayout.Alignment.LEADING))))
+                        .addComponent(btnCancel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(lblDescription)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDescription)
+                    .addComponent(lblMembNo))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,7 +239,7 @@ public class NewMemberGui extends javax.swing.JFrame
      */
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_btnCancelMouseClicked
     {//GEN-HEADEREND:event_btnCancelMouseClicked
-        NewMemberGui.this.setVisible(false);
+        EditMemberGui.this.setVisible(false);
     }//GEN-LAST:event_btnCancelMouseClicked
 
     /**
@@ -209,25 +249,32 @@ public class NewMemberGui extends javax.swing.JFrame
      */
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_btnSaveMouseClicked
     {//GEN-HEADEREND:event_btnSaveMouseClicked
-        Member memberobj = Member.createSimple(txtFirstName.getText(), txtLastName.getText(), txtAddress.getText(), Integer.parseInt(txtYear.getText()), Integer.parseInt(txtTelephone.getText()) , txtEmail.getText());
+        m.setFirstName(txtFirstName.getText());
+        m.SetLastName(txtLastName.getText());
+        m.setAddress(txtAddress.getText());
+        m.setEmail(txtEmail.getText());
+        m.setPhoneNo(Integer.parseInt(txtTelephone.getText()));
+        m.setBirthYear(Integer.parseInt(txtYear.getText()));
+        System.out.println("Attempting to save:\n" + m.getFirstName() + " " + m.getLastName() 
+                + "\n" + m.getAddress() + "\n" + m.getEmail() + "\n" + m.getPhoneNo() + "");
         try
         {
-            mM.add(memberobj);
+            mM.update(m);
         } 
         catch (SQLServerException ex)
         {
             System.out.println("SQLServerException: " + ex);
-            Logger.getLogger(NewMemberGui.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditMemberGui.class.getName()).log(Level.SEVERE, null, ex);
         } 
         catch (SQLException ex)
         {
             System.out.println("SQLException: " + ex);
-            Logger.getLogger(NewMemberGui.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditMemberGui.class.getName()).log(Level.SEVERE, null, ex);
         }
         catch (Exception å)
         {
             System.out.println("Exception: " + å);
-            Logger.getLogger(NewMemberGui.class.getName()).log(Level.SEVERE, null, å);
+            Logger.getLogger(EditMemberGui.class.getName()).log(Level.SEVERE, null, å);
         }
         Object[] options =
         {
@@ -241,7 +288,7 @@ public class NewMemberGui extends javax.swing.JFrame
                 null, //do not use a custom Icon
                 options, //the titles of buttons
                 options[0]); //default button title
-        NewMemberGui.this.setVisible(false);
+        EditMemberGui.this.setVisible(false);
     }//GEN-LAST:event_btnSaveMouseClicked
 
     /**
@@ -269,16 +316,16 @@ public class NewMemberGui extends javax.swing.JFrame
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(NewMemberGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditMemberGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(NewMemberGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditMemberGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(NewMemberGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditMemberGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(NewMemberGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditMemberGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -287,7 +334,7 @@ public class NewMemberGui extends javax.swing.JFrame
         {
             public void run()
             {
-                new NewMemberGui().setVisible(true);
+                new EditMemberGui().setVisible(true);
             }
         });
     }
@@ -299,6 +346,7 @@ public class NewMemberGui extends javax.swing.JFrame
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblFirstName;
     private javax.swing.JLabel lblLastName;
+    private javax.swing.JLabel lblMembNo;
     private javax.swing.JLabel lblTelephone;
     private javax.swing.JLabel lblYear;
     private javax.swing.JTextField txtAddress;
@@ -308,4 +356,18 @@ public class NewMemberGui extends javax.swing.JFrame
     private javax.swing.JTextField txtTelephone;
     private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * Populates the text-fields with details from the member-object.
+     * @param m the member to be added to the details.
+     */
+    private void populateDetails(Member m)
+    {
+            txtFirstName.setText(m.getFirstName());
+            txtLastName.setText(m.getLastName());
+            txtAddress.setText(m.getAddress());
+            txtEmail.setText(m.getEmail());
+            txtTelephone.setText("" + m.getPhoneNo());
+            txtYear.setText("" + m.getBirthYear());
+    }
 }

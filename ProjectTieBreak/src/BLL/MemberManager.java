@@ -100,6 +100,23 @@ public class MemberManager
         members.remove(m);
     }
     
+    public void update(Member m) throws Exception
+    {
+        String membertype = "senior";
+        Calendar c = Calendar.getInstance();
+        int age = c.get(Calendar.YEAR) - m.getBirthYear();
+        if(age < 18)
+        {
+            membertype = "junior";
+        }
+        else if(age > 60)
+        {
+            membertype = "retiree";
+        }
+        m.setMemberType(membertype);
+        accessor.update(m);
+    }
+    
     public void add(Member memb) throws SQLServerException, SQLException
     {
         
@@ -123,8 +140,4 @@ public class MemberManager
         members.add(memb);
         
     }
-    
-    //private methods
-    
-    
 }

@@ -134,15 +134,18 @@ public class MemberAccess
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "UPDATE Member SET firstName = ?, lastName = ?, address = ?, phoneNo = ?, email = ?, DTUPoints = ?, WHERE Id = ?";
+            String sql = "UPDATE Member "
+                    + "SET First_Name = ?, Last_Name = ?, Address = ?, Birth_Year = ?, Phone_No = ?, Email = ?, MemberType = ? "
+                    + "WHERE Id = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, m.getFirstName());
             ps.setString(2, m.getLastName());
             ps.setString(3, m.getAddress());
-            ps.setInt(4, m.getPhoneNo());
-            ps.setString(5, m.getEmail());
-            ps.setInt(6, m.getDTUPoints());
-            ps.setInt(7, m.getMemberNo());
+            ps.setInt(4, m.getBirthYear());
+            ps.setInt(5, m.getPhoneNo());
+            ps.setString(6, m.getEmail());
+            ps.setString(7, m.getMemberType());
+            ps.setInt(8, m.getMemberNo());
             
             int affectedRows = ps.executeUpdate();
             if (affectedRows < 1)
@@ -179,8 +182,8 @@ public class MemberAccess
         System.out.println("DEBUG: running debugAdd!");
         try (Connection con = connector.getConnection())
         {
-            String sql = "INSERT INTO Member (First_Name, Last_Name, Address, Birth_Year, Phone_No, Email) "
-                    + "VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO Member (First_Name, Last_Name, Address, Birth_Year, Phone_No, Email, MemberType) "
+                    + "VALUES (?,?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, m.getFirstName());
             ps.setString(2, m.getLastName());
@@ -188,6 +191,7 @@ public class MemberAccess
             ps.setInt(4, m.getBirthYear());
             ps.setInt(5, m.getPhoneNo());
             ps.setString(6, m.getEmail());
+            ps.setString(7,m.getMemberType());
             int affectedRows = ps.executeUpdate();
             if (affectedRows < 1)
             {
