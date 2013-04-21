@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 /**
@@ -65,7 +67,8 @@ public class MemberGui extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         txtBoxQuery = new javax.swing.JTextField();
         lblQuery = new javax.swing.JLabel();
@@ -91,15 +94,19 @@ public class MemberGui extends javax.swing.JFrame
         File = new javax.swing.JMenu();
         Settings = new javax.swing.JMenu();
         Options = new javax.swing.JMenuItem();
+        tools = new javax.swing.JMenu();
+        booking = new javax.swing.JMenuItem();
+        ranking = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(460, 499));
         setMinimumSize(new java.awt.Dimension(460, 499));
         setResizable(false);
 
-        txtBoxQuery.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        txtBoxQuery.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 txtBoxQueryActionPerformed(evt);
             }
         });
@@ -111,21 +118,25 @@ public class MemberGui extends javax.swing.JFrame
         pnlResultsAndDetails.setMinimumSize(new java.awt.Dimension(440, 353));
         pnlResultsAndDetails.setName("test"); // NOI18N
 
-        lstResults.setModel(new javax.swing.AbstractListModel() {
+        lstResults.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "model" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
         lstResults.setMaximumSize(new java.awt.Dimension(200, 278));
         lstResults.setMinimumSize(new java.awt.Dimension(200, 278));
-        lstResults.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+        lstResults.addListSelectionListener(new javax.swing.event.ListSelectionListener()
+        {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt)
+            {
                 lstResultsValueChanged(evt);
             }
         });
         scrPnlResults.setViewportView(lstResults);
 
-        lstDetails.setModel(new javax.swing.AbstractListModel() {
+        lstDetails.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "model2" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -135,8 +146,10 @@ public class MemberGui extends javax.swing.JFrame
         scrPnlDetails.setViewportView(lstDetails);
 
         btnClose.setText("Close");
-        btnClose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnClose.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnCloseActionPerformed(evt);
             }
         });
@@ -144,27 +157,35 @@ public class MemberGui extends javax.swing.JFrame
         lblCount.setText("Count: ");
 
         btnAddMember.setText("Add...");
-        btnAddMember.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnAddMember.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnAddMemberActionPerformed(evt);
             }
         });
 
         btnRemoveMember.setText("Remove");
-        btnRemoveMember.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRemoveMember.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRemoveMemberActionPerformed(evt);
             }
         });
 
         btnEdit.setText("Edit...");
-        btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        btnEdit.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 btnEditMouseClicked(evt);
             }
         });
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnEdit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnEditActionPerformed(evt);
             }
         });
@@ -222,8 +243,10 @@ public class MemberGui extends javax.swing.JFrame
         lblSearchFor.setText("Search for...");
 
         cmbBoxSearchType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Full Name", "Member No." }));
-        cmbBoxSearchType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmbBoxSearchType.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmbBoxSearchTypeActionPerformed(evt);
             }
         });
@@ -256,8 +279,10 @@ public class MemberGui extends javax.swing.JFrame
         lblLimit.setText("Limit to...");
 
         cmbBoxLimit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "None", "10", "20", "50", "100" }));
-        cmbBoxLimit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmbBoxLimit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmbBoxLimitActionPerformed(evt);
             }
         });
@@ -285,8 +310,10 @@ public class MemberGui extends javax.swing.JFrame
         );
 
         btnSearch.setText("Search");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSearch.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSearchActionPerformed(evt);
             }
         });
@@ -298,14 +325,42 @@ public class MemberGui extends javax.swing.JFrame
 
         Options.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         Options.setText("Options");
-        Options.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        Options.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 OptionsActionPerformed(evt);
             }
         });
         Settings.add(Options);
 
         jMenuBar.add(Settings);
+
+        tools.setText("Tools");
+
+        booking.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
+        booking.setText("Booking");
+        booking.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bookingActionPerformed(evt);
+            }
+        });
+        tools.add(booking);
+
+        ranking.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        ranking.setText("Ranking");
+        ranking.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                rankingActionPerformed(evt);
+            }
+        });
+        tools.add(ranking);
+
+        jMenuBar.add(tools);
 
         setJMenuBar(jMenuBar);
 
@@ -502,10 +557,51 @@ public class MemberGui extends javax.swing.JFrame
       
     }//GEN-LAST:event_btnEditActionPerformed
 
+    private void rankingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_rankingActionPerformed
+    {//GEN-HEADEREND:event_rankingActionPerformed
+        try
+        {
+            new RankingGui().setVisible(true);
+        } catch (SQLServerException ex)
+        {
+            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_rankingActionPerformed
+
+    private void bookingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_bookingActionPerformed
+    {//GEN-HEADEREND:event_bookingActionPerformed
+        try
+        {
+            new BookingGui().setVisible(true);
+        } catch (SQLServerException ex)
+        {
+            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bookingActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu File;
     private javax.swing.JMenuItem Options;
     private javax.swing.JMenu Settings;
+    private javax.swing.JMenuItem booking;
     private javax.swing.JButton btnAddMember;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnEdit;
@@ -524,8 +620,10 @@ public class MemberGui extends javax.swing.JFrame
     private javax.swing.JPanel pnlLimit;
     private javax.swing.JPanel pnlResultsAndDetails;
     private javax.swing.JPanel pnlSearch;
+    private javax.swing.JMenuItem ranking;
     private javax.swing.JScrollPane scrPnlDetails;
     private javax.swing.JScrollPane scrPnlResults;
+    private javax.swing.JMenu tools;
     private javax.swing.JTextField txtBoxQuery;
     // End of variables declaration//GEN-END:variables
 

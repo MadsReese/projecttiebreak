@@ -27,6 +27,7 @@ public class RankingGui extends javax.swing.JFrame {
     private int switchLimitation = Integer.MAX_VALUE;
     private int switchType = 0;
     
+    
     /**
      * Creates new form RankingGui
      */
@@ -36,6 +37,7 @@ public class RankingGui extends javax.swing.JFrame {
         initComponents();
         rM = RankingManager.getInstance();
         lstRank.setModel(model3);
+        this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
     }
 
     public static void main(String[] args) throws SQLServerException, SQLException, FileNotFoundException, IOException

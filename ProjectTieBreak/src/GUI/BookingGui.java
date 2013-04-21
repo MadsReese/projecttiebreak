@@ -38,6 +38,7 @@ public class BookingGui extends javax.swing.JFrame {
         bM = BookingManager.getInstance();
         lstCourts.setModel(model4);
         lstBookings.setModel(model5);
+        this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
