@@ -3,6 +3,8 @@
  */
 package BE;
 
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author boinq
@@ -11,26 +13,29 @@ public class Booking
 {
     private int bookingId;
     private int courtId;
-    private int fromDate;
-    private int toDate;
+    private GregorianCalendar dateAndTime;
     private int memberId;
-    private int time;
     
     private Booking() throws IllegalArgumentException
     {
        
     }
     
-    public static Booking createSimple(int bookingId, int courtId, int fromDate, int toDate, int memberId, int time)
+    public static Booking createSimple(int bookingId, int courtId,  int memberId, GregorianCalendar dateAndTime)
     {
         Booking newBookingObj = new Booking();
         newBookingObj.setBookingId(bookingId);
         newBookingObj.setCourtId(courtId);
-        newBookingObj.setFromDate(fromDate);
-        newBookingObj.setToDate(toDate);
+        
+        
         newBookingObj.setMemberId(memberId);
-        newBookingObj.setTime(time);        
+             
         return newBookingObj;
+    }
+    
+    private void setDateAndTime(GregorianCalendar dateAndTime)
+    {
+        this.dateAndTime = dateAndTime;
     }
 
     private void setBookingId(int bookingId) {
@@ -41,22 +46,10 @@ public class Booking
         this.memberId=memberId;
     }
 
-    private void setToDate(int toDate) {
-        this.toDate=toDate;
-    }
-
-    private void setFromDate(int fromDate) {
-        this.fromDate=fromDate;
-    }
-
     private void setCourtId(int courtId) {
         this.courtId=courtId;
     }
-    
-    private void setTime(int time) {
-        this.time=time;
-    }
-    
+        
     public int getBookingId()
     {
         return bookingId;
@@ -66,26 +59,17 @@ public class Booking
     {
         return memberId;
     }
-    
-    public int getToDate()
-    {
-        return toDate;
-    }
-    
-    public int getFromDate()
-    {
-        return fromDate;
-    }
+
     
     public int getCourtId()
     {
         return courtId;
     }
     
-    public int getTime()
+    public GregorianCalendar getDateAndTime()
     {
-        return time;
-    }    
-    
+        return dateAndTime;
+    }
+
     
 }

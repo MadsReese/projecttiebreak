@@ -18,6 +18,6 @@ public class BookingContainer
     
     public String toString()
     {
-        return bookingObject.getMemberId() + " - " + bookingObject.getCourtId() + " - " + bookingObject.getFromDate();
+        return bookingObject.getMemberId() + " - " + bookingObject.getCourtId() + " - " + bookingObject.getDateAndTime();
     }
 }

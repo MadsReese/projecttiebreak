@@ -28,18 +28,18 @@ public class BookingManager {
     
     public void removeBooking(Booking bookingobj) throws Exception
     {
-        accessor.delete(bookingobj);
-        bookings.delete(bookingobj);
+//        accessor.delete(bookingobj);
+//        bookings.delete(bookingobj);
     }
     
     public void addBooking(Booking bookingobj) throws SQLServerException, SQLException
     {
-        accessor.add(bookingobj);
+//        accessor.add(bookingobj);
     }
     
     public void update(Booking bookingobj) throws SQLServerException, SQLException
     {
-        accessor.update(bookingobj);
+//        accessor.update(bookingobj);
     }
     
     public List<Booking> getAllBookings() throws SQLServerException, SQLException

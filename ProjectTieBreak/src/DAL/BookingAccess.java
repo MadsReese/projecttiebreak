@@ -65,30 +65,23 @@ public class BookingAccess {
             
 
             ResultSet rs = ps.executeQuery();
-            int i = 0;
+
             while (rs.next())
             {
                 court.add(getOneCourt(rs));
-                i++;
-                System.out.println(i + " member objects created.");
             }
-            System.out.println("DEBUG: returned list containing " + members.size());
+            
             return court;
         }
     }
     
+    
     public Court getOneCourt(ResultSet rs) throws SQLException
     {
+        int id = rs.getInt("Id");
+        int number = rs.getInt("Number");
+        String type = rs.getString("Type");
         
-    }
-    
-    private Member getOneMember(ResultSet rs) throws SQLException
-    {
-        int id = rs.getInt(1);
-        int number = rs.getString(2);
-        String type = rs.getString(3);
-        
-        
-        return Member.fromDataBase(id, number, type);
+        return Court.fromDataBase(id,number,type);
     }
 }
