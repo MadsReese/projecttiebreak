@@ -3,8 +3,8 @@
  */
 package BLL;
 
+import BE.BookingOptions;
 import BE.Court;
-import BE.Member;
 import DAL.BookingAccess;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
@@ -26,8 +26,13 @@ public class BookingManager {
         accessor = BookingAccess.getInstance();
     }
     
-    public void delete() {
+    public void deleteCourt() {
         
+    }
+    
+    public void removeBooking() {
+        //accessor.delete(bo.);
+        //bookings.delete(bo);
     }
     
     public void add() {
