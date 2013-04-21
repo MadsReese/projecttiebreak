@@ -24,7 +24,6 @@ import java.util.List;
  * @author Mads Funch Patrzalek Reese, Kasper Pedersen, Jakob Hansen
  */
 public class RankingAccess {
-    /* Management */
     // Instance variables \\
     private Connector connector;
     private static RankingAccess instance = null;

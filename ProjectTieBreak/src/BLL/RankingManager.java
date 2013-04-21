@@ -8,7 +8,6 @@
  */
 package BLL;
 
-import BE.Match;
 import BE.Member;
 import DAL.RankingAccess;
 import DAL.XmlReader;
@@ -24,25 +23,41 @@ import java.util.List;
  */
 public class RankingManager 
 {
-    
+    // Instance variables \\
     private static RankingManager instance;
     private static RankingAccess accessor;
-    
-    
+        
+    /**
+     * Constructs an instance of the RankingManager-object.
+     * @author Mads Funch Patrzalek Reese
+     * @throws IOException 
+     */
     private RankingManager() throws IOException
     {
         accessor = RankingAccess.getInstance();
     }
     
+    /**
+     * Returns an instance of the RankingManager class, and creates one first, if
+     * there's none available 
+     * @return an instance of the RankingManager
+     * @throws IOException --
+     */
     public static RankingManager getInstance() throws IOException
     {
         if(instance == null)
         {
-            instance=new RankingManager();
+            instance = new RankingManager();
         }
         return instance;
     }
     
+    /**
+     * Returns all members in a list by rank.
+     * @author Mads Funch Patrzalek Reese
+     * @return a list containing results.
+     * @throws SQLException --
+     */
     public List<Member> getByRank() throws SQLException 
     {
         return accessor.getByRank();
@@ -55,7 +70,7 @@ public class RankingManager
      * @return a list containing the age-group ranked in descending order by points.
      * @throws SQLException --
      */
-    public List<Member> getByAge(int agelimit) throws SQLException
+    public List<Member> getBelowAge(int agelimit) throws SQLException
     {
         Calendar c = Calendar.getInstance();
         List<Member> members = accessor.getBelowAge(agelimit);
@@ -100,6 +115,12 @@ public class RankingManager
                         break;
                     }
                     break;
+                case 100:
+                    if (age >= 18)
+                    {
+                        results.add(m);
+                        break;
+                    }
             }
         }
         return results;
