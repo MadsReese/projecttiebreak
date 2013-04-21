@@ -35,8 +35,10 @@ public class BookingManager {
         //bookings.delete(bo);
     }
     
-    public void add() {
-        
+    public void addBooking(String t, String f, String m) {
+        t = 
+        f = 
+        m = 
     }
     
     public void update(){
