@@ -3,11 +3,16 @@
  */
 package GUI;
 
-import BLL.RankingManager;
+import BE.Court;
+import BE.CourtContainer;
+import BLL.BookingManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 /**
@@ -16,7 +21,9 @@ import javax.swing.DefaultListModel;
  */
 public class BookingGui extends javax.swing.JFrame {
     private DefaultListModel model4 = new DefaultListModel();
-    private RankingManager rM;
+    private BookingManager bM;
+    private int switchLimitation = Integer.MAX_VALUE;
+    private int switchType = 0;
     /**
      * Creates new form BookingGui
      */
@@ -24,7 +31,7 @@ public class BookingGui extends javax.swing.JFrame {
     {
         this.setTitle("Tie-Break Tennis Club Booking");
         initComponents();
-        rM = RankingManager.getInstance();
+        bM = BookingManager.getInstance();
         lstCourts.setModel(model4);
     }
 
@@ -115,14 +122,14 @@ public class BookingGui extends javax.swing.JFrame {
             
     }
     
-    private void getAll()throws {
-        model3.clear();
+    private void getAll(){
+        model4.clear();
         String query = "";
         //String query = txtBoxQuery.getText();
-        List<Member> resultSet;
+        List<Court> resultSet;
         try
         {
-            resultSet = rM.getByRank();
+            resultSet = bM.getAll();
         } catch (SQLException ex)
         {
             Logger.getLogger(RankingGui.class.getName()).log(Level.SEVERE, null, ex);
@@ -132,9 +139,9 @@ public class BookingGui extends javax.swing.JFrame {
         if (!resultSet.isEmpty())
         {
             int i = 1;
-            for (Member m : resultSet)
+            for (Court m : resultSet)
             {
-                model3.addElement(new MemberContainer(m,i++));
+                model4.addElement(new CourtContainer(m,i++));
             }
             
         } else

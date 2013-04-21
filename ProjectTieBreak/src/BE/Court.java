@@ -28,6 +28,30 @@ public class Court
     }
     
     /**
+     * @return the id
+     */
+    public int getId()
+    {
+        return id;
+    }
+    
+    /**
+     * @return the number
+     */
+    public int getNumber()
+    {
+        return number;
+    }
+    
+    /**
+     * @return the courtType
+     */
+    public String getCourtType()
+    {
+        return courtType;
+    }
+    
+    /**
      * @param number the number to set
      */
     public void setNumber(int number)
