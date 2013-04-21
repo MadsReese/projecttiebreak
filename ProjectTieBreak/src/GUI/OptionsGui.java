@@ -49,7 +49,25 @@ public class OptionsGui extends javax.swing.JFrame
         {
             Logger.getLogger(OptionsGui.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        for(BookingOptions b: options)
+        {
+            if(b.getType().equalsIgnoreCase("outdoor"))
+            {
+                txtOutdoorPrice.setText(b.getPrice()+"");
+                txtOutdoorRentalFrom.setText(b.getRentableFromDate());
+                txtOutdoorRentalTo.setText(b.getRentableToDate());
+                txtOutdoorRentalTimeFrom.setText(b.getRentableFromTime()/60 + ":" +b.getRentableFromTime()%60);
+                txtOutdoorRentalTimeTo.setText(b.getRentableToTime()/60 + ":" + b.getRentableToTime()%60);
+            }
+            else if(b.getType().equalsIgnoreCase("indoor"))
+            {
+                txtIndoorPrice.setText(b.getPrice()+"");
+                txtIndoorRentalFrom.setText(b.getRentableFromDate());
+                txtIndoorRentalTo.setText(b.getRentableToDate());
+                txtIndoorRentalTimeFrom.setText(b.getRentableFromTime()/60 + ":" +b.getRentableFromTime()%60);
+                txtIndoorRentalTimeTo.setText(b.getRentableToTime()/60 + ":" + b.getRentableToTime()%60);
+            }    
+        }
         
     }
     /**
@@ -67,12 +85,12 @@ public class OptionsGui extends javax.swing.JFrame
         lblOutDoorPriceText = new javax.swing.JLabel();
         txtOutdoorPrice = new javax.swing.JTextField();
         lblIndoorRentalPrice = new javax.swing.JLabel();
-        txtIndoorRentalPrice = new javax.swing.JTextField();
+        txtIndoorPrice = new javax.swing.JTextField();
         lblOutdoorRental = new javax.swing.JLabel();
         txtOutdoorRentalFrom = new javax.swing.JTextField();
         lblOutdoorTo = new javax.swing.JLabel();
         txtOutdoorRentalTo = new javax.swing.JTextField();
-        txtIndoorTo = new javax.swing.JTextField();
+        txtIndoorRentalTo = new javax.swing.JTextField();
         lblIndoorFrom = new javax.swing.JLabel();
         txtIndoorRentalFrom = new javax.swing.JTextField();
         lblIndoorRental = new javax.swing.JLabel();
@@ -106,7 +124,7 @@ public class OptionsGui extends javax.swing.JFrame
 
         txtOutdoorRentalTo.setText("dd-mm");
 
-        txtIndoorTo.setText("dd-mm");
+        txtIndoorRentalTo.setText("dd-mm");
 
         lblIndoorFrom.setText("To");
 
@@ -164,7 +182,7 @@ public class OptionsGui extends javax.swing.JFrame
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtOutdoorPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtIndoorRentalPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(txtIndoorPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,7 +219,7 @@ public class OptionsGui extends javax.swing.JFrame
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblIndoorFrom)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtIndoorTo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtIndoorRentalTo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtIndoorFrom1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -218,7 +236,7 @@ public class OptionsGui extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblIndoorRentalPrice)
-                    .addComponent(txtIndoorRentalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIndoorPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOutdoorRental)
@@ -238,7 +256,7 @@ public class OptionsGui extends javax.swing.JFrame
                     .addComponent(lblIndoorRental)
                     .addComponent(txtIndoorRentalFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblIndoorFrom)
-                    .addComponent(txtIndoorTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIndoorRentalTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblInDoorFrom))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -390,11 +408,11 @@ public class OptionsGui extends javax.swing.JFrame
     private javax.swing.JLabel lblOutdoorRental;
     private javax.swing.JLabel lblOutdoorTo;
     private javax.swing.JLabel txtIndoorFrom1;
+    private javax.swing.JTextField txtIndoorPrice;
     private javax.swing.JTextField txtIndoorRentalFrom;
-    private javax.swing.JTextField txtIndoorRentalPrice;
     private javax.swing.JTextField txtIndoorRentalTimeFrom;
     private javax.swing.JTextField txtIndoorRentalTimeTo;
-    private javax.swing.JTextField txtIndoorTo;
+    private javax.swing.JTextField txtIndoorRentalTo;
     private javax.swing.JTextField txtOutdoorPrice;
     private javax.swing.JTextField txtOutdoorRentalFrom;
     private javax.swing.JTextField txtOutdoorRentalTimeFrom;
