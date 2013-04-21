@@ -42,7 +42,7 @@ public class BookingManager {
         accessor.update(bookingobj);
     }
     
-    public List<Court> getAllBookings() throws SQLServerException, SQLException
+    public List<Booking> getAllBookings() throws SQLServerException, SQLException
     {
         return bookings;
     }
