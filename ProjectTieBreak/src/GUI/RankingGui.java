@@ -1,5 +1,10 @@
-/*
- * 
+/**
+ * Project Tie-Break, EASV (2nd Semester, 2013)
+ *
+ * @author Kasper Pedersen, Jesper Agerbo Hansen,
+ * @author Mads Funch Patrzalek Reese and Jakob Hansen.
+ *
+ * Code stored at: https://github.com/MadsReese/projecttiebreak
  */
 package GUI;
 
@@ -18,15 +23,13 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 /**
- *
- * @author boinq
+ * RankingGui
+ * @author Kasper Pedersen, Jakob Hansen
  */
 public class RankingGui extends javax.swing.JFrame {
     private DefaultListModel model3 = new DefaultListModel();
     private RankingManager rM;
     private int switchLimitation = Integer.MAX_VALUE;
-    private int switchType = 0;
-    
     
     /**
      * Creates new form RankingGui
@@ -40,6 +43,15 @@ public class RankingGui extends javax.swing.JFrame {
         this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
     }
 
+    /**
+     * The main-method for launching this interface separately.
+     * @author Kasper Pedersen
+     * @param args unused
+     * @throws SQLServerException --
+     * @throws SQLException --
+     * @throws FileNotFoundException -- 
+     * @throws IOException --
+     */
     public static void main(String[] args) throws SQLServerException, SQLException, FileNotFoundException, IOException
     {
         new RankingGui().setVisible(true);
@@ -52,14 +64,15 @@ public class RankingGui extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jLabel1 = new javax.swing.JLabel();
         dateLabel = new javax.swing.JLabel();
         btnRefresh = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstRank = new javax.swing.JList();
-        jComboBox1 = new javax.swing.JComboBox();
+        cmbBoxAgeLimit = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,25 +84,37 @@ public class RankingGui extends javax.swing.JFrame {
 
         btnRefresh.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btnRefresh.setText("Refresh");
-        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRefresh.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRefreshActionPerformed(evt);
             }
         });
 
-        lstRank.setModel(new javax.swing.AbstractListModel() {
+        lstRank.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "model3" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        lstRank.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+        lstRank.addListSelectionListener(new javax.swing.event.ListSelectionListener()
+        {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt)
+            {
                 lstRankValueChanged(evt);
             }
         });
         jScrollPane1.setViewportView(lstRank);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "U12", "U14", "U16" }));
+        cmbBoxAgeLimit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "U10", "U12", "U14", "U16", "U18", "Senior" }));
+        cmbBoxAgeLimit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmbBoxAgeLimitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,7 +127,7 @@ public class RankingGui extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbBoxAgeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -117,7 +142,7 @@ public class RankingGui extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(btnRefresh)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbBoxAgeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -136,46 +161,121 @@ public class RankingGui extends javax.swing.JFrame {
         searchByRank();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
-    private void updateDateLabel(){
+    /**
+     * Age-limiter
+     * @author Jakob Hansen
+     * @param evt event to be listened for.
+     */
+    private void cmbBoxAgeLimitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmbBoxAgeLimitActionPerformed
+    {//GEN-HEADEREND:event_cmbBoxAgeLimitActionPerformed
+        switch (cmbBoxAgeLimit.getSelectedIndex())
+        {
+            case 0:
+                switchLimitation = 0;
+                break;
+            case 1:
+                switchLimitation = 10;
+                break;
+            case 2:
+                switchLimitation = 12;
+                break;
+            case 3:
+                switchLimitation = 14;
+                break;
+            case 4:
+                switchLimitation = 16;
+                break;
+            case 5:
+                switchLimitation = 18;
+                break;
+            case 6:
+                switchLimitation = 100;
+                break;
+        }
+        try
+        {
+            searchByAge(switchLimitation);
+        } 
+        catch (Exception ex)
+        {
+            Logger.getLogger(RankingGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmbBoxAgeLimitActionPerformed
+
+    /**
+     * Updates the interface dateLabel.
+     * @author Kasper Pedersen
+     */
+    private void updateDateLabel()
+    {
         Date date = new Date( );
         String str = String.format("Last Updated: %tc", date);
         dateLabel.setText(str);
     }
     
+    /**
+     * Returns all members in a given age-group.
+     * @author Jakob Hansen
+     * @param maxage the maximum age in the age-group.
+     * (options are 0 for all members, U10, U12, U14, U16, U18 and senior.)
+     * @throws Exception --
+     */
+    private void searchByAge(int maxage) throws Exception
+    {
+        model3.clear();
+        List<Member> resultSet = null;
+        try
+        {
+            resultSet = rM.getBelowAge(maxage);
+            System.out.println("Success! :)");
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(RankingGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (!resultSet.isEmpty())
+        {
+            int i = 1;
+            for (Member m: resultSet)
+            {
+                model3.addElement(new MemberContainer(m, i++));
+            }
+        }
+        updateDateLabel();
+    }
+    
+    /**
+     * searchByRank
+     * @author Kasper Pedersen, Jakob Hansen
+     */
     private void searchByRank()
     {
         model3.clear();
-        String query = "";
-        //String query = txtBoxQuery.getText();
         List<Member> resultSet;
         try
         {
             resultSet = rM.getByRank();
-        } catch (SQLException ex)
+        } 
+        catch (SQLException ex)
         {
             Logger.getLogger(RankingGui.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
-        resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
         if (!resultSet.isEmpty())
         {
             int i = 1;
             for (Member m : resultSet)
             {
-                model3.addElement(new MemberContainer(m,i++));
-            }
-            
-        } else
-        {
-            //lblCount.setText("No results.");
-        }
+                model3.addElement(new MemberContainer(m, i++));
+            } 
+        } 
         updateDateLabel();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRefresh;
+    private javax.swing.JComboBox cmbBoxAgeLimit;
     private javax.swing.JLabel dateLabel;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList lstRank;
