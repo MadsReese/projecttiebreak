@@ -3,16 +3,19 @@
  */
 package DAL;
 
+import BE.Booking;
 import BE.Court;
 import BE.Member;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -63,7 +66,6 @@ public class BookingAccess {
             String sql = "SELECT * FROM Court";
             PreparedStatement ps = con.prepareStatement(sql);
             
-
             ResultSet rs = ps.executeQuery();
 
             while (rs.next())
@@ -75,8 +77,35 @@ public class BookingAccess {
         }
     }
     
-    
-    public Court getOneCourt(ResultSet rs) throws SQLException
+    public List<Booking> getAllBookings() throws SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = 
+            "select CourtBooking.*, [Member/Booking].MemberId"
+            + " from CourtBooking"
+            + " Left Join [Member/Booking]"
+            + " on CourtBooking.Id=[Member/Booking].CourtBookingId";
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            ArrayList<Integer> memberId = new ArrayList();
+            
+            if(!(rs.next())) return null;
+            int id = rs.getInt("Id");
+            while(true)
+            {
+               int courtid=rs.getInt("CourtId");
+               Date sqldate = rs.getDate("DateFrom");
+               GregorianCalendar fromDate =  (GregorianCalendar) GregorianCalendar.getInstance();               
+               fromDate.setTimeInMillis(sqldate.getTime());
+               
+            }
+        }
+    }
+    private Court getOneCourt(ResultSet rs) throws SQLException
     {
         int id = rs.getInt("Id");
         int number = rs.getInt("Number");
@@ -84,4 +113,6 @@ public class BookingAccess {
         
         return Court.fromDataBase(id,number,type);
     }
+    
+   // private Booking getOneBooking()
 }

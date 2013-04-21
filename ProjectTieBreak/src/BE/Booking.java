@@ -3,6 +3,7 @@
  */
 package BE;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 /**
@@ -14,14 +15,14 @@ public class Booking
     private int bookingId;
     private int courtId;
     private GregorianCalendar dateAndTime;
-    private int memberId;
+    private ArrayList<Integer> memberId;
     
     private Booking() throws IllegalArgumentException
     {
        
     }
     
-    public static Booking createSimple(int bookingId, int courtId,  int memberId, GregorianCalendar dateAndTime)
+    public static Booking createSimple(int bookingId, int courtId, GregorianCalendar dateAndTime, int... memberId)
     {
         Booking newBookingObj = new Booking();
         newBookingObj.setBookingId(bookingId);
@@ -42,8 +43,12 @@ public class Booking
         this.bookingId=bookingId;
     }
     
-    private void setMemberId(int memberId) {
-        this.memberId=memberId;
+    private void setMemberId(int[] memberId) {
+        this.memberId=new ArrayList();
+        for(int id: memberId)
+        {
+            this.memberId.add(new Integer(id));
+        }
     }
 
     private void setCourtId(int courtId) {
@@ -55,7 +60,7 @@ public class Booking
         return bookingId;
     }
     
-    public int getMemberId()
+    public ArrayList<Integer> getMemberId()
     {
         return memberId;
     }
