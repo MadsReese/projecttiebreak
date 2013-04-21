@@ -99,7 +99,7 @@ public class RankingAccess {
      * @throws SQLServerException --
      * @throws SQLException  --
      */
-    public List<Member> getByAge(int age) throws SQLServerException, SQLException
+    public List<Member> getBelowAge(int age) throws SQLServerException, SQLException
     {
         try (Connection con = connector.getConnection())
         {
