@@ -435,17 +435,18 @@ public class OptionsGui extends javax.swing.JFrame
 
     private void btnApplyActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnApplyActionPerformed
     {//GEN-HEADEREND:event_btnApplyActionPerformed
-        // TODO add your handling code here:
+        updateOptions();
     }//GEN-LAST:event_btnApplyActionPerformed
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnOkActionPerformed
     {//GEN-HEADEREND:event_btnOkActionPerformed
-        // TODO add your handling code here:
+        updateOptions();
+        dispose();
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCancelActionPerformed
     {//GEN-HEADEREND:event_btnCancelActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
    
     /**

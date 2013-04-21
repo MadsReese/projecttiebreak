@@ -63,8 +63,11 @@ public class BookingOptionsAccess
             ps.setInt(4, b.getRentableFromTime());
             ps.setInt(5, b.getRentableToTime());
             ps.setString(6, b.getType());
+            
+            ps.executeQuery();
             }
         }
+        
     }        
     
             
