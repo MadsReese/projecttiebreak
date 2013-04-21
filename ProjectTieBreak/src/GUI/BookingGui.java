@@ -40,6 +40,7 @@ public class BookingGui extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         lstCourts = new javax.swing.JList();
         btnRefresh = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +64,10 @@ public class BookingGui extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Tie-Break Booking");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,18 +75,24 @@ public class BookingGui extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRefresh))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRefresh))
+                        .addGap(0, 293, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                 .addComponent(btnRefresh)
-                .addContainerGap())
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -103,8 +114,37 @@ public class BookingGui extends javax.swing.JFrame {
        new BookingGui().setVisible(true);
             
     }
+    
+    private void getAll()throws {
+        model3.clear();
+        String query = "";
+        //String query = txtBoxQuery.getText();
+        List<Member> resultSet;
+        try
+        {
+            resultSet = rM.getByRank();
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(RankingGui.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
+        if (!resultSet.isEmpty())
+        {
+            int i = 1;
+            for (Member m : resultSet)
+            {
+                model3.addElement(new MemberContainer(m,i++));
+            }
+            
+        } else
+        {
+            //lblCount.setText("No results.");
+        }        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRefresh;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList lstCourts;
     // End of variables declaration//GEN-END:variables

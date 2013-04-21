@@ -9,28 +9,47 @@ package BE;
  */
 public class Court 
 {
-    int Id;
-    int Number;
-    String Type;
+    private int id;
+    private int number;
+    private String courtType;
     
     private Court() throws IllegalArgumentException
     {
        
     }
     
-    public static Member fromDataBase(int memberNo, String lastName, String firstname, String address, int birthYear, int phoneNo, String email, String memberType, int DTULicenceNo, int DTUPoints) throws IllegalArgumentException
+    public static Court fromDataBase(int id, int number, String courtType) throws IllegalArgumentException
     {
         Court newMemberObj = new Court();
-        newMemberObj.setMemberNo(memberNo);
-        newMemberObj.SetLastName(lastName);
-        newMemberObj.setFirstName(firstname);
-        newMemberObj.setAddress(address);
-        newMemberObj.setEmail(email);
-        newMemberObj.setBirthYear(birthYear);
-        newMemberObj.setPhoneNo(phoneNo);
-        newMemberObj.setMemberType(memberType);
-        newMemberObj.setDTUPoints(DTUPoints);
-        newMemberObj.setDTULicenseNo(DTULicenceNo);
+        newMemberObj.setId(id);
+        newMemberObj.setNumber(number);
+        newMemberObj.setCourtType(courtType);        
         return newMemberObj;
     }
+    
+    /**
+     * @param number the number to set
+     */
+    public void setNumber(int number)
+    {
+        this.number = number;
+    }
+    
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+    
+    /**
+     * @param courtType the courtType to set
+     */
+    public void setCourtType(String courtType)
+    {
+        this.courtType = courtType;
+    }
+    
+    
 }
