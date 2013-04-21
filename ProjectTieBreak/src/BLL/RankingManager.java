@@ -71,30 +71,35 @@ public class RankingManager
                         results.add(m);
                         break;
                     }
+                    break;
                 case 12:
                     if (age >= 10)
                     {
                         results.add(m);
                         break;
                     }
+                    break;
                 case 14:
                     if (age >= 12)
                     {
                         results.add(m);
                         break;
                     }
+                    break;
                 case 16:
                     if (age >= 14)
                     {
                         results.add(m);
                         break;
                     }
+                    break;
                 case 18:
                     if (age >= 16)
                     {
                         results.add(m);
                         break;
                     }
+                    break;
             }
         }
         return results;
