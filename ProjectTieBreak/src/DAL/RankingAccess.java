@@ -1,5 +1,10 @@
-/*
- * 
+/**
+ * Project Tie-Break, EASV (2nd Semester, 2013)
+ *
+ * @author Kasper Pedersen, Jesper Agerbo Hansen,
+ * @author Mads Funch Patrzalek Reese and Jakob Hansen.
+ *
+ * Code stored at: https://github.com/MadsReese/projecttiebreak
  */
 package DAL;
 
@@ -15,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author boinq
+ * RankingAccess
+ * @author Mads Funch Patrzalek Reese, Kasper Pedersen, Jakob Hansen
  */
 public class RankingAccess {
     /* Management */
@@ -27,9 +32,9 @@ public class RankingAccess {
     // Constructor \\
     /**
      * Constructs an instance of the MemberAccess class
-     *
-     * @throws FileNotFoundException if the config file is not found
-     * @throws IOException if there's an error reading the config file
+     * @author Mads Funch Patrzalek Reese
+     * @throws FileNotFoundException if the configuration file is not found
+     * @throws IOException if there's an error reading the configuration file
      */
     private RankingAccess()throws FileNotFoundException, IOException
     {
@@ -38,12 +43,12 @@ public class RankingAccess {
 
     // Singleton \\
     /**
-     * Returns an instance of the MemberAccess class, and creates one first, if
+     * Returns an instance of the RankingAccess class, and creates one first, if
      * there's none available
-     *
+     * @author Mads Funch Patrzalek Reese
      * @return an instance of the MemberAccess class
-     * @throws FileNotFoundException if the config file can't be found
-     * @throws IOException if there's an error reading the config file
+     * @throws FileNotFoundException if the configuration file can't be found
+     * @throws IOException if there's an error reading the configuration file
      */
     public static RankingAccess getInstance() throws FileNotFoundException, IOException
     {
@@ -54,6 +59,13 @@ public class RankingAccess {
         return instance;
      }
 
+    /**
+     * Get members by rank from the database.
+     * @author Kasper Pedersen
+     * @return a list of members sorted in descending order by their points.
+     * @throws SQLServerException --
+     * @throws SQLException --
+     */
     public List<Member> getByRank() throws SQLServerException, SQLException
     {
         
@@ -79,9 +91,43 @@ public class RankingAccess {
         }
     }
     
-    
-    
-    
+    /**
+     * Get a specified age-group by comparing birth-year with the current year.
+     * @author Jakob Hansen
+     * @param age the age, results should be below.
+     * @return an arrayList containing all members in the given age-group.
+     * @throws SQLServerException --
+     * @throws SQLException  --
+     */
+    public List<Member> getByAge(int age) throws SQLServerException, SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql =
+              "SELECT *"
+            + "FROM Member"
+            + "WHERE (year(getdate()) - Member.Birth_Year) < ?"
+            + "ORDER BY DTU_Points DESC";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1,"" + age);
+            ResultSet rs = ps.executeQuery();
+            
+            List<Member> agegroup = new ArrayList();
+            while(rs.next())
+            {
+                agegroup.add(getOneMember(rs));
+            }
+            return agegroup;
+        }
+    }
+
+    /**
+     * Gets one member from the resultSet from the database.
+     * @author Kasper Pedersen
+     * @param rs the resultSet to be fetched from.
+     * @return one Member object from the resultSet.
+     * @throws SQLException --
+     */
     private Member getOneMember(ResultSet rs) throws SQLException
     {
         int memberNo = rs.getInt(1);
