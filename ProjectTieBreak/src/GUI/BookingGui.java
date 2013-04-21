@@ -26,6 +26,7 @@ public class BookingGui extends javax.swing.JFrame {
     private BookingManager bM;
     private int switchLimitation = Integer.MAX_VALUE;
     private int switchType = 0;
+    //String[] timeStrings = { "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00" };
     /**
      * Creates new form BookingGui
      */
@@ -54,15 +55,15 @@ public class BookingGui extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         lstBookings = new javax.swing.JList();
         btnAddBooking = new javax.swing.JButton();
-        txtFrom = new javax.swing.JTextField();
-        txtTo = new javax.swing.JTextField();
+        txtDate = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtMemberNo = new javax.swing.JTextField();
         btnRemove = new javax.swing.JButton();
-        txtTime = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        cmbFrom = new javax.swing.JComboBox();
+        cmbTo = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,13 +105,11 @@ public class BookingGui extends javax.swing.JFrame {
             }
         });
 
-        txtFrom.setText("dd-mm-yyyy");
+        txtDate.setText("dd-mm-yyyy");
 
-        txtTo.setText("dd-mm-yyyy");
+        jLabel2.setText("Date:");
 
-        jLabel2.setText("From:");
-
-        jLabel3.setText("To:");
+        jLabel3.setText("From:");
 
         jLabel4.setText("Booker:");
 
@@ -123,9 +122,11 @@ public class BookingGui extends javax.swing.JFrame {
             }
         });
 
-        txtTime.setToolTipText("fx 17:00");
+        jLabel5.setText("To:");
 
-        jLabel5.setText("Time:");
+        cmbFrom.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00" }));
+
+        cmbTo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,11 +155,15 @@ public class BookingGui extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtFrom, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                                    .addComponent(txtTo)
-                                    .addComponent(txtTime))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtDate, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                                            .addComponent(cmbFrom, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addComponent(cmbTo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addGap(348, 348, 348)
                         .addComponent(btnRemove)))
                 .addContainerGap())
@@ -177,15 +182,15 @@ public class BookingGui extends javax.swing.JFrame {
                     .addComponent(btnRemove)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addComponent(txtFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(cmbFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(cmbTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -211,7 +216,7 @@ public class BookingGui extends javax.swing.JFrame {
 
     private void btnAddBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBookingActionPerformed
         /*Court c = (Court)lstCourts.getSelectedValue();
-        int f;
+        
         int t;
         int cc = c.getId();
         int m;
@@ -221,6 +226,8 @@ public class BookingGui extends javax.swing.JFrame {
         m = Integer.parseInt(txtMemberNo.getText());
         ti = Integer.parseInt(txtTime.getText());
         
+        cmbFrom.getSelectedItem();
+        cmbFrom.
         Booking bookingobj = Booking.createSimple(1,f,t,cc,m,ti);
         try 
         {
@@ -324,6 +331,8 @@ public class BookingGui extends javax.swing.JFrame {
     private javax.swing.JButton btnAddBooking;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnRemove;
+    private javax.swing.JComboBox cmbFrom;
+    private javax.swing.JComboBox cmbTo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -333,9 +342,7 @@ public class BookingGui extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList lstBookings;
     private javax.swing.JList lstCourts;
-    private javax.swing.JTextField txtFrom;
+    private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtMemberNo;
-    private javax.swing.JTextField txtTime;
-    private javax.swing.JTextField txtTo;
     // End of variables declaration//GEN-END:variables
 }
