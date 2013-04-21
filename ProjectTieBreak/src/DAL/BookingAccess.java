@@ -105,7 +105,6 @@ public class BookingAccess {
                
                sqldate = rs.getDate("DateFrom");
                GregorianCalendar toDate =  (GregorianCalendar) GregorianCalendar.getInstance();               
-               toDate.setTimeInMillis(sqldate.getTime());
                
                memberId.add(rs.getInt("MemberId"));
                

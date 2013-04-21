@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -217,20 +218,24 @@ public class BookingGui extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnAddBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBookingActionPerformed
-        /*Court c = (Court)lstCourts.getSelectedValue();
+        Court court = (Court)lstCourts.getSelectedValue();
         
-        int t;
-        int cc = c.getId();
-        int m;
-        int ti;
-        f = Integer.parseInt(txtFrom.getText());
-        t = Integer.parseInt(txtTo.getText());
-        m = Integer.parseInt(txtMemberNo.getText());
-        ti = Integer.parseInt(txtTime.getText());
         
-        cmbFrom.getSelectedItem();
-        cmbFrom.
-        Booking bookingobj = Booking.createSimple(1,f,t,cc,m,ti);
+        int courtId = court.getId();
+        
+        String[] fromTime = ((String)cmbFrom.getSelectedItem()).split(":");
+        String[] toTime =((String)cmbTo.getSelectedItem()).split(":");
+        String[] date = txtDate.getText().split("-");
+        if(date.length!=3)
+        {
+            JOptionPane.showMessageDialog(this,"Date input most be formatted dd-mm-yyyy", "Date Input Error", JOptionPane.ERROR_MESSAGE);
+        }
+        String[] memberNos = txtMemberNo.getText().split(",");
+        //for(String s:mem)
+        
+        
+        
+        Booking bookingobj =null;// Booking.createSimple();
         try 
         {
             bM.addBooking(bookingobj);
@@ -243,7 +248,7 @@ public class BookingGui extends javax.swing.JFrame {
         {
             Logger.getLogger(BookingGui.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
+        
     }//GEN-LAST:event_btnAddBookingActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed

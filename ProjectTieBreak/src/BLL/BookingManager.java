@@ -18,7 +18,7 @@ import java.util.List;
 public class BookingManager {
     private static BookingManager instance;
     private static BookingAccess accessor;
-    private List<Court> courts;
+    
     private List<Booking> bookings;
     
     private BookingManager() throws IOException
@@ -44,12 +44,12 @@ public class BookingManager {
     
     public List<Booking> getAllBookings() throws SQLServerException, SQLException
     {
-        return bookings;
+        return accessor.getAllBookings();
     }
     
     public List<Court> getAllCourts() throws SQLServerException, SQLException
     {
-        return courts;
+        return accessor.getAllCourts();
     }
             
     public static BookingManager getInstance() throws IOException

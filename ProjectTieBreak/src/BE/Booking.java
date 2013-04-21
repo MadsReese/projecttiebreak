@@ -14,7 +14,8 @@ public class Booking
 {
     private int bookingId;
     private int courtId;
-    private GregorianCalendar dateAndTime;
+    private GregorianCalendar fromDate;
+    private GregorianCalendar toDate;
     private ArrayList<Integer> memberId;
     
     private Booking() throws IllegalArgumentException
@@ -27,17 +28,15 @@ public class Booking
         Booking newBookingObj = new Booking();
         newBookingObj.setBookingId(bookingId);
         newBookingObj.setCourtId(courtId);
-        
+        newBookingObj.setFromDate(fromDate);
+        newBookingObj.setToDate(toDate);
         
         newBookingObj.setMemberId(memberId);
              
         return newBookingObj;
     }
     
-    private void setDateAndTime(GregorianCalendar dateAndTime)
-    {
-        this.dateAndTime = dateAndTime;
-    }
+
 
     private void setBookingId(int bookingId) 
     {
@@ -69,9 +68,37 @@ public class Booking
         return courtId;
     }
     
-    public GregorianCalendar getDateAndTime()
+
+    /**
+     * @return the fromDate
+     */
+    public GregorianCalendar getFromDate()
     {
-        return dateAndTime;
+        return fromDate;
+    }
+
+    /**
+     * @param fromDate the fromDate to set
+     */
+    public void setFromDate(GregorianCalendar fromDate)
+    {
+        this.fromDate = fromDate;
+    }
+
+    /**
+     * @return the toDate
+     */
+    public GregorianCalendar getToDate()
+    {
+        return toDate;
+    }
+
+    /**
+     * @param toDate the toDate to set
+     */
+    public void setToDate(GregorianCalendar toDate)
+    {
+        this.toDate = toDate;
     }
 
     
