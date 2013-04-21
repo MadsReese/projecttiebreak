@@ -57,11 +57,38 @@ public class BookingAccess {
     
     public List<Court> getAllCourts() throws SQLServerException, SQLException
     {
-        
+        try (Connection con = connector.getConnection())
+        {
+            List<Member> members = new ArrayList<>();
+            String sql = "SELECT * FROM Court";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+
+            ResultSet rs = ps.executeQuery();
+            int i = 0;
+            while (rs.next())
+            {
+                court.add(getOneMember(rs));
+                i++;
+                System.out.println(i + " member objects created.");
+            }
+            System.out.println("DEBUG: returned list containing " + members.size());
+            return members;
+        }
     }
     
     public Court getOneCourt(ResultSet rs) throws SQLException
     {
         
+    }
+    
+    private Member getOneMember(ResultSet rs) throws SQLException
+    {
+        int id = rs.getInt(1);
+        int number = rs.getString(2);
+        String type = rs.getString(3);
+        
+        
+        return Member.fromDataBase(id, number, type);
     }
 }
