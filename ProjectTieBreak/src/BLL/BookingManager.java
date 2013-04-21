@@ -24,25 +24,22 @@ public class BookingManager {
     private BookingManager() throws IOException
     {
         accessor = BookingAccess.getInstance();
+    }    
+    
+    public void removeBooking(Booking bookingobj) throws Exception
+    {
+        accessor.delete(bookingobj);
+        bookings.delete(bookingobj);
     }
     
-    public void deleteCourt() {
-        
+    public void addBooking(Booking bookingobj) throws SQLServerException, SQLException
+    {
+        accessor.add(bookingobj);
     }
     
-    public void removeBooking(Booking b) {
-        accessor.delete(b);
-        bookings.delete(b);
-    }
-    
-    public void addBooking(String t, String f, String m) {
-        t = 
-        f = 
-        m = 
-    }
-    
-    public void update(){
-        
+    public void update(Booking bookingobj) throws SQLServerException, SQLException
+    {
+        accessor.update(bookingobj);
     }
     
     public List<Court> getAllBookings() throws SQLServerException, SQLException

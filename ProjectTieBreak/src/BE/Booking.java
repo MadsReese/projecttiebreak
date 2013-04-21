@@ -14,13 +14,14 @@ public class Booking
     private int fromDate;
     private int toDate;
     private int memberId;
+    private int time;
     
     private Booking() throws IllegalArgumentException
     {
        
     }
     
-    public static Booking createSimple(int bookingId, int courtId, int fromDate, int toDate, int memberId)
+    public static Booking createSimple(int bookingId, int courtId, int fromDate, int toDate, int memberId, int time)
     {
         Booking newBookingObj = new Booking();
         newBookingObj.setBookingId(bookingId);
@@ -28,6 +29,7 @@ public class Booking
         newBookingObj.setFromDate(fromDate);
         newBookingObj.setToDate(toDate);
         newBookingObj.setMemberId(memberId);
+        newBookingObj.setTime(time);        
         return newBookingObj;
     }
 
@@ -49,6 +51,10 @@ public class Booking
 
     private void setCourtId(int courtId) {
         this.courtId=courtId;
+    }
+    
+    private void setTime(int time) {
+        this.time=time;
     }
     
     public int getBookingId()
@@ -75,6 +81,11 @@ public class Booking
     {
         return courtId;
     }
+    
+    public int getTime()
+    {
+        return time;
+    }    
     
     
 }
