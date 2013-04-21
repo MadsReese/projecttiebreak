@@ -16,10 +16,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 
 /**
  * This is the main-class for the MemberGui-system.
@@ -68,8 +65,7 @@ public class MemberGui extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         txtBoxQuery = new javax.swing.JTextField();
         lblQuery = new javax.swing.JLabel();
@@ -83,6 +79,7 @@ public class MemberGui extends javax.swing.JFrame
         btnAddMember = new javax.swing.JButton();
         btnRemoveMember = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
+        lblRefresh = new javax.swing.JLabel();
         pnlSearch = new javax.swing.JPanel();
         lblSearchFor = new javax.swing.JLabel();
         cmbBoxSearchType = new javax.swing.JComboBox();
@@ -101,10 +98,8 @@ public class MemberGui extends javax.swing.JFrame
         setMinimumSize(new java.awt.Dimension(460, 499));
         setResizable(false);
 
-        txtBoxQuery.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txtBoxQuery.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBoxQueryActionPerformed(evt);
             }
         });
@@ -116,25 +111,21 @@ public class MemberGui extends javax.swing.JFrame
         pnlResultsAndDetails.setMinimumSize(new java.awt.Dimension(440, 353));
         pnlResultsAndDetails.setName("test"); // NOI18N
 
-        lstResults.setModel(new javax.swing.AbstractListModel()
-        {
+        lstResults.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "model" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
         lstResults.setMaximumSize(new java.awt.Dimension(200, 278));
         lstResults.setMinimumSize(new java.awt.Dimension(200, 278));
-        lstResults.addListSelectionListener(new javax.swing.event.ListSelectionListener()
-        {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt)
-            {
+        lstResults.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstResultsValueChanged(evt);
             }
         });
         scrPnlResults.setViewportView(lstResults);
 
-        lstDetails.setModel(new javax.swing.AbstractListModel()
-        {
+        lstDetails.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "model2" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -144,10 +135,8 @@ public class MemberGui extends javax.swing.JFrame
         scrPnlDetails.setViewportView(lstDetails);
 
         btnClose.setText("Close");
-        btnClose.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);
             }
         });
@@ -155,35 +144,27 @@ public class MemberGui extends javax.swing.JFrame
         lblCount.setText("Count: ");
 
         btnAddMember.setText("Add...");
-        btnAddMember.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAddMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddMemberActionPerformed(evt);
             }
         });
 
         btnRemoveMember.setText("Remove");
-        btnRemoveMember.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnRemoveMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoveMemberActionPerformed(evt);
             }
         });
 
         btnEdit.setText("Edit...");
-        btnEdit.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnEditMouseClicked(evt);
             }
         });
-        btnEdit.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
             }
         });
@@ -204,19 +185,24 @@ public class MemberGui extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnClose))
                     .addGroup(pnlResultsAndDetailsLayout.createSequentialGroup()
-                        .addComponent(lblCount)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlResultsAndDetailsLayout.createSequentialGroup()
-                        .addComponent(scrPnlResults, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlResultsAndDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(scrPnlResults, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCount))
                         .addGap(18, 18, 18)
-                        .addComponent(scrPnlDetails)))
+                        .addGroup(pnlResultsAndDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(scrPnlDetails)
+                            .addGroup(pnlResultsAndDetailsLayout.createSequentialGroup()
+                                .addComponent(lblRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         pnlResultsAndDetailsLayout.setVerticalGroup(
             pnlResultsAndDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlResultsAndDetailsLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(lblCount, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlResultsAndDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCount, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlResultsAndDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrPnlDetails)
@@ -236,10 +222,8 @@ public class MemberGui extends javax.swing.JFrame
         lblSearchFor.setText("Search for...");
 
         cmbBoxSearchType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Full Name", "Member No." }));
-        cmbBoxSearchType.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        cmbBoxSearchType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbBoxSearchTypeActionPerformed(evt);
             }
         });
@@ -272,10 +256,8 @@ public class MemberGui extends javax.swing.JFrame
         lblLimit.setText("Limit to...");
 
         cmbBoxLimit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "None", "10", "20", "50", "100" }));
-        cmbBoxLimit.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        cmbBoxLimit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbBoxLimitActionPerformed(evt);
             }
         });
@@ -303,10 +285,8 @@ public class MemberGui extends javax.swing.JFrame
         );
 
         btnSearch.setText("Search");
-        btnSearch.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
             }
         });
@@ -318,10 +298,8 @@ public class MemberGui extends javax.swing.JFrame
 
         Options.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         Options.setText("Options");
-        Options.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        Options.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OptionsActionPerformed(evt);
             }
         });
@@ -485,7 +463,7 @@ public class MemberGui extends javax.swing.JFrame
     private void btnRemoveMemberActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRemoveMemberActionPerformed
     {//GEN-HEADEREND:event_btnRemoveMemberActionPerformed
         Member m = (Member)lstResults.getSelectedValue();
-        //lstResults.clearSelection();
+        lstResults.clearSelection();
         System.out.println("Derp");
         model.removeElement(m);
         try
@@ -539,6 +517,7 @@ public class MemberGui extends javax.swing.JFrame
     private javax.swing.JLabel lblCount;
     private javax.swing.JLabel lblLimit;
     private javax.swing.JLabel lblQuery;
+    private javax.swing.JLabel lblRefresh;
     private javax.swing.JLabel lblSearchFor;
     private javax.swing.JList lstDetails;
     private javax.swing.JList lstResults;
@@ -556,6 +535,7 @@ public class MemberGui extends javax.swing.JFrame
     private void searchByName()
     {
         model.clear();
+        
         String query = txtBoxQuery.getText();
         List<Member> resultSet = mM.getByName(query.toLowerCase());
         resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
@@ -577,9 +557,10 @@ public class MemberGui extends javax.swing.JFrame
      */
     private void searchByMemberNo()
     {        
-        model.clear();
+        model.clear();        
+        List<Member> resultSet = null;
         String query = txtBoxQuery.getText();
-        List<Member> resultSet = mM.getByMemberNo(query);
+        resultSet = mM.getByMemberNo(query);
         if (!resultSet.isEmpty())
         {
             for(Member m : resultSet)
