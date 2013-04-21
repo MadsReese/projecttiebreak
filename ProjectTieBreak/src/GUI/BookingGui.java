@@ -212,7 +212,7 @@ public class BookingGui extends javax.swing.JFrame {
         Court c = (Court)lstCourts.getSelectedValue();
         int f;
         int t;
-        int cc = Integer.parseInt(c.getId());
+        int cc = c.getId();
         int m;
         int ti;
         f = Integer.parseInt(txtFrom.getText());
@@ -249,7 +249,7 @@ public class BookingGui extends javax.swing.JFrame {
         {
             ex.printStackTrace();
         }
-        getAll();
+        getAllBookings();
         
     }//GEN-LAST:event_btnRemoveActionPerformed
 
