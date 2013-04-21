@@ -3,6 +3,7 @@
  */
 package GUI;
 
+import BE.Booking;
 import BE.Court;
 import BE.CourtContainer;
 import BLL.BookingManager;
@@ -21,6 +22,7 @@ import javax.swing.DefaultListModel;
  */
 public class BookingGui extends javax.swing.JFrame {
     private DefaultListModel model4 = new DefaultListModel();
+    private DefaultListModel model5 = new DefaultListModel();
     private BookingManager bM;
     private int switchLimitation = Integer.MAX_VALUE;
     private int switchType = 0;
@@ -33,6 +35,7 @@ public class BookingGui extends javax.swing.JFrame {
         initComponents();
         bM = BookingManager.getInstance();
         lstCourts.setModel(model4);
+        lstBookings.setModel(model5);
     }
 
     /**
@@ -57,6 +60,7 @@ public class BookingGui extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtMemberNo = new javax.swing.JTextField();
+        btnRemove = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +114,13 @@ public class BookingGui extends javax.swing.JFrame {
 
         txtMemberNo.setText("Member No.");
 
+        btnRemove.setText("Remove");
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,16 +128,12 @@ public class BookingGui extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAddBooking)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRefresh))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
@@ -140,13 +147,20 @@ public class BookingGui extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txtFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(348, 348, 348)
+                        .addComponent(btnRemove))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAddBooking)
+                        .addGap(141, 141, 141)
+                        .addComponent(btnRefresh)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +169,8 @@ public class BookingGui extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRemove))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -164,11 +179,11 @@ public class BookingGui extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtMemberNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddBooking)
                     .addComponent(btnRefresh))
-                .addGap(29, 29, 29))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -184,15 +199,42 @@ public class BookingGui extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnAddBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBookingActionPerformed
+        Court c = (Court)lstCourts.getSelectedValue();
         String f;
         String t;
         String m;
         f = txtFrom.getText();
         t = txtTo.getText();
-        m = txtMemberNo.getText();
-        
-        bM.addBooking(f,t,m);
+        m = txtMemberNo.getText();        
+        if(c == null){
+            // Message box
+        } else if (c == null){
+            // Message box
+        } else if (t == null){
+            // Message box
+        } else if (m == null){
+            // Message box
+        } else {
+            bM.addBooking(f,t,c,m);
+        }
     }//GEN-LAST:event_btnAddBookingActionPerformed
+
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        Booking c = (Booking)lstBookings.getSelectedValue();
+        lstCourts.clearSelection();
+        System.out.println("Derp");
+        model5.removeElement(c);
+        try
+        {
+            bM.removeBooking(c);
+        } 
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        getAll();
+        
+    }//GEN-LAST:event_btnRemoveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,7 +246,32 @@ public class BookingGui extends javax.swing.JFrame {
     }
     
     private void getAllBookings(){
-        
+        model5.clear();
+        String query = "";
+        //String query = txtBoxQuery.getText();
+        List<Court> resultSet;
+        try
+        {
+            resultSet = bM.getAllBookings();
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(RankingGui.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
+        if (!resultSet.isEmpty())
+        {
+            int i = 1;
+            for (Court m : resultSet)
+            {
+                model5.addElement(new CourtContainer(m));
+            }
+            
+        } else
+        {
+            
+            //lblCount.setText("No results.");
+        }        
     }
     
     private void getAllAvailbleCourts(){
@@ -238,6 +305,7 @@ public class BookingGui extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddBooking;
     private javax.swing.JButton btnRefresh;
+    private javax.swing.JButton btnRemove;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

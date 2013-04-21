@@ -9,6 +9,7 @@ package BE;
  */
 public class Booking 
 {
+    private int bookingId;
     private int courtId;
     private int fromDate;
     private int toDate;
@@ -19,9 +20,10 @@ public class Booking
        
     }
     
-    public static Booking createSimple(int courtId, int fromDate, int toDate, int memberId)
+    public static Booking createSimple(int bookingId, int courtId, int fromDate, int toDate, int memberId)
     {
         Booking newBookingObj = new Booking();
+        newBookingObj.setBookingId(bookingId);
         newBookingObj.setCourtId(courtId);
         newBookingObj.setFromDate(fromDate);
         newBookingObj.setToDate(toDate);
@@ -29,6 +31,10 @@ public class Booking
         return newBookingObj;
     }
 
+    private void setBookingId(int bookingId) {
+        this.bookingId=bookingId;
+    }
+    
     private void setMemberId(int memberId) {
         this.memberId=memberId;
     }
@@ -43,6 +49,11 @@ public class Booking
 
     private void setCourtId(int courtId) {
         this.courtId=courtId;
+    }
+    
+    public int getBookingId()
+    {
+        return bookingId;
     }
     
     public int getMemberId()

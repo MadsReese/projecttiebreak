@@ -3,7 +3,7 @@
  */
 package BLL;
 
-import BE.BookingOptions;
+import BE.Booking;
 import BE.Court;
 import DAL.BookingAccess;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -19,7 +19,7 @@ public class BookingManager {
     private static BookingManager instance;
     private static BookingAccess accessor;
     private List<Court> courts;
-    private List<Court> bookings;
+    private List<Booking> bookings;
     
     private BookingManager() throws IOException
     {
@@ -30,9 +30,9 @@ public class BookingManager {
         
     }
     
-    public void removeBooking() {
-        //accessor.delete(bo.);
-        //bookings.delete(bo);
+    public void removeBooking(Booking b) {
+        accessor.delete(b);
+        bookings.delete(b);
     }
     
     public void addBooking(String t, String f, String m) {
