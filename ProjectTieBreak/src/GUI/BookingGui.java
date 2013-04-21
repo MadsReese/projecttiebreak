@@ -48,6 +48,8 @@ public class BookingGui extends javax.swing.JFrame {
         lstCourts = new javax.swing.JList();
         btnRefresh = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lstBookings = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +77,13 @@ public class BookingGui extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Tie-Break Booking");
 
+        lstBookings.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Bookings" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(lstBookings);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,10 +93,12 @@ public class BookingGui extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRefresh))
-                        .addGap(0, 293, Short.MAX_VALUE)))
+                        .addComponent(btnRefresh)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -96,10 +107,12 @@ public class BookingGui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRefresh)
-                .addGap(28, 28, 28))
+                .addGap(234, 234, 234))
         );
 
         pack();
@@ -110,7 +123,7 @@ public class BookingGui extends javax.swing.JFrame {
     }//GEN-LAST:event_lstCourtsValueChanged
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        // TODO add your handling code here:
+        getAllAvailbleCourts();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     /**
@@ -122,14 +135,14 @@ public class BookingGui extends javax.swing.JFrame {
             
     }
     
-    private void getAll(){
+    private void getAllAvailbleCourts(){
         model4.clear();
         String query = "";
         //String query = txtBoxQuery.getText();
         List<Court> resultSet;
         try
         {
-            resultSet = bM.getAll();
+            resultSet = bM.getAllCourts();
         } catch (SQLException ex)
         {
             Logger.getLogger(RankingGui.class.getName()).log(Level.SEVERE, null, ex);
@@ -141,7 +154,7 @@ public class BookingGui extends javax.swing.JFrame {
             int i = 1;
             for (Court m : resultSet)
             {
-                model4.addElement(new CourtContainer(m,i++));
+                model4.addElement(new CourtContainer(m));
             }
             
         } else
@@ -153,6 +166,8 @@ public class BookingGui extends javax.swing.JFrame {
     private javax.swing.JButton btnRefresh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList lstBookings;
     private javax.swing.JList lstCourts;
     // End of variables declaration//GEN-END:variables
 }

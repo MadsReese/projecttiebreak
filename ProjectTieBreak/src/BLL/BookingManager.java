@@ -19,6 +19,7 @@ public class BookingManager {
     private static BookingManager instance;
     private static BookingAccess accessor;
     private List<Court> courts;
+    private List<Court> bookings;
     
     private BookingManager() throws IOException
     {
@@ -37,7 +38,12 @@ public class BookingManager {
         
     }
     
-    public List<Court> getAll() throws SQLServerException, SQLException
+    public List<Court> getAllBookings() throws SQLServerException, SQLException
+    {
+        return bookings;
+    }
+    
+    public List<Court> getAllCourts() throws SQLServerException, SQLException
     {
         return courts;
     }
@@ -46,7 +52,7 @@ public class BookingManager {
     {
         if(instance == null)
         {
-            instance=new BookingManager();
+            instance = new BookingManager();
         }
         return instance;
     }    

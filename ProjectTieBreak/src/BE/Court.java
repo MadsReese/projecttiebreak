@@ -20,11 +20,11 @@ public class Court
     
     public static Court fromDataBase(int id, int number, String courtType) throws IllegalArgumentException
     {
-        Court newMemberObj = new Court();
-        newMemberObj.setId(id);
-        newMemberObj.setNumber(number);
-        newMemberObj.setCourtType(courtType);        
-        return newMemberObj;
+        Court newCourtObj = new Court();
+        newCourtObj.setId(id);
+        newCourtObj.setNumber(number);
+        newCourtObj.setCourtType(courtType);        
+        return newCourtObj;
     }
     
     /**
