@@ -21,6 +21,6 @@ public class MemberContainer
     
     public String toString()
     {
-        return rank + ". - " + memberObject.getFirstName() + " "+memberObject.getLastName() + " - " + memberObject.getDTUPoints() + " points.";
+        return String.format("%6d %-25s %25s ",rank," - " + memberObject.getFirstName() + " " +memberObject.getLastName(), memberObject.getDTUPoints() + " Points.");
     }
 }
