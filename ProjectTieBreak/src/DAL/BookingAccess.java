@@ -92,17 +92,41 @@ public class BookingAccess {
             ResultSet rs = ps.executeQuery();
             
             ArrayList<Integer> memberId = new ArrayList();
+            ArrayList<Booking> bookings = new ArrayList();
             
-            if(!(rs.next())) return null;
-            int id = rs.getInt("Id");
-            while(true)
+            
+            while(rs.next())
             {
-               int courtid=rs.getInt("CourtId");
+               int id = rs.getInt("Id");
+               int courtid=rs.getInt("CourtId");               
                Date sqldate = rs.getDate("DateFrom");
                GregorianCalendar fromDate =  (GregorianCalendar) GregorianCalendar.getInstance();               
                fromDate.setTimeInMillis(sqldate.getTime());
                
+               sqldate = rs.getDate("DateFrom");
+               GregorianCalendar toDate =  (GregorianCalendar) GregorianCalendar.getInstance();               
+               toDate.setTimeInMillis(sqldate.getTime());
+               
+               memberId.add(rs.getInt("MemberId"));
+               
+               while(rs.next())
+               {
+                   
+                   if(rs.getInt("Id")==id)
+                   {
+                       memberId.add(rs.getInt("MemberId"));                       
+                   }                       
+                   else
+                   {
+                       bookings.add(Booking.createSimple(id, courtid, fromDate, toDate, memberId));
+                       id=rs.getInt("Id");
+                       memberId.clear();
+                       break;
+                       
+                   }
+               }               
             }
+            return bookings;
         }
     }
     private Court getOneCourt(ResultSet rs) throws SQLException
@@ -114,5 +138,5 @@ public class BookingAccess {
         return Court.fromDataBase(id,number,type);
     }
     
-   // private Booking getOneBooking()
+ 
 }

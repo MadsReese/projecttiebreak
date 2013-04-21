@@ -22,7 +22,7 @@ public class Booking
        
     }
     
-    public static Booking createSimple(int bookingId, int courtId, GregorianCalendar dateAndTime, int... memberId)
+    public static Booking createSimple(int bookingId, int courtId, GregorianCalendar fromDate,GregorianCalendar toDate, ArrayList<Integer> memberId)
     {
         Booking newBookingObj = new Booking();
         newBookingObj.setBookingId(bookingId);
@@ -39,16 +39,14 @@ public class Booking
         this.dateAndTime = dateAndTime;
     }
 
-    private void setBookingId(int bookingId) {
+    private void setBookingId(int bookingId) 
+    {
         this.bookingId=bookingId;
     }
     
-    private void setMemberId(int[] memberId) {
-        this.memberId=new ArrayList();
-        for(int id: memberId)
-        {
-            this.memberId.add(new Integer(id));
-        }
+    private void setMemberId(ArrayList<Integer> memberId) 
+    {
+        this.memberId=memberId;
     }
 
     private void setCourtId(int courtId) {
