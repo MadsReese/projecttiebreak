@@ -59,7 +59,7 @@ public class BookingAccess {
     {
         try (Connection con = connector.getConnection())
         {
-            List<Member> members = new ArrayList<>();
+            List<Court> court = new ArrayList<>();
             String sql = "SELECT * FROM Court";
             PreparedStatement ps = con.prepareStatement(sql);
             
@@ -68,12 +68,12 @@ public class BookingAccess {
             int i = 0;
             while (rs.next())
             {
-                court.add(getOneMember(rs));
+                court.add(getOneCourt(rs));
                 i++;
                 System.out.println(i + " member objects created.");
             }
             System.out.println("DEBUG: returned list containing " + members.size());
-            return members;
+            return court;
         }
     }
     
