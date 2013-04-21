@@ -4,8 +4,11 @@
  */
 package BLL;
 
+import BE.BookingOptions;
 import DAL.BookingOptionsAccess;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -32,8 +35,13 @@ public class BookingOptionsManager
     
   
     
-    public void setOutdoorPrice(double price)
+    public void updateAll(BookingOptions...options) throws SQLException
     {
-        
+        accessor.updateAll(options);
+    }
+    
+    public ArrayList<BookingOptions> getAll() throws SQLException
+    {
+        return accessor.getAll();
     }
 }

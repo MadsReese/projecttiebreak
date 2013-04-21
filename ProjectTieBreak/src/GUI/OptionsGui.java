@@ -4,6 +4,13 @@
  */
 package GUI;
 
+import BE.BookingOptions;
+import BLL.BookingOptionsManager;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.WindowConstants;
 
 /**
@@ -12,7 +19,8 @@ import javax.swing.WindowConstants;
  */
 public class OptionsGui extends javax.swing.JFrame
 {
-
+    private BookingOptionsManager bom;
+    private ArrayList<BookingOptions> options;
     /**
      * Creates new form OptionsGui
      */
@@ -20,8 +28,30 @@ public class OptionsGui extends javax.swing.JFrame
     {
         initComponents();
         this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+        setup();
     }
 
+    //get the
+    private void setup()
+    {
+        
+        try
+        {
+            bom = BookingOptionsManager.getInstance();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(OptionsGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try
+        {
+            options = bom.getAll();
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(OptionsGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,24 +123,10 @@ public class OptionsGui extends javax.swing.JFrame
         jLabel2.setText("From");
 
         txtOutdoorRentalTimeFrom.setText("HH:mm");
-        txtOutdoorRentalTimeFrom.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtOutdoorRentalTimeFromActionPerformed(evt);
-            }
-        });
 
         lblFrom.setText("To");
 
         txtOutdoorRentalTimeTo.setText("HH:mm");
-        txtOutdoorRentalTimeTo.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtOutdoorRentalTimeToActionPerformed(evt);
-            }
-        });
 
         lblIndoorRentalHours.setText("Indoor court rental hours:");
 
@@ -121,13 +137,6 @@ public class OptionsGui extends javax.swing.JFrame
         txtIndoorFrom1.setText("To");
 
         txtIndoorRentalTimeTo.setText("HH:mm");
-        txtIndoorRentalTimeTo.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtIndoorRentalTimeToActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -253,6 +262,13 @@ public class OptionsGui extends javax.swing.JFrame
         });
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         btnApply.setText("Apply");
         btnApply.addActionListener(new java.awt.event.ActionListener()
@@ -305,21 +321,11 @@ public class OptionsGui extends javax.swing.JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_btnOkActionPerformed
 
-    private void txtOutdoorRentalTimeFromActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtOutdoorRentalTimeFromActionPerformed
-    {//GEN-HEADEREND:event_txtOutdoorRentalTimeFromActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCancelActionPerformed
+    {//GEN-HEADEREND:event_btnCancelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtOutdoorRentalTimeFromActionPerformed
-
-    private void txtIndoorRentalTimeToActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtIndoorRentalTimeToActionPerformed
-    {//GEN-HEADEREND:event_txtIndoorRentalTimeToActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIndoorRentalTimeToActionPerformed
-
-    private void txtOutdoorRentalTimeToActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtOutdoorRentalTimeToActionPerformed
-    {//GEN-HEADEREND:event_txtOutdoorRentalTimeToActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtOutdoorRentalTimeToActionPerformed
-
+    }//GEN-LAST:event_btnCancelActionPerformed
+   
     /**
      * @param args the command line arguments
      */
