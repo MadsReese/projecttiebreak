@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.DataFormatException;
 import javax.swing.WindowConstants;
 
 /**
@@ -69,6 +70,109 @@ public class OptionsGui extends javax.swing.JFrame
             }    
         }
         
+    }
+    
+    private void updateOptions()
+    {
+        options = new ArrayList();
+        try
+        {
+        options.add(getIndoorText());
+        options.add(getOutdoorText());
+        }
+        catch(DataFormatException e)
+        {
+            //JOptionPane.showMessageDialo(frame,"input error",e.getMessage());
+        }
+        BookingOptions[] tempOptions = new BookingOptions[2];
+        try
+        {
+            tempOptions[0]=getIndoorText();
+        } catch (DataFormatException ex)
+        {
+            Logger.getLogger(OptionsGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try
+        {
+            tempOptions[1]=getOutdoorText();
+        } catch (DataFormatException ex)
+        {
+            Logger.getLogger(OptionsGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try
+        {
+            bom.updateAll(tempOptions);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(OptionsGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    private BookingOptions getIndoorText() throws DataFormatException
+    {
+        
+        String indoorPrice = txtIndoorPrice.getText();
+        
+        double price = Double.parseDouble(indoorPrice);
+        
+        
+        String[] rentableFromDate = txtIndoorRentalFrom.getText().split("-");
+        int month = Integer.parseInt(rentableFromDate[1]);
+        int day = Integer.parseInt(rentableFromDate[0]);
+        if(!(month>0 && month < 13 && day>0 && day<32))
+            throw new DataFormatException("Indoor From Date Format");
+        String rentableDate1 = txtIndoorRentalFrom.getText();
+        
+        String[] rentableToDate = txtIndoorRentalTo.getText().split("-");
+        month = Integer.parseInt(rentableFromDate[1]);
+        day = Integer.parseInt(rentableFromDate[0]);
+        if(!(month>0 && month < 13 && day>0 && day<32))
+            throw new DataFormatException("Indoor To Date Format");
+        String rentableDate2 = txtIndoorRentalFrom.getText();
+        
+        String[] rentableFromTime = txtIndoorRentalTimeFrom.getText().split(":");
+        int rentableFromTime2 = Integer.parseInt(rentableFromTime[0])*60+Integer.parseInt(rentableFromTime[1]);
+        
+        String[] rentableToTime = txtIndoorRentalTimeFrom.getText().split(":");
+        int rentableToTime2 = Integer.parseInt(rentableToTime[0])*60+Integer.parseInt(rentableToTime[1]);
+        
+        if(!(rentableFromTime2<=rentableToTime2 && rentableToTime2<1440 && rentableFromTime2<1440))
+            throw new DataFormatException("Indoor Time Format");
+            
+        return new BookingOptions("Indoor",rentableDate1,rentableDate2,price,rentableFromTime2,rentableToTime2);
+    }
+    private BookingOptions getOutdoorText() throws DataFormatException
+    {
+        String outdoorPrice = txtOutdoorPrice.getText();
+        
+        double price = Double.parseDouble(outdoorPrice);
+        
+        
+        String[] rentableFromDate = txtOutdoorRentalFrom.getText().split("-");
+        int month = Integer.parseInt(rentableFromDate[1]);
+        int day = Integer.parseInt(rentableFromDate[0]);
+        if(!(month>0 && month < 13 && day>0 && day<32))
+            throw new DataFormatException("Outdoor From Date Format");
+        String rentableDate1 = txtOutdoorRentalFrom.getText();
+        
+        String[] rentableToDate = txtOutdoorRentalTo.getText().split("-");
+        month = Integer.parseInt(rentableFromDate[1]);
+        day = Integer.parseInt(rentableFromDate[0]);
+        if(!(month>0 && month < 13 && day>0 && day<32))
+            throw new DataFormatException("Outdoor To Date Format");
+        String rentableDate2 = txtOutdoorRentalFrom.getText();
+        
+        String[] rentableFromTime = txtOutdoorRentalTimeFrom.getText().split(":");
+        int rentableFromTime2 = Integer.parseInt(rentableFromTime[0])*60+Integer.parseInt(rentableFromTime[1]);
+        
+        String[] rentableToTime = txtOutdoorRentalTimeFrom.getText().split(":");
+        int rentableToTime2 = Integer.parseInt(rentableToTime[0])*60+Integer.parseInt(rentableToTime[1]);
+        
+        if(!(rentableFromTime2<=rentableToTime2 && rentableToTime2<1440 && rentableFromTime2<1440))
+            throw new DataFormatException("Outdoor Time Format");
+            
+        return new BookingOptions("Outdoor",rentableDate1,rentableDate2,price,rentableFromTime2,rentableToTime2);
     }
     /**
      * This method is called from within the constructor to initialize the form.
