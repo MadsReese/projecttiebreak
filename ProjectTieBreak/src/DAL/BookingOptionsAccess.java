@@ -52,9 +52,9 @@ public class BookingOptionsAccess
             for(BookingOptions b: options)
             {
             String sql =
-            "Insert into CourtType (RentableFromDate,RentableToDate,price,RentableFromTime,RentableToTime)"
-            + " Values (?,?,?,?,?)"
-            + " Where Type = ?";
+            "update CourtType "
+            + " set RentableFromDate=?,RentableToDate=?,price=?,RentableFromTime=?,RentableToTime=?"
+            + " Where CourtType.[Type] = ?";
             
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, b.getRentableFromDate());
@@ -64,7 +64,7 @@ public class BookingOptionsAccess
             ps.setInt(5, b.getRentableToTime());
             ps.setString(6, b.getType());
             
-            ps.executeQuery();
+            ps.executeUpdate();
             }
         }
         
