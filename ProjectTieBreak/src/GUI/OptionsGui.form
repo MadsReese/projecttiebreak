@@ -93,7 +93,7 @@
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="txtOutdoorPrice" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
-                                          <Component id="txtIndoorRentalPrice" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
+                                          <Component id="txtIndoorPrice" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -145,7 +145,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblIndoorFrom" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="txtIndoorTo" min="-2" pref="99" max="-2" attributes="0"/>
+                              <Component id="txtIndoorRentalTo" min="-2" pref="99" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="txtIndoorFrom1" min="-2" max="-2" attributes="0"/>
@@ -168,7 +168,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblIndoorRentalPrice" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtIndoorRentalPrice" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtIndoorPrice" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -191,7 +191,7 @@
                           <Component id="lblIndoorRental" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtIndoorRentalFrom" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblIndoorFrom" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtIndoorTo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtIndoorRentalTo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblInDoorFrom" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
@@ -220,7 +220,7 @@
                 <Property name="text" type="java.lang.String" value="Indoor court rental price:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtIndoorRentalPrice">
+            <Component class="javax.swing.JTextField" name="txtIndoorPrice">
             </Component>
             <Component class="javax.swing.JLabel" name="lblOutdoorRental">
               <Properties>
@@ -242,7 +242,7 @@
                 <Property name="text" type="java.lang.String" value="dd-mm"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtIndoorTo">
+            <Component class="javax.swing.JTextField" name="txtIndoorRentalTo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="dd-mm"/>
               </Properties>
