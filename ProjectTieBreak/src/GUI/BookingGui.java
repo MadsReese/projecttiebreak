@@ -4,6 +4,7 @@
 package GUI;
 
 import BE.Booking;
+import BE.BookingContainer;
 import BE.Court;
 import BE.CourtContainer;
 import BLL.BookingManager;
@@ -271,25 +272,24 @@ public class BookingGui extends javax.swing.JFrame {
     }
     
     private void getAllBookings(){
-        model5.clear();
-        String query = "";
+        model5.clear();        
         //String query = txtBoxQuery.getText();
-        List<Court> resultSet;
+        List<Booking> resultSet;
         try
         {
             resultSet = bM.getAllBookings();
         } catch (SQLException ex)
         {
-            Logger.getLogger(RankingGui.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BookingGui.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
         resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
         if (!resultSet.isEmpty())
         {
             int i = 1;
-            for (Court m : resultSet)
+            for (Booking m : resultSet)
             {
-                model5.addElement(new CourtContainer(m));
+                model5.addElement(new BookingContainer(m));
             }
             
         } else
@@ -309,7 +309,7 @@ public class BookingGui extends javax.swing.JFrame {
             resultSet = bM.getAllCourts();
         } catch (SQLException ex)
         {
-            Logger.getLogger(RankingGui.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BookingGui.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
         resultSet = resultSet.subList(0, Math.min(resultSet.size(), switchLimitation));
