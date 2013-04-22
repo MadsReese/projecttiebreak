@@ -94,8 +94,9 @@ public class BookingAccess {
             ArrayList<Integer> memberId = new ArrayList();
             ArrayList<Booking> bookings = new ArrayList();
             
-            
-            while(rs.next())
+            if(!(rs.next()))return null;
+            outer:
+            while(true)
             {
                int id = rs.getInt("Id");
                int courtid=rs.getInt("CourtId");     
@@ -120,12 +121,14 @@ public class BookingAccess {
                    else
                    {
                        bookings.add(Booking.createSimple(id, courtid, fromDate, toDate, memberId));
-                       id=rs.getInt("Id");
-                       memberId.clear();
-                       break;
+                       
+                       memberId= new ArrayList();
+                       
+                       continue outer;
                        
                    }
-               }               
+               } 
+               break;
             }
             return bookings;
         }
