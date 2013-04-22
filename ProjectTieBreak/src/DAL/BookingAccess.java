@@ -160,11 +160,12 @@ public class BookingAccess {
                 sql=
                 "insert into [Member/Booking]"
                 + " values(?,?)";
-
+                
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, i);
                 ps.setInt(2, key);
-
+                
+                
                 affectedRows = ps.executeUpdate();
                 if (affectedRows < 1)
                 {
