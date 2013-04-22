@@ -98,14 +98,16 @@ public class BookingAccess {
             while(rs.next())
             {
                int id = rs.getInt("Id");
-               int courtid=rs.getInt("CourtId");               
+               int courtid=rs.getInt("CourtId");     
+               
                Date sqldate = rs.getDate("DateFrom");
                GregorianCalendar fromDate =  (GregorianCalendar) GregorianCalendar.getInstance();               
                fromDate.setTimeInMillis(sqldate.getTime());
                
-               sqldate = rs.getDate("DateFrom");
+               sqldate = rs.getDate("DateTo");
                GregorianCalendar toDate =  (GregorianCalendar) GregorianCalendar.getInstance();               
-               
+               toDate.setTimeInMillis(sqldate.getTime());
+                       
                memberId.add(rs.getInt("MemberId"));
                
                while(rs.next())
