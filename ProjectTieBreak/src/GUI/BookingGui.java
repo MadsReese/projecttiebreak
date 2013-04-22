@@ -12,6 +12,8 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -218,7 +220,7 @@ public class BookingGui extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnAddBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBookingActionPerformed
-        Court court = (Court)lstCourts.getSelectedValue();
+        Court court = ((CourtContainer)lstCourts.getSelectedValue()).getCourt();
         
         
         int courtId = court.getId();
@@ -231,14 +233,24 @@ public class BookingGui extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Date input most be formatted dd-mm-yyyy", "Date Input Error", JOptionPane.ERROR_MESSAGE);
         }
         String[] memberNos = txtMemberNo.getText().split(",");
-        //for(String s:mem)
         
+        ArrayList<Integer> members = new ArrayList();
+        for(String s:memberNos)
+        {
+            members.add(new Integer(s));
+        }
+        GregorianCalendar from = (GregorianCalendar)GregorianCalendar.getInstance();
+        GregorianCalendar to = (GregorianCalendar)GregorianCalendar.getInstance();
         
+        from.set(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]), Integer.parseInt(fromTime[0]), Integer.parseInt(fromTime[1]));
+        to.set(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]), Integer.parseInt(toTime[0]), Integer.parseInt(toTime[1]));
         
-        Booking bookingobj =null;// Booking.createSimple();
+        Booking bookingObj = Booking.createNew(courtId,from,to,members);
         try 
         {
-            bM.addBooking(bookingobj);
+            int key = bM.addBooking(bookingObj);
+            Booking bookingObj2 = Booking.createSimple(key, courtId, from, to, members);
+            model5.addElement(new BookingContainer(bookingObj2));
         } 
         catch (SQLServerException ex) 
         {

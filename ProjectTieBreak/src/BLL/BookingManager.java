@@ -32,9 +32,9 @@ public class BookingManager {
 //        bookings.delete(bookingobj);
     }
     
-    public void addBooking(Booking bookingobj) throws SQLServerException, SQLException
+    public int addBooking(Booking bookingobj) throws SQLServerException, SQLException
     {
-//        accessor.add(bookingobj);
+        return accessor.addBooking(bookingobj);
     }
     
     public void update(Booking bookingobj) throws SQLServerException, SQLException

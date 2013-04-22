@@ -19,4 +19,9 @@ public class CourtContainer {
     {
         return courtObject.getNumber() + " - " + courtObject.getCourtType();
     }
+    
+    public Court getCourt()
+    {
+        return courtObject;
+    }
 }

@@ -36,6 +36,17 @@ public class Booking
         return newBookingObj;
     }
     
+    public static Booking createNew(int courtId, GregorianCalendar fromDate,GregorianCalendar toDate, ArrayList<Integer> memberId)
+    {
+        Booking newBookingObj = new Booking();        
+        newBookingObj.setCourtId(courtId);
+        newBookingObj.setFromDate(fromDate);
+        newBookingObj.setToDate(toDate);        
+        newBookingObj.setMemberId(memberId);
+             
+        return newBookingObj;
+    }
+    
 
 
     private void setBookingId(int bookingId) 

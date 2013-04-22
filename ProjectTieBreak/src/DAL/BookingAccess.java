@@ -128,6 +128,55 @@ public class BookingAccess {
             return bookings;
         }
     }
+    
+    public int addBooking(Booking booking) throws SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql=
+            "insert into CourtBooking "
+            + " values(?,?,?)";
+            
+            PreparedStatement ps = con.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+            
+            ps.setInt(1, booking.getCourtId());
+            Date from = new Date(booking.getFromDate().getTimeInMillis());
+            Date to = new Date(booking.getToDate().getTimeInMillis());
+            ps.setDate(2,from);
+            ps.setDate(3, to);
+            
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows < 1)
+            {
+                throw new SQLException("Unable to InserBooking");
+            }
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            int key = rs.getInt(1);
+            
+            for(Integer i:booking.getMemberId())
+            {
+                sql=
+                "insert into [Member/Booking]"
+                + " values(?,?)";
+
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, i);
+                ps.setInt(2, key);
+
+                affectedRows = ps.executeUpdate();
+                if (affectedRows < 1)
+                {
+                    throw new SQLException("Unable to InserBooking");
+                }
+            }
+            
+            return key;
+            
+        }
+    }
+    
     private Court getOneCourt(ResultSet rs) throws SQLException
     {
         int id = rs.getInt("Id");
