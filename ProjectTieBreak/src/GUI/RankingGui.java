@@ -29,17 +29,18 @@ import javax.swing.DefaultListModel;
 public class RankingGui extends javax.swing.JFrame {
     private DefaultListModel model3 = new DefaultListModel();
     private RankingManager rM;
-    private int switchLimitation = Integer.MAX_VALUE;
+    private int switchLimitation = 0;
     
     /**
      * Creates new form RankingGui
      */
-    public RankingGui() throws SQLServerException, SQLException, FileNotFoundException, IOException
+    public RankingGui() throws Exception
     {
-        this.setTitle("Tie-Break Tennis Club Ranking List");
         initComponents();
+        this.setTitle("Tie-Break Tennis Club Ranking List");
         rM = RankingManager.getInstance();
         lstRank.setModel(model3);
+        search();
         this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
     }
 
@@ -52,7 +53,7 @@ public class RankingGui extends javax.swing.JFrame {
      * @throws FileNotFoundException -- 
      * @throws IOException --
      */
-    public static void main(String[] args) throws SQLServerException, SQLException, FileNotFoundException, IOException
+    public static void main(String[] args) throws Exception
     {
         new RankingGui().setVisible(true);
     }
@@ -158,7 +159,14 @@ public class RankingGui extends javax.swing.JFrame {
     }//GEN-LAST:event_lstRankValueChanged
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        searchByRank();
+        try
+        {
+            search();
+        } 
+        catch (Exception ex)
+        {
+            Logger.getLogger(RankingGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     /**
@@ -194,7 +202,7 @@ public class RankingGui extends javax.swing.JFrame {
         }
         try
         {
-            searchByAge(switchLimitation);
+            search();
         } 
         catch (Exception ex)
         {
@@ -215,19 +223,18 @@ public class RankingGui extends javax.swing.JFrame {
     
     /**
      * Returns all members in a given age-group.
-     * @author Jakob Hansen
+     * @author Jakob Hansen, Kasper Pedersen
      * @param maxage the maximum age in the age-group.
      * (options are 0 for all members, U10, U12, U14, U16, U18 and senior.)
      * @throws Exception --
      */
-    private void searchByAge(int maxage) throws Exception
+    private void search() throws Exception
     {
         model3.clear();
         List<Member> resultSet = null;
         try
         {
-            resultSet = rM.getBelowAge(maxage);
-            System.out.println("Success! :)");
+            resultSet = rM.getBelowAge(switchLimitation);
         }
         catch (SQLException ex)
         {
@@ -241,34 +248,6 @@ public class RankingGui extends javax.swing.JFrame {
                 model3.addElement(new MemberContainer(m, i++));
             }
         }
-        updateDateLabel();
-    }
-    
-    /**
-     * searchByRank
-     * @author Kasper Pedersen, Jakob Hansen
-     */
-    private void searchByRank()
-    {
-        model3.clear();
-        List<Member> resultSet;
-        try
-        {
-            resultSet = rM.getByRank();
-        } 
-        catch (SQLException ex)
-        {
-            Logger.getLogger(RankingGui.class.getName()).log(Level.SEVERE, null, ex);
-            return;
-        }
-        if (!resultSet.isEmpty())
-        {
-            int i = 1;
-            for (Member m : resultSet)
-            {
-                model3.addElement(new MemberContainer(m, i++));
-            } 
-        } 
         updateDateLabel();
     }
     
