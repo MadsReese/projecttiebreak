@@ -103,12 +103,12 @@ public class RankingAccess {
         try (Connection con = connector.getConnection())
         {
             String sql =
-              "SELECT *"
-            + "FROM Member"
-            + "WHERE (year(getdate()) - Member.Birth_Year) < ?"
+              "SELECT * "
+            + "FROM Member "
+            + "WHERE (year(getdate()) - Member.Birth_Year) < ? "
             + "ORDER BY DTU_Points DESC";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1,"" + age);
+            ps.setInt(1, age);
             ResultSet rs = ps.executeQuery();
             
             List<Member> agegroup = new ArrayList();

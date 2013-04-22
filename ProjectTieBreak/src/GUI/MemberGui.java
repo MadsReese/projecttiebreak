@@ -562,16 +562,8 @@ public class MemberGui extends javax.swing.JFrame
         try
         {
             new RankingGui().setVisible(true);
-        } catch (SQLServerException ex)
-        {
-            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
-        {
-            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (FileNotFoundException ex)
-        {
-            Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex)
+        } 
+        catch (Exception ex)
         {
             Logger.getLogger(MemberGui.class.getName()).log(Level.SEVERE, null, ex);
         }

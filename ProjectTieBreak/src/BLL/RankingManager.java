@@ -73,13 +73,24 @@ public class RankingManager
     public List<Member> getBelowAge(int agelimit) throws SQLException
     {
         Calendar c = Calendar.getInstance();
-        List<Member> members = accessor.getBelowAge(agelimit);
         List<Member> results = new ArrayList();
+        List<Member> members = new ArrayList();
+        if (agelimit == 0)
+        {
+            members = accessor.getBelowAge(Integer.MAX_VALUE);
+        }
+        else
+        {
+            members = accessor.getBelowAge(agelimit);
+        }
         for (Member m : members)
         {
             int age = c.get(Calendar.YEAR)-m.getBirthYear();
             switch(agelimit)
             {
+                case 0:
+                    results.add(m);
+                    break;
                 case 10:
                     if (age < 10)
                     {
